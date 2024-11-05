@@ -183,8 +183,10 @@ class SAC:
         """
 
         self.env, self.test_env = env_fn(), env_fn()
-        # self.env.seed(seed)
-        # self.test_env.seed(seed+1)
+        # Set seeds during reset instead of env.seed()
+        self.seed = seed
+        self.env.reset(seed=seed)
+        self.test_env.reset(seed=seed+1)
         self.obs_dim = self.env.observation_space.shape
         self.act_dim = self.env.action_space.shape[0]
         self.max_ep_len=max_ep_len
@@ -347,7 +349,7 @@ class SAC:
 
         avg_ep_return  = 0.
         for j in range(self.num_test_episodes):
-            o, info = self.test_env.reset()
+            o, info = self.test_env.reset(seed=self.seed+j)
             obs = np.zeros((self.max_ep_len, o.shape[0]))
             for t in range(self.max_ep_len):
                 # Take deterministic actions at test time?
@@ -363,9 +365,9 @@ class SAC:
             self.test_env.eval()
 
         rets = []
-        for _ in range(self.num_test_episodes):
+        for j in range(self.num_test_episodes):
             ret = 0
-            o, info = self.test_env.reset()
+            o, info = self.test_env.reset(seed=self.seed+j)
             for t in range(self.max_ep_len):
                 a = self.get_action(o, deterministic)
                 o, r, done, _, _ = self.test_env.step(a)
@@ -376,11 +378,12 @@ class SAC:
         return np.mean(rets)
     
     def test_agent_batch(self):
-        # for vectorize goal grid
         if hasattr(self.test_env, 'eval'):
             self.test_env.eval()
 
-        o, info = self.test_env.reset(self.num_test_episodes)
+        # Use different seeds for each test episode
+        test_seeds = np.arange(self.seed, self.seed + self.num_test_episodes)
+        o, info = self.test_env.reset(test_seeds[0])  # Adjust based on your env implementation
         ep_ret = np.zeros((self.num_test_episodes))
         log_pi = np.zeros(self.num_test_episodes)
         for t in range(self.max_ep_len-1):
@@ -399,9 +402,10 @@ class SAC:
         total_steps = self.steps_per_epoch * self.epochs
         start_time = time.time()
 
-        o, info = self.env.reset(n_parallel)
+        # Initialize with base seed for all parallel environments
+        o, info = self.env.reset(seed=self.seed)
+        current_seeds = np.arange(self.seed, self.seed + n_parallel)
         ep_len = np.ones(n_parallel).astype(np.int)
-        # o, ep_ret, ep_len = self.env.reset(), 0, 0
 
         print(f"Training SAC for IRL agent: Total steps {total_steps:d}")
         # Main loop: collect experience in env and update/log each epoch
@@ -451,11 +455,12 @@ class SAC:
             # most recent observation!
             o = o2
 
-            # End of trajectory handling
-            # implictly assume all trajectories are synchronized
+            # End of trajectory handling with incremented seeds
             if d or np.any(ep_len == self.max_ep_len):
-                o, info = self.env.reset(n_parallel)
-                info = np.ones(n_parallel).astype(np.int)
+                # Update seeds for environments that need reset
+                current_seeds += n_parallel  # Increment by n_parallel to ensure unique seeds
+                o, info = self.env.reset(seed=current_seeds[0])  # Assuming vectorized env takes single seed
+                ep_len = np.ones(n_parallel).astype(np.int)
 
             # Update handling
             log_pi = 0
@@ -494,7 +499,8 @@ class SAC:
         start_time = time.time()
         local_time = time.time()
         best_eval = -np.inf
-        o, info = self.env.reset()
+        o, info = self.env.reset(seed=self.seed)
+        current_seed = self.seed
         ep_len = 0
 
         print(f"Training SAC for IRL agent: Total steps {total_steps:d}")
@@ -540,10 +546,10 @@ class SAC:
             # most recent observation!
             o = o2
 
-            # End of trajectory handling
-            # implictly assume all trajectories are synchronized
+            # End of trajectory handling with incremented seed
             if d or ep_len==self.max_ep_len:
-                o, info = self.env.reset()
+                current_seed += 1  # Increment seed for next episode
+                o, info = self.env.reset(seed=current_seed)
                 ep_len = 0
 
             # Update handling

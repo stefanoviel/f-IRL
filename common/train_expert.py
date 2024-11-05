@@ -15,7 +15,7 @@ from utils.plots.train_plot import plot_sac_curve
 
 def train_policy(EnvCls):
     env = EnvCls()
-    # env.seed(seed) v5 doesn't support this
+    env.reset(seed=seed)  # Set seed during reset
     
     replay_buffer = ReplayBuffer(
         env.observation_space.shape[0], 
@@ -50,7 +50,7 @@ def evaluate_policy(policy, env, n_episodes, deterministic=False):
     returns = []
 
     for n in range(n_episodes):
-        obs, info = env.reset()
+        obs, info = env.reset(seed=seed+n)  # Use different seeds for each evaluation episode
         ret = 0
         for t in range(env_T):
             action = policy(obs, deterministic)
