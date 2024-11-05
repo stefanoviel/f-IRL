@@ -50,17 +50,18 @@ def evaluate_policy(policy, env, n_episodes, deterministic=False):
     returns = []
 
     for n in range(n_episodes):
-        obs = env.reset()
+        obs, info = env.reset()
         ret = 0
         for t in range(env_T):
             action = policy(obs, deterministic)
-            obs, rew, _, _ = env.step(action) # NOTE: assume rew=0 after done=True for evaluation
+            obs, rew, _, _, _ = env.step(action) # NOTE: assume rew=0 after done=True for evaluation
             expert_states[n, t, :] = torch.from_numpy(obs).clone()
             expert_actions[n, t, :] = torch.from_numpy(action).clone()
             ret += rew
         returns.append(ret)
     
     return expert_states, expert_actions, np.array(returns)
+
 
 
 if __name__ == "__main__":
@@ -84,7 +85,7 @@ if __name__ == "__main__":
     policy = train_policy(EnvCls)
 
     env = EnvCls()
-    env.seed(seed+1)
+    # env.seed(seed+1)
 
     expert_states_sto, expert_actions_sto, expert_returns = evaluate_policy(policy, env, v['expert']['samples_episode'])
     return_info = f'Expert(Sto) Return Avg: {expert_returns.mean():.2f}, std: {expert_returns.std():.2f}'
