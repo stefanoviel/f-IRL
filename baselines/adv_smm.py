@@ -168,13 +168,14 @@ class AdvSMM:
     def train(self):
         self.try_evaluate("Running", 0)
         # based on common/sac.py learn()
-        o, ep_len = self.env.reset(), 0
+        o, info = self.env.reset()
+        ep_len = 0
 
         for epoch in range(1, self.num_epochs+1):
             for steps_this_epoch in range(self.num_steps_per_epoch):
                 a = self.agent.get_action(o) # now assumes no early random exploration
 
-                o2, _, d, _ = self.env.step(a) # reward is set by discrimator, not here
+                o2, _, d, _, _ = self.env.step(a) # reward is set by discrimator, not here
 
                 ep_len += 1
                 self._n_env_steps_total += 1
@@ -185,7 +186,8 @@ class AdvSMM:
                 o = o2
 
                 if d or (ep_len==self.max_path_length):
-                    o, ep_len = self.env.reset(), 0
+                    o, info = self.env.reset()
+                    ep_len = 0
 
                 if self._n_env_steps_total % self.num_steps_between_train_calls == 0:
                     self._try_to_train(epoch)

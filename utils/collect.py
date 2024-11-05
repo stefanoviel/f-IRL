@@ -50,10 +50,10 @@ def collect_trajectories_policy_single(env, sac_agent, n=2000, state_indices=Non
 
     for traj_no in range(n):
 
-        s = env.reset()
+        s, info = env.reset()
         for i in range(T):
             a, logpi = sac_agent.get_action(s,get_logprob=True)
-            s_nxt, _, _, _ = env.step(a) # assign reward online
+            s_nxt, _, _, _, _ = env.step(a) # assign reward online
             s_buffer[traj_no,i,:] = s
             a_buffer[traj_no,i,:] = a
             log_a_buffer[traj_no,i] = logpi

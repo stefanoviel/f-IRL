@@ -83,10 +83,10 @@ if __name__ == "__main__":
         obs_std[obs_std == 0.0] = 1.0 # avoid constant distribution
         expert_samples = (expert_samples - obs_mean) / obs_std # normalize expert data
         print('obs_mean, obs_std', obs_mean, obs_std)
-        env_fn = lambda: gym.make(env_name, obs_mean=obs_mean, obs_std=obs_std)
+        env_fn = lambda: gym.make(env_name)
     
-    # load expert actions for AIRL
-    expert_action_trajs = torch.load(f'expert_data/actions/{env_name}_airl.pt').numpy()
+    # load expert actions for AIRL             
+    expert_action_trajs = torch.load(f'expert_data/actions/{env_name}.pt').numpy()
     expert_action_trajs = expert_action_trajs[:num_expert_trajs, :, :] # select first expert_episodes
 
     # build the discriminator model
