@@ -1,7 +1,7 @@
 import sys, os, time
 import numpy as np
 import math
-import gym
+import gymnasium as gym 
 from ruamel.yaml import YAML
 import envs
 

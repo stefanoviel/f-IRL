@@ -2,7 +2,7 @@ import sys, os, time
 from ruamel.yaml import YAML
 from utils import system
 
-import gym
+import gymnasium as gym
 import numpy as np 
 import torch
 import matplotlib; matplotlib.use('Agg')
@@ -15,7 +15,7 @@ from utils.plots.train_plot import plot_sac_curve
 
 def train_policy(EnvCls):
     env = EnvCls()
-    env.seed(seed)
+    # env.seed(seed) v5 doesn't support this
     
     replay_buffer = ReplayBuffer(
         env.observation_space.shape[0], 
@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     fig, axs = plt.subplots(1, 2, figsize=(15, 6))
 
-    EnvCls = lambda : gym.make(env_name, T=env_T)
+    EnvCls = lambda : gym.make(env_name)
     print(f"training Expert on {env_name}")
     policy = train_policy(EnvCls)
 

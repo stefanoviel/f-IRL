@@ -54,7 +54,6 @@ class ReplayBuffer:
             self.reward[idx]=rew
             self.done[idx]=done
             self.ptr= (self.ptr+num)%self.max_size            
-            
 
         self.size = min(self.size + num, self.max_size)
 
@@ -184,8 +183,8 @@ class SAC:
         """
 
         self.env, self.test_env = env_fn(), env_fn()
-        self.env.seed(seed)
-        self.test_env.seed(seed+1)
+        # self.env.seed(seed)
+        # self.test_env.seed(seed+1)
         self.obs_dim = self.env.observation_space.shape
         self.act_dim = self.env.action_space.shape[0]
         self.max_ep_len=max_ep_len
@@ -348,11 +347,11 @@ class SAC:
 
         avg_ep_return  = 0.
         for j in range(self.num_test_episodes):
-            o = self.test_env.reset()
+            o, info = self.test_env.reset()
             obs = np.zeros((self.max_ep_len, o.shape[0]))
             for t in range(self.max_ep_len):
                 # Take deterministic actions at test time?
-                o, _, _, _ = self.test_env.step(self.get_action(o, True))
+                o, _, _, _, _ = self.test_env.step(self.get_action(o, True))
                 obs[t] = o.copy()
             obs = torch.FloatTensor(obs).to(self.device)[:, self.reward_state_indices]
             avg_ep_return += self.reward_function(obs).sum() # (T, d) -> (T)
@@ -366,10 +365,10 @@ class SAC:
         rets = []
         for _ in range(self.num_test_episodes):
             ret = 0
-            o = self.test_env.reset()
+            o, info = self.test_env.reset()
             for t in range(self.max_ep_len):
                 a = self.get_action(o, deterministic)
-                o, r, done, _ = self.test_env.step(a)
+                o, r, done, _, _ = self.test_env.step(a)
                 ret += r
                 if done:
                     break
@@ -381,12 +380,13 @@ class SAC:
         if hasattr(self.test_env, 'eval'):
             self.test_env.eval()
 
-        o, ep_ret = self.test_env.reset(self.num_test_episodes), np.zeros((self.num_test_episodes))
+        o, info = self.test_env.reset(self.num_test_episodes)
+        ep_ret = np.zeros((self.num_test_episodes))
         log_pi = np.zeros(self.num_test_episodes)
         for t in range(self.max_ep_len-1):
             # Take stochastic action!
             a, log_pi_ = self.get_action_batch(o)
-            o, r, _, _ = self.test_env.step(a)
+            o, r, _, _, _ = self.test_env.step(a)
             # print(t, o, r, a)
             ep_ret += r
             log_pi += log_pi_
@@ -399,7 +399,8 @@ class SAC:
         total_steps = self.steps_per_epoch * self.epochs
         start_time = time.time()
 
-        o, ep_len = self.env.reset(n_parallel), np.ones(n_parallel).astype(np.int)
+        o, info = self.env.reset(n_parallel)
+        ep_len = np.ones(n_parallel).astype(np.int)
         # o, ep_ret, ep_len = self.env.reset(), 0, 0
 
         print(f"Training SAC for IRL agent: Total steps {total_steps:d}")
@@ -430,7 +431,7 @@ class SAC:
 
 
             # Step the env
-            o2, r, d, _ = self.env.step(a)
+            o2, r, d, _, _ = self.env.step(a)
 
             ep_len += 1
 
@@ -453,7 +454,8 @@ class SAC:
             # End of trajectory handling
             # implictly assume all trajectories are synchronized
             if d or np.any(ep_len == self.max_ep_len):
-                o, ep_len = self.env.reset(n_parallel), np.ones(n_parallel).astype(np.int)
+                o, info = self.env.reset(n_parallel)
+                info = np.ones(n_parallel).astype(np.int)
 
             # Update handling
             log_pi = 0
@@ -492,7 +494,8 @@ class SAC:
         start_time = time.time()
         local_time = time.time()
         best_eval = -np.inf
-        o, ep_len = self.env.reset(), 0
+        o, info = self.env.reset()
+        ep_len = 0
 
         print(f"Training SAC for IRL agent: Total steps {total_steps:d}")
         # Main loop: collect experience in env and update/log each epoch
@@ -514,7 +517,7 @@ class SAC:
 
 
             # Step the env
-            o2, r, d, _ = self.env.step(a)
+            o2, r, d, _, _ = self.env.step(a)
 
             ep_len += 1
 
@@ -540,7 +543,8 @@ class SAC:
             # End of trajectory handling
             # implictly assume all trajectories are synchronized
             if d or ep_len==self.max_ep_len:
-                o, ep_len = self.env.reset(), 0
+                o, info = self.env.reset()
+                ep_len = 0
 
             # Update handling
             log_pi = 0
