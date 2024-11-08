@@ -292,6 +292,7 @@ class SAC:
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         q_std = torch.std(torch.stack(q_mins, dim=0), dim=0)
         
+        # q are evaluated with the action from the policy
         # Use mean + std in policy loss
         loss_pi = (self.alpha * logp_pi - (q_mean + q_std)).mean()
         return loss_pi, logp_pi
