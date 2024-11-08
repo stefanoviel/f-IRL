@@ -94,7 +94,7 @@ if __name__ == "__main__":
         os.makedirs(exp_id)
 
     now = datetime.datetime.now(dateutil.tz.tzlocal())
-    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}'
+    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}_seed{seed}'
     logger.configure(dir=log_folder)            
     print(f"Logging to directory: {log_folder}")
     os.system(f'cp firl/irl_samples.py {log_folder}')
