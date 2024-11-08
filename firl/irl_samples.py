@@ -13,7 +13,8 @@ from firl.divs.ipm import ipm_loss
 from firl.models.reward import MLPReward
 from firl.models.discrim import SMMIRLDisc as Disc
 from firl.models.discrim import SMMIRLCritic as Critic
-from common.sac import ReplayBuffer, SAC
+# from common.sac import ReplayBuffer, SAC
+from common.mod_sac import ReplayBuffer, SAC
 
 import envs
 from utils import system, collect, logger, eval
@@ -67,6 +68,7 @@ def try_evaluate(itr: int, policy_type: str, sac_info):
 if __name__ == "__main__":
     yaml = YAML()
     v = yaml.load(open(sys.argv[1]))
+    num_q_pairs = sys.argv[2] if len(sys.argv) > 2 else 1
 
     # common parameters
     env_name = v['env']['env_name']
@@ -92,7 +94,7 @@ if __name__ == "__main__":
         os.makedirs(exp_id)
 
     now = datetime.datetime.now(dateutil.tz.tzlocal())
-    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S')
+    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}'
     logger.configure(dir=log_folder)            
     print(f"Logging to directory: {log_folder}")
     os.system(f'cp firl/irl_samples.py {log_folder}')
@@ -148,6 +150,7 @@ if __name__ == "__main__":
                 start_steps=v['env']['T'] * v['sac']['random_explore_episodes'],
                 reward_state_indices=state_indices,
                 device=device,
+                num_q_pairs=num_q_pairs,
                 **v['sac']
             )
         
