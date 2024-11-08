@@ -140,6 +140,7 @@ class MLPQFunction(nn.Module):
         q = self.q(torch.cat([obs, act], dim=-1))
         return torch.squeeze(q, -1) # Critical to ensure q has right shape.
 
+
 class MLPActorCritic(nn.Module):
 
     def __init__(self, observation_space, action_space, k, hidden_sizes=(256,256), add_time=False,

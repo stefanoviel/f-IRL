@@ -280,6 +280,7 @@ class SAC:
         q_pi = torch.min(q1_pi, q2_pi)
 
         # Entropy-regularized policy loss
+        # the policy is updated to maximize the expected return (from the quality of the action) + entropy
         loss_pi = (self.alpha * logp_pi - q_pi).mean()
 
         return loss_pi, logp_pi
