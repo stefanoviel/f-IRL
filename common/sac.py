@@ -273,6 +273,8 @@ class SAC:
 
     # Set up function for computing SAC pi loss
     def compute_loss_pi(self,data):
+
+        # what is the relation between q and the policy? 
         o = data['obs']
         pi, logp_pi = self.ac.pi(o[:, :self.true_state_dim])
         q1_pi = self.ac.q1(o, pi)
