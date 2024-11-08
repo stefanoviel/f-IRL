@@ -144,7 +144,7 @@ class MLPQFunction(nn.Module):
 class MLPActorCritic(nn.Module):
 
     def __init__(self, observation_space, action_space, k, hidden_sizes=(256,256), add_time=False,
-                 activation=nn.ReLU, device=torch.device("cpu")):
+                 activation=nn.ReLU, device=torch.device("cpu"), num_q_pairs=1):
         super().__init__()
 
         obs_dim = observation_space.shape[0]
@@ -152,14 +152,33 @@ class MLPActorCritic(nn.Module):
         act_limit = action_space.high[0]
         self.device = device
 
+        # Policy network
         if k == 1:
             self.pi = SquashedGaussianMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit).to(self.device)
-        else: # we did not use GMM policy, this is experimental.
+        else:
             self.pi = SquashedGmmMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit, k).to(self.device)
-        self.q1 = MLPQFunction(obs_dim, act_dim, hidden_sizes, activation).to(self.device)
-        self.q2 = MLPQFunction(obs_dim, act_dim, hidden_sizes, activation).to(self.device)
 
-    def act(self, obs, deterministic=False, get_logprob = False):
+        # Create multiple pairs of Q-networks
+        self.q1_list = nn.ModuleList([
+            MLPQFunction(obs_dim, act_dim, hidden_sizes, activation).to(self.device)
+            for _ in range(num_q_pairs)
+        ])
+        self.q2_list = nn.ModuleList([
+            MLPQFunction(obs_dim, act_dim, hidden_sizes, activation).to(self.device)
+            for _ in range(num_q_pairs)
+        ])
+
+        # Keep first pair accessible as q1/q2 for backward compatibility
+        self.q1 = self.q1_list[0]
+        self.q2 = self.q2_list[0]
+
+        # Create list of parameters for each Q-network pair
+        self.q_params_list = [
+            list(self.q1_list[i].parameters()) + list(self.q2_list[i].parameters())
+            for i in range(num_q_pairs)
+        ]
+
+    def act(self, obs, deterministic=False, get_logprob=False):
         with torch.no_grad():
             a, logpi = self.pi(obs, deterministic, True)
             if get_logprob:
