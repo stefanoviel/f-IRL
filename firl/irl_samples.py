@@ -150,7 +150,7 @@ if __name__ == "__main__":
                 start_steps=v['env']['T'] * v['sac']['random_explore_episodes'],
                 reward_state_indices=state_indices,
                 device=device,
-                num_q_pairs=num_q_pairs,
+                num_q_pairs=int(num_q_pairs),
                 **v['sac']
             )
         
