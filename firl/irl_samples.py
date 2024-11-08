@@ -4,7 +4,7 @@ f-IRL: Extract policy/reward from specified expert samples
 import sys, os, time
 import numpy as np
 import torch
-import gym
+import gymnasium as gym 
 from ruamel.yaml import YAML
 
 from firl.divs.f_div_disc import f_div_disc_loss
