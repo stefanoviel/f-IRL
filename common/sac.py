@@ -286,7 +286,6 @@ class SAC:
 
 
     # Set up model saving
-
     def update(self,data):
         # called by adv IRL
         # First run one gradient descent step for Q1 and Q2
