@@ -40,15 +40,16 @@ class SquashedGaussianMLPActor(nn.Module):
             # Only used for evaluating policy at test time.
             pi_action = mu
         else:
+            # reparameterization trick
             pi_action = pi_distribution.rsample()
 
         if with_logprob:
-            logp_pi = pi_distribution.log_prob(pi_action).sum(axis=-1)
-            logp_pi -= (2*(np.log(2) - pi_action - F.softplus(-2*pi_action))).sum(axis=1)
+            logp_pi = pi_distribution.log_prob(pi_action).sum(axis=-1) # compute log probability of action
+            logp_pi -= (2*(np.log(2) - pi_action - F.softplus(-2*pi_action))).sum(axis=1)  # idk 
         else:
             logp_pi = None
 
-        pi_action = torch.tanh(pi_action)
+        pi_action = torch.tanh(pi_action)  # project action to [-1,1], but why? 
         pi_action = self.act_limit * pi_action
 
         return pi_action, logp_pi
@@ -138,6 +139,7 @@ class MLPQFunction(nn.Module):
         # print(obs, act)
         q = self.q(torch.cat([obs, act], dim=-1))
         return torch.squeeze(q, -1) # Critical to ensure q has right shape.
+
 
 class MLPActorCritic(nn.Module):
 
