@@ -24,8 +24,9 @@ from utils.plots.train_plot import plot_disc as visual_disc
 import datetime
 import dateutil.tz
 import json, copy
+from torch.utils.tensorboard import SummaryWriter
 
-def try_evaluate(itr: int, policy_type: str, sac_info):
+def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step):
     assert policy_type in ["Running"]
     update_time = itr * v['reward']['gradient_step']
     env_steps = itr * v['sac']['epochs'] * v['env']['T']
@@ -37,15 +38,16 @@ def try_evaluate(itr: int, policy_type: str, sac_info):
     # eval real reward
     real_return_det = eval.evaluate_real_return(sac_agent.get_action, env_fn(), 
                                             v['irl']['eval_episodes'], v['env']['T'], True)
-    metrics['Real Det Return'] = real_return_det
-    print(f"real det return avg: {real_return_det:.2f}")
-    logger.record_tabular("Real Det Return", round(real_return_det, 2))
-
     real_return_sto = eval.evaluate_real_return(sac_agent.get_action, env_fn(), 
                                             v['irl']['eval_episodes'], v['env']['T'], False)
-    metrics['Real Sto Return'] = real_return_sto
-    print(f"real sto return avg: {real_return_sto:.2f}")
-    logger.record_tabular("Real Sto Return", round(real_return_sto, 2))
+    
+    # Log to tensorboard
+    writer.add_scalar('Returns/Deterministic', real_return_det, global_step)
+    writer.add_scalar('Returns/Stochastic', real_return_sto, global_step)
+    
+    # Log KL metrics
+    for key, value in metrics.items():
+        writer.add_scalar(f'Metrics/{key}', value, global_step)
 
     if v['obj'] in ["emd"]:
         eval_len = int(0.1 * len(critic_loss["main"]))
@@ -68,8 +70,9 @@ def try_evaluate(itr: int, policy_type: str, sac_info):
 if __name__ == "__main__":
     yaml = YAML()
     v = yaml.load(open(sys.argv[1]))
-    num_q_pairs = sys.argv[2] if len(sys.argv) > 2 else 1
+    num_q_pairs = int(sys.argv[2]) if len(sys.argv) > 2 else 1
     seed = int(sys.argv[3]) if len(sys.argv) > 3 else v['seed']
+    uncertainty_coef = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
 
     print("num_q_pairs", num_q_pairs)
     print("seed", seed)
@@ -99,6 +102,7 @@ if __name__ == "__main__":
     now = datetime.datetime.now(dateutil.tz.tzlocal())
     log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}_seed{seed}'
     logger.configure(dir=log_folder)            
+    writer = SummaryWriter(log_folder)
     print(f"Logging to directory: {log_folder}")
     os.system(f'cp firl/irl_samples.py {log_folder}')
     os.system(f'cp {sys.argv[1]} {log_folder}/variant_{pid}.yml')
@@ -154,6 +158,7 @@ if __name__ == "__main__":
                 reward_state_indices=state_indices,
                 device=device,
                 num_q_pairs=int(num_q_pairs),
+                uncertainty_coef=uncertainty_coef,
                 **v['sac']
             )
         
@@ -204,7 +209,7 @@ if __name__ == "__main__":
             reward_optimizer.step()
 
         # evaluating the learned reward
-        real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info)
+        real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info, writer, itr)
         if real_return_det > max_real_return_det and real_return_sto > max_real_return_sto:
             max_real_return_det, max_real_return_sto = real_return_det, real_return_sto
             torch.save(reward_func.state_dict(), os.path.join(logger.get_dir(), 
