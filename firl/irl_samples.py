@@ -71,6 +71,9 @@ if __name__ == "__main__":
     num_q_pairs = sys.argv[2] if len(sys.argv) > 2 else 1
     seed = int(sys.argv[3]) if len(sys.argv) > 3 else v['seed']
 
+    print("num_q_pairs", num_q_pairs)
+    print("seed", seed)
+
     # common parameters
     env_name = v['env']['env_name']
     state_indices = v['env']['state_indices']
