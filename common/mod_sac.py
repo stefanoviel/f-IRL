@@ -261,19 +261,16 @@ class SAC:
 
         # Bellman backup for Q functions
         with torch.no_grad():
+            # Target actions come from *current* policy
             a2, logp_a2 = self.ac.pi(o2[:, :self.true_state_dim])
 
-            # Get Q-values from all target networks
-            q1_targets = [q1_targ(o2, a2) for q1_targ in self.ac_targ.q1_list]
-            q2_targets = [q2_targ(o2, a2) for q2_targ in self.ac_targ.q2_list]
-            
-            # Take mean of minimum Q-values across all pairs
-            q_mins = [torch.min(q1_targ, q2_targ) for q1_targ, q2_targ in zip(q1_targets, q2_targets)]
-            q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
-            q_std = torch.std(torch.stack(q_mins, dim=0), dim=0)
-            
-            backup = r + self.gamma * (1 - d) * (q_mean + q_std - self.alpha * logp_a2)
+            # Target Q-values from corresponding target network pair
+            q1_pi_targ = self.ac_targ.q1_list[q_idx](o2, a2)
+            q2_pi_targ = self.ac_targ.q2_list[q_idx](o2, a2)
+            q_pi_targ = torch.min(q1_pi_targ, q2_pi_targ)
+            backup = r + self.gamma * (1 - d) * (q_pi_targ - self.alpha * logp_a2)
 
+        # MSE loss against Bellman backup
         loss_q1 = ((q1 - backup)**2).mean()
         loss_q2 = ((q2 - backup)**2).mean()
         return loss_q1 + loss_q2
@@ -290,7 +287,11 @@ class SAC:
         # Compute mean and std of minimum Q-values
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
-        q_std = torch.std(torch.stack(q_mins, dim=0), dim=0)
+
+        if len(q_mins) > 1:
+            q_std = torch.std(torch.stack(q_mins, dim=0), dim=0)
+        else:
+            q_std = torch.zeros_like(q_mean)
         
         # q are evaluated with the action from the policy
         # Use mean + std in policy loss
