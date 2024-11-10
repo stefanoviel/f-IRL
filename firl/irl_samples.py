@@ -67,6 +67,37 @@ def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step):
 
     return real_return_det, real_return_sto
 
+def log_metrics(itr: int, sac_agent, uncertainty_coef: float, loss: float, writer: SummaryWriter, v: dict):
+    """
+    Log training metrics to tensorboard
+    
+    Args:
+        itr: Current iteration number
+        sac_agent: SAC agent instance
+        uncertainty_coef: Uncertainty coefficient for exploration
+        loss: Current reward loss value
+        writer: Tensorboard SummaryWriter instance
+        v: Config dictionary
+    """
+    # Calculate global step
+    global_step = itr * v['sac']['epochs'] * v['env']['T']
+    
+    # Log SAC training metrics
+    writer.add_scalar('SAC/Alpha', 
+                     sac_agent.alpha.item() if v['sac']['automatic_alpha_tuning'] else v['sac']['alpha'], 
+                     global_step)
+    writer.add_scalar('SAC/Uncertainty_Coefficient', uncertainty_coef, global_step)
+    
+    # Log average Q-values and their std
+    q_values, q_stds = sac_agent.get_q_stats()
+    writer.add_scalar('SAC/Average_Q', q_values, global_step)
+    writer.add_scalar('SAC/Q_Std', q_stds, global_step)
+    
+    # Log reward loss
+    writer.add_scalar('Training/Reward_Loss', loss.item(), global_step)
+    
+    return global_step
+
 if __name__ == "__main__":
     yaml = YAML()
     v = yaml.load(open(sys.argv[1]))
@@ -205,8 +236,11 @@ if __name__ == "__main__":
             loss.backward()
             reward_optimizer.step()
 
+        # Log metrics and get global step
+        global_step = log_metrics(itr, sac_agent, uncertainty_coef, loss, writer, v)
+        
         # evaluating the learned reward
-        real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info, writer, itr)
+        real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info, writer, global_step)
         if real_return_det > max_real_return_det and real_return_sto > max_real_return_sto:
             max_real_return_det, max_real_return_sto = real_return_det, real_return_sto
             torch.save(reward_func.state_dict(), os.path.join(logger.get_dir(), 
@@ -221,3 +255,5 @@ if __name__ == "__main__":
         #     torch.save(reward_func.state_dict(), os.path.join(logger.get_dir(), f"model/reward_model_{itr}.pkl"))
 
         logger.dump_tabular()
+
+    writer.close()
