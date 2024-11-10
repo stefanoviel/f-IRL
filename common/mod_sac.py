@@ -84,7 +84,7 @@ class SAC:
             update_after=1000, update_every=50, num_test_episodes=10, max_ep_len=1000, 
             log_step_interval=None, reward_state_indices=None,
             save_freq=1, device=torch.device("cpu"), automatic_alpha_tuning=True, reinitialize=True,
-            num_q_pairs=3, # New parameter for number of Q-network pairs
+            num_q_pairs=3, uncertainty_coef=1.0,  # Add uncertainty_coef here
             **kwargs):
         """
         Soft Actor-Critic (SAC)
@@ -251,6 +251,8 @@ class SAC:
 
         self.test_fn = self.test_agent
 
+        self.uncertainty_coef = uncertainty_coef  # Store the coefficient
+
     # Set up function for computing SAC Q-losses
     def compute_loss_q(self, data, q_idx):
         """Compute Q-loss for a specific pair of Q-networks"""
@@ -287,15 +289,15 @@ class SAC:
         # Compute mean and std of minimum Q-values
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
-
+        
         if len(q_mins) > 1:
             q_std = torch.std(torch.stack(q_mins, dim=0), dim=0)
+            exploration_bonus = self.uncertainty_coef * q_std  # Use the coefficient here
         else:
-            q_std = torch.zeros_like(q_mean)
+            exploration_bonus = 0
         
-        # q are evaluated with the action from the policy
-        # Use mean + std in policy loss
-        loss_pi = (self.alpha * logp_pi - (q_mean + q_std)).mean()
+        # Use mean + exploration bonus in policy loss
+        loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()
         return loss_pi, logp_pi
 
 

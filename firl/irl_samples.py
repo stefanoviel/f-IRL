@@ -68,8 +68,9 @@ def try_evaluate(itr: int, policy_type: str, sac_info):
 if __name__ == "__main__":
     yaml = YAML()
     v = yaml.load(open(sys.argv[1]))
-    num_q_pairs = sys.argv[2] if len(sys.argv) > 2 else 1
+    num_q_pairs = int(sys.argv[2]) if len(sys.argv) > 2 else 1
     seed = int(sys.argv[3]) if len(sys.argv) > 3 else v['seed']
+    uncertainty_coef = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
 
     # common parameters
     env_name = v['env']['env_name']
@@ -151,6 +152,7 @@ if __name__ == "__main__":
                 reward_state_indices=state_indices,
                 device=device,
                 num_q_pairs=int(num_q_pairs),
+                uncertainty_coef=uncertainty_coef,
                 **v['sac']
             )
         
