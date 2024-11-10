@@ -17,3 +17,5 @@ export PYTHONPATH=${PWD}:$PYTHONPATH
 # python common/train_optimal.py configs/samples/experts/halfcheetah.yml
 # python baselines/bc.py configs/samples/agents/hopper.yml
 # python baselines/main_samples.py configs/samples/agents/hopper.yml
+
+
