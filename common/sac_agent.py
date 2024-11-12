@@ -82,7 +82,6 @@ class SquashedGmmMLPActor(nn.Module):
         self.log_std_layer = nn.Linear(hidden_sizes[-1], k*act_dim)
         self.act_limit = act_limit
         self.k = k 
-        
 
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)

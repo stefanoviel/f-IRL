@@ -4,7 +4,7 @@
 mkdir -p outputs
 
 # Array of first parameters (number of q_pairs)
-q_pairs=(2 3 4 5 10)
+q_pairs=(2 3 5)
 
 # Array of seeds
 seeds=(42 123 456 789 1024)
