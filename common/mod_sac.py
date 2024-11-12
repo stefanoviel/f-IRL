@@ -10,6 +10,7 @@ import torch
 from torch.optim import Adam
 import gym
 import time
+import pdb
 import sys
 import common.sac_agent as core
 
@@ -208,6 +209,8 @@ class SAC:
         self.ac = actor_critic(self.env.observation_space, self.env.action_space, k, 
                              add_time=add_time, device=device, num_q_pairs=num_q_pairs, **ac_kwargs)
         self.ac_targ = deepcopy(self.ac)
+
+        pdb.set_trace()
 
         # Freeze target networks with respect to optimizers
         for p in self.ac_targ.parameters():
