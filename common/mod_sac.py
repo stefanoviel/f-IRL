@@ -288,6 +288,7 @@ class SAC:
         
         # Compute mean and std of minimum Q-values
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
+        q_max = torch.max(q_mins)
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
         if len(q_mins) > 1:
@@ -297,7 +298,7 @@ class SAC:
             exploration_bonus = 0
         
         # Use mean + exploration bonus in policy loss
-        loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()
+        loss_pi = (self.alpha * logp_pi - (q_max)).mean()
         return loss_pi, logp_pi
 
 
