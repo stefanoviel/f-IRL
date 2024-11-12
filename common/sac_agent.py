@@ -155,6 +155,7 @@ class MLPActorCritic(nn.Module):
         if k == 1:
             self.pi = SquashedGaussianMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit).to(self.device)
         else:
+            # not used
             self.pi = SquashedGmmMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit, k).to(self.device)
 
         # Create multiple pairs of Q-networks
