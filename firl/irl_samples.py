@@ -81,13 +81,7 @@ def log_metrics(itr: int, sac_agent, uncertainty_coef: float, loss: float, write
     """
     # Calculate global step
     global_step = itr * v['sac']['epochs'] * v['env']['T']
-    
-    # Log SAC training metrics
-    writer.add_scalar('SAC/Alpha', 
-                     sac_agent.alpha.item() if v['sac']['automatic_alpha_tuning'] else v['sac']['alpha'], 
-                     global_step)
-    writer.add_scalar('SAC/Uncertainty_Coefficient', uncertainty_coef, global_step)
-    
+        
     # Log average Q-values and their std
     q_values, q_stds = sac_agent.get_q_stats()
     writer.add_scalar('SAC/Average_Q', q_values, global_step)

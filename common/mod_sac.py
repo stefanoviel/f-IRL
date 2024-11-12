@@ -614,7 +614,7 @@ class SAC:
         return [self.ac.pi, self.ac.q1, self.ac.q2]
 
     def get_q_stats(self):
-        """Get average Q-values and their standard deviations across all Q-networks."""
+        """Get average Q-values and their standard deviations across Q-networks for each state."""
         if not hasattr(self, '_q_stats_batch'):
             # Cache a batch of states for consistent monitoring
             self._q_stats_batch = self.replay_buffer.sample_batch(100)
@@ -630,8 +630,8 @@ class SAC:
             # Get minimum Q-values from each pair
             q_mins = torch.minimum(q1_vals, q2_vals)
             
-            # Compute mean and std across Q-networks
-            q_mean = q_mins.mean().item()
-            q_std = q_mins.std().item()
+            # Compute mean and std for each state across Q-networks
+            q_mean = q_mins.mean(dim=0).mean().item()  # Average across networks then states
+            q_std = q_mins.std(dim=0).mean().item()    # Std across networks, averaged over states
             
             return q_mean, q_std
