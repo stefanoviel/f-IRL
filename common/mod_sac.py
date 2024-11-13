@@ -85,7 +85,7 @@ class SAC:
             update_after=1000, update_every=50, num_test_episodes=10, max_ep_len=1000, 
             log_step_interval=None, reward_state_indices=None,
             save_freq=1, device=torch.device("cpu"), automatic_alpha_tuning=True, reinitialize=True,
-            num_q_pairs=3, uncertainty_coef=1.0,  # Add uncertainty_coef here
+            num_q_pairs=3, uncertainty_coef=1.0, q_std_clip=1.0,  # Add q_std_clip parameter
             **kwargs):
         """
         Soft Actor-Critic (SAC)
@@ -147,8 +147,8 @@ class SAC:
                 networks. Target networks are updated towards main networks 
                 according to:
 
-                .. math:: \\theta_{\\text{targ}} \\leftarrow 
-                    \\rho \\theta_{\\text{targ}} + (1-\\rho) \\theta
+                .. math:: \\theta_{\\\text{targ}} \\leftarrow 
+                    \\rho \\theta_{\\\text{targ}} + (1-\\\rho) \\theta
 
                 where :math:`\\rho` is polyak. (Always between 0 and 1, usually 
                 close to 1.)
@@ -182,6 +182,7 @@ class SAC:
             save_freq (int): How often (in terms of gap between epochs) to save
                 the current policy and value function.
 
+            q_std_clip (float): Maximum value to clip Q-value standard deviations. Default: 1.0
         """
 
         self.env, self.test_env = env_fn(), env_fn()
@@ -257,6 +258,7 @@ class SAC:
         self.test_fn = self.test_agent
 
         self.uncertainty_coef = uncertainty_coef  # Store the coefficient
+        self.q_std_clip = q_std_clip  # Store the clipping value
 
     # Set up function for computing SAC Q-losses
     def compute_loss_q(self, data, q_idx):
@@ -293,17 +295,16 @@ class SAC:
         
         # Compute mean and std of minimum Q-values
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
-        # q_max = torch.max(torch.stack(q_mins, dim=0), dim=0)[0]
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
         if len(q_mins) > 1:
-            q_std = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, 1)
-            exploration_bonus = self.uncertainty_coef * q_std  
+            q_std = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, self.q_std_clip)  # Use self.q_std_clip
+            exploration_bonus = self.uncertainty_coef * q_std
         else:
             exploration_bonus = 0
         
         # Use mean + exploration bonus in policy loss
-        loss_pi = (self.alpha * logp_pi - (q_mean)).mean()
+        loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()
         return loss_pi, logp_pi
 
 

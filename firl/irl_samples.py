@@ -105,10 +105,12 @@ if __name__ == "__main__":
     num_q_pairs = int(sys.argv[2]) if len(sys.argv) > 2 else 1
     seed = int(sys.argv[3]) if len(sys.argv) > 3 else v['seed']
     uncertainty_coef = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
+    q_std_clip = float(sys.argv[5]) if len(sys.argv) > 5 else 1.0
 
     print("num_q_pairs", num_q_pairs)
     print("seed", seed)
     print("uncertainty_coef", uncertainty_coef)
+    print("q_std_clip", q_std_clip)
 
     # common parameters
     env_name = v['env']['env_name']
@@ -192,6 +194,7 @@ if __name__ == "__main__":
                 device=device,
                 num_q_pairs=int(num_q_pairs),
                 uncertainty_coef=uncertainty_coef,
+                q_std_clip=q_std_clip,
                 **v['sac']
             )
         
