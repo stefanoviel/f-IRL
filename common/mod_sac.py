@@ -13,6 +13,7 @@ import gym
 import time
 import sys
 import common.sac_agent as core
+import random
 
 def combined_shape(length, shape=None):
     if shape is None:
@@ -36,6 +37,11 @@ class ReplayBuffer:
         self.ptr, self.size, self.max_size = 0, 0, size
         self.device = device
         # print(device)
+        self.rng = np.random.RandomState()
+
+    def set_seed(self, seed):
+        """Add this method to set seed for buffer sampling"""
+        self.rng.seed(seed)
 
     def store_batch(self, obs, act, rew, next_obs, done):
         num = len(obs)
@@ -68,7 +74,8 @@ class ReplayBuffer:
         self.size = min(self.size+1, self.max_size)
 
     def sample_batch(self, batch_size=32):
-        idxs = np.random.randint(0, self.size, size=batch_size)
+        """Update sampling to use seeded RNG"""
+        idxs = self.rng.randint(0, self.size, size=batch_size)
         batch = dict(obs=self.state[idxs],
                      obs2=self.next_state[idxs],
                      act=self.action[idxs],
@@ -184,6 +191,13 @@ class SAC:
 
             q_std_clip (float): Maximum value to clip Q-value standard deviations. Default: 1.0
         """
+
+        # Set all seeds
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+        random.seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
 
         self.env, self.test_env = env_fn(), env_fn()
         # Set seeds during reset instead of env.seed()

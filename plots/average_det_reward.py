@@ -35,7 +35,12 @@ def extract_q(folder_name):
 # Function to extract clip value from folder name
 def extract_clip(folder_name):
     match = re.search(r'qstd(\d+\.\d+)', folder_name)
-    return float(match.group(1)) if match else None
+    if match:
+        return float(match.group(1))
+    # Check if this is a no-clipping folder
+    if 'qstd' not in folder_name:
+        return 'no_clipping'
+    return None
 
 # Get all folders after 2024-11-10 14-30
 target_date = datetime.strptime('2024_11_10_14_30_00', '%Y_%m_%d_%H_%M_%S')
@@ -65,17 +70,38 @@ for folder in folders:
 # Create and save the plot
 plt.figure(figsize=(12, 8))
 
+# Define a set of distinct colors using tableau colors (more distinguishable than rainbow)
+distinct_colors = [
+    '#1f77b4',  # blue
+    '#ff7f0e',  # orange
+    '#2ca02c',  # green
+    '#d62728',  # red
+    '#9467bd',  # purple
+    '#8c564b',  # brown
+    '#e377c2',  # pink
+    '#7f7f7f',  # gray
+    '#bcbd22',  # yellow-green
+    '#17becf',  # cyan
+    '#aec7e8',  # light blue
+    '#ffbb78',  # light orange
+    '#98df8a',  # light green
+    '#ff9896',  # light red
+    '#c5b0d5',  # light purple
+]
+
 # Create distinct visual combinations for each line
 line_styles = ['-', '--', ':', '-.']
-# Generate more colors using a different colormap
-colors = plt.cm.rainbow(np.linspace(0, 1, len(q_clip_results)))
 
-# Create a mapping for unique combinations
-unique_combinations = sorted(q_clip_results.keys())
-style_mapping = {combo: (color, style) 
-                for combo, (color, style) in 
-                zip(unique_combinations, 
-                    zip(colors, [style for style in line_styles for _ in range(len(unique_combinations)//len(line_styles) + 1)]))}
+# Calculate how many unique combinations we need
+num_combinations = len(q_clip_results)
+
+# Create style mapping using colors first, then line styles if needed
+style_mapping = {}
+for idx, combo in enumerate(sorted(q_clip_results.keys())):
+    color_idx = idx % len(distinct_colors)
+    style_idx = idx // len(distinct_colors)
+    style = line_styles[style_idx] if idx >= len(distinct_colors) else '-'
+    style_mapping[combo] = (distinct_colors[color_idx], style)
 
 for idx, ((q, clip), series_list) in enumerate(sorted(q_clip_results.items())):
     # Pad or truncate series to same length
@@ -90,8 +116,9 @@ for idx, ((q, clip), series_list) in enumerate(sorted(q_clip_results.items())):
     # Get the color and line style for this combination
     color, line_style = style_mapping[(q, clip)]
     
+    label = f'num_of_nns={q}, ' + ('no_clipping' if clip == 'no_clipping' else f'clip={clip}')
     plt.plot(episodes, mean, 
-             label=f'num_of_nns={q}, clip={clip}',
+             label=label,
              linestyle=line_style,
              color=color)
     
