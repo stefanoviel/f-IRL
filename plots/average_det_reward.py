@@ -31,7 +31,7 @@ def extract_q(folder_name):
 
 # Function to extract clip value from folder name
 def extract_clip(folder_name):
-    match = re.search(r'clip(\d+)\.log$', folder_name)
+    match = re.search(r'qstd(\d+\.\d+)', folder_name)
     return float(match.group(1)) if match else None
 
 # Get all folders after 2024-11-10 14-30
@@ -43,19 +43,21 @@ q_clip_results = {}
 
 for folder in folders:
     folder_date = parse_datetime(folder)
-    if folder_date >= target_date:
-        q = extract_q(folder)
-        clip = extract_clip(folder)
-        if q is not None and clip is not None:
-            try:
-                df = pd.read_csv(f'{folder}/progress.csv')
-                key = (q, clip)
-                if key not in q_clip_results:
-                    q_clip_results[key] = []
-                q_clip_results[key].append(df['Real Det Return'].values)
-            except Exception as e:
-                print(f"Error reading file in folder: {folder}")
-                print(f"Error: {e}")
+
+    q = extract_q(folder)
+    clip = extract_clip(folder)
+    print(f"q={q}, clip={clip}")
+    if q is not None and clip is not None:
+        print(f"Reading folder: {folder}")
+        try:
+            df = pd.read_csv(f'{folder}/progress.csv')
+            key = (q, clip)
+            if key not in q_clip_results:
+                q_clip_results[key] = []
+            q_clip_results[key].append(df['Real Det Return'].values)
+        except Exception as e:
+            print(f"Error reading file in folder: {folder}")
+            print(f"Error: {e}")
 
 # Create and save the plot
 plt.figure(figsize=(12, 8))
