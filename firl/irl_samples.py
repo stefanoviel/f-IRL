@@ -154,7 +154,7 @@ if __name__ == "__main__":
         os.makedirs(exp_id)
 
     now = datetime.datetime.now(dateutil.tz.tzlocal())
-    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}_seed{seed}' 
+    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}_seed{seed}' + f'_qstd{q_std_clip}'
     logger.configure(dir=log_folder)            
     writer = SummaryWriter(log_folder)
     print(f"Logging to directory: {log_folder}")
