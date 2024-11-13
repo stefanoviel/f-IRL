@@ -6,6 +6,7 @@ import numpy as np
 import torch
 import gymnasium as gym 
 from ruamel.yaml import YAML
+import argparse
 
 from firl.divs.f_div_disc import f_div_disc_loss
 from firl.divs.f_div import maxentirl_loss
@@ -100,17 +101,35 @@ def log_metrics(itr: int, sac_agent, uncertainty_coef: float, loss: float, write
     return global_step
 
 if __name__ == "__main__":
-    yaml = YAML()
-    v = yaml.load(open(sys.argv[1]))
-    num_q_pairs = int(sys.argv[2]) if len(sys.argv) > 2 else 1
-    seed = int(sys.argv[3]) if len(sys.argv) > 3 else v['seed']
-    uncertainty_coef = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
-    q_std_clip = float(sys.argv[5]) if len(sys.argv) > 5 else 1.0
+    # Set up argument parser
+    parser = argparse.ArgumentParser(description='f-IRL training script')
+    parser.add_argument('--config', type=str, required=True,
+                      help='Path to config YAML file')
+    parser.add_argument('--num_q_pairs', type=int, default=1,
+                      help='Number of Q-network pairs (default: 1)')
+    parser.add_argument('--seed', type=int, default=None,
+                      help='Random seed (default: from config)')
+    parser.add_argument('--uncertainty_coef', type=float, default=1.0,
+                      help='Uncertainty coefficient for exploration (default: 1.0)')
+    parser.add_argument('--q_std_clip', type=float, default=1.0,
+                      help='Maximum value to clip Q-value standard deviations (default: 1.0)')
+    
+    args = parser.parse_args()
 
-    print("num_q_pairs", num_q_pairs)
-    print("seed", seed)
-    print("uncertainty_coef", uncertainty_coef)
-    print("q_std_clip", q_std_clip)
+    # Load config
+    yaml = YAML()
+    v = yaml.load(open(args.config))
+    
+    # Use parsed arguments
+    num_q_pairs = args.num_q_pairs
+    seed = args.seed if args.seed is not None else v['seed']
+    uncertainty_coef = args.uncertainty_coef
+    q_std_clip = args.q_std_clip
+
+    print("num_q_pairs:", num_q_pairs)
+    print("seed:", seed)
+    print("uncertainty_coef:", uncertainty_coef)
+    print("q_std_clip:", q_std_clip)
 
     # common parameters
     env_name = v['env']['env_name']
@@ -140,7 +159,7 @@ if __name__ == "__main__":
     writer = SummaryWriter(log_folder)
     print(f"Logging to directory: {log_folder}")
     os.system(f'cp firl/irl_samples.py {log_folder}')
-    os.system(f'cp {sys.argv[1]} {log_folder}/variant_{pid}.yml')
+    os.system(f'cp {args.config} {log_folder}/variant_{pid}.yml')
     with open(os.path.join(logger.get_dir(), 'variant.json'), 'w') as f:
         json.dump(v, f, indent=2, sort_keys=True)
     print('pid', pid)
