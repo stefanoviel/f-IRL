@@ -14,6 +14,9 @@ base_path = "logs/Hopper-v5/exp-4/rkl/"
 plot_dir = "plots"
 os.makedirs(plot_dir, exist_ok=True)
 
+# Add parameter for confidence interval
+SHOW_CONFIDENCE_INTERVAL = False
+
 # Function to parse datetime from folder name
 def parse_datetime(folder_name):
     # Extract just the filename from the full path
@@ -31,7 +34,7 @@ def extract_q(folder_name):
 
 # Function to extract clip value from folder name
 def extract_clip(folder_name):
-    match = re.search(r'clip(\d+)\.log$', folder_name)
+    match = re.search(r'qstd(\d+\.\d+)', folder_name)
     return float(match.group(1)) if match else None
 
 # Get all folders after 2024-11-10 14-30
@@ -43,50 +46,63 @@ q_clip_results = {}
 
 for folder in folders:
     folder_date = parse_datetime(folder)
-    if folder_date >= target_date:
-        q = extract_q(folder)
-        clip = extract_clip(folder)
-        if q is not None and clip is not None:
-            try:
-                df = pd.read_csv(f'{folder}/progress.csv')
-                key = (q, clip)
-                if key not in q_clip_results:
-                    q_clip_results[key] = []
-                q_clip_results[key].append(df['Real Det Return'].values)
-            except Exception as e:
-                print(f"Error reading file in folder: {folder}")
-                print(f"Error: {e}")
+
+    q = extract_q(folder)
+    clip = extract_clip(folder)
+    print(f"q={q}, clip={clip}")
+    if q is not None and clip is not None:
+        print(f"Reading folder: {folder}")
+        try:
+            df = pd.read_csv(f'{folder}/progress.csv')
+            key = (q, clip)
+            if key not in q_clip_results:
+                q_clip_results[key] = []
+            q_clip_results[key].append(df['Real Det Return'].values)
+        except Exception as e:
+            print(f"Error reading file in folder: {folder}")
+            print(f"Error: {e}")
 
 # Create and save the plot
 plt.figure(figsize=(12, 8))
 
-# Create a different line style for each q value
+# Create distinct visual combinations for each line
 line_styles = ['-', '--', ':', '-.']
-colors = plt.cm.tab10(np.linspace(0, 1, len(set(k[0] for k in q_clip_results.keys()))))
+# Generate more colors using a different colormap
+colors = plt.cm.rainbow(np.linspace(0, 1, len(q_clip_results)))
 
-for (q, clip), series_list in sorted(q_clip_results.items()):
+# Create a mapping for unique combinations
+unique_combinations = sorted(q_clip_results.keys())
+style_mapping = {combo: (color, style) 
+                for combo, (color, style) in 
+                zip(unique_combinations, 
+                    zip(colors, [style for style in line_styles for _ in range(len(unique_combinations)//len(line_styles) + 1)]))}
+
+for idx, ((q, clip), series_list) in enumerate(sorted(q_clip_results.items())):
     # Pad or truncate series to same length
     min_length = min(len(series) for series in series_list)
     aligned_series = [series[:min_length] for series in series_list]
     
     data = np.array(aligned_series)
     mean = np.mean(data, axis=0)
-    stderr = stats.sem(data, axis=0)
-    conf_int = stderr * stats.t.ppf((1 + 0.95) / 2, data.shape[0] - 1)
     
     episodes = np.arange(min_length) * 5000
     
-    # Use different line styles and colors for better distinction
-    color_idx = sorted(list(set(k[0] for k in q_clip_results.keys()))).index(q)
+    # Get the color and line style for this combination
+    color, line_style = style_mapping[(q, clip)]
+    
     plt.plot(episodes, mean, 
              label=f'num_of_nns={q}, clip={clip}',
-             linestyle=line_styles[color_idx % len(line_styles)],
-             color=colors[color_idx])
-    plt.fill_between(episodes, 
-                    mean - conf_int, 
-                    mean + conf_int, 
-                    alpha=0.2,
-                    color=colors[color_idx])
+             linestyle=line_style,
+             color=color)
+    
+    if SHOW_CONFIDENCE_INTERVAL:
+        stderr = stats.sem(data, axis=0)
+        conf_int = stderr * stats.t.ppf((1 + 0.95) / 2, data.shape[0] - 1)
+        plt.fill_between(episodes, 
+                        mean - conf_int, 
+                        mean + conf_int, 
+                        alpha=0.2,
+                        color=color)
 
 plt.xlabel('Episodes')
 plt.ylabel('Average Real Det Return')
