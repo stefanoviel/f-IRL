@@ -8,9 +8,9 @@ import itertools
 import numpy as np
 import torch
 from torch.optim import Adam
+# import pdb
 import gym
 import time
-import pdb
 import sys
 import common.sac_agent as core
 
@@ -210,11 +210,13 @@ class SAC:
                              add_time=add_time, device=device, num_q_pairs=num_q_pairs, **ac_kwargs)
         self.ac_targ = deepcopy(self.ac)
 
-        pdb.set_trace()
+        
 
         # Freeze target networks with respect to optimizers
         for p in self.ac_targ.parameters():
             p.requires_grad = False
+
+        # pdb.set_trace()
             
         # Create separate optimizers for each Q-network pair
         self.q_optimizers = [Adam(pair_params, lr=lr) 
@@ -291,17 +293,17 @@ class SAC:
         
         # Compute mean and std of minimum Q-values
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
-        q_max = torch.max(q_mins)
+        # q_max = torch.max(torch.stack(q_mins, dim=0), dim=0)[0]
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
         if len(q_mins) > 1:
-            q_std = torch.std(torch.stack(q_mins, dim=0), dim=0)
-            exploration_bonus = self.uncertainty_coef * q_std  # Use the coefficient here
+            q_std = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, 1)
+            exploration_bonus = self.uncertainty_coef * q_std  
         else:
             exploration_bonus = 0
         
         # Use mean + exploration bonus in policy loss
-        loss_pi = (self.alpha * logp_pi - (q_max)).mean()
+        loss_pi = (self.alpha * logp_pi - (q_mean)).mean()
         return loss_pi, logp_pi
 
 
