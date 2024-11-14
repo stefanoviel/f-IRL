@@ -220,10 +220,14 @@ class SAC:
         self.udpate_num = update_num
         self.num_test_episodes = num_test_episodes
         self.epochs = epochs
-        # Create actor-critic module and target networks
+        # Create actor-critic module and set its seed
         self.ac = actor_critic(self.env.observation_space, self.env.action_space, k, 
                              add_time=add_time, device=device, num_q_pairs=num_q_pairs, **ac_kwargs)
+        self.ac.set_seed(seed)
+        
+        # Create target networks and set their seeds
         self.ac_targ = deepcopy(self.ac)
+        self.ac_targ.set_seed(seed + 1)  # Use different seed for target network
 
         # Freeze target networks with respect to optimizers
         for p in self.ac_targ.parameters():
@@ -382,7 +386,11 @@ class SAC:
 
 
     def reset(self):
-        pass
+        """Reset random number generators"""
+        if hasattr(self, 'seed'):
+            self.ac.set_seed(self.seed)
+            self.ac_targ.set_seed(self.seed + 1)
+            self.replay_buffer.set_seed(self.seed)
 
     def test_agent(self):
         # NOTE: drawback, didn't use task reward!

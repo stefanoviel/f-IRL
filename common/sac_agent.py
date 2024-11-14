@@ -22,10 +22,18 @@ class SquashedGaussianMLPActor(nn.Module):
 
     def __init__(self, obs_dim, act_dim, hidden_sizes, activation, act_limit):
         super().__init__()
+        self.rng = torch.Generator()
+        self.np_rng = np.random.RandomState()
+        
         self.net = mlp([obs_dim] + list(hidden_sizes), activation, activation)
         self.mu_layer = nn.Linear(hidden_sizes[-1], act_dim)
         self.log_std_layer = nn.Linear(hidden_sizes[-1], act_dim)
         self.act_limit = act_limit
+
+    def set_seed(self, seed):
+        """Set seeds for all random number generators"""
+        self.rng.manual_seed(seed)
+        self.np_rng.seed(seed)
 
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)
@@ -77,11 +85,19 @@ class SquashedGmmMLPActor(nn.Module):
 
     def __init__(self, obs_dim, act_dim, hidden_sizes, activation, act_limit, k):
         super().__init__()
+        self.rng = torch.Generator()
+        self.np_rng = np.random.RandomState()
+        
         self.net = mlp([obs_dim] + list(hidden_sizes), activation, activation)
         self.mu_layer = nn.Linear(hidden_sizes[-1], k*act_dim)
         self.log_std_layer = nn.Linear(hidden_sizes[-1], k*act_dim)
         self.act_limit = act_limit
         self.k = k 
+
+    def set_seed(self, seed):
+        """Set seeds for all random number generators"""
+        self.rng.manual_seed(seed)
+        self.np_rng.seed(seed)
 
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)
@@ -145,7 +161,9 @@ class MLPActorCritic(nn.Module):
     def __init__(self, observation_space, action_space, k, hidden_sizes=(256,256), add_time=False,
                  activation=nn.ReLU, device=torch.device("cpu"), num_q_pairs=1):
         super().__init__()
-
+        self.rng = torch.Generator()
+        self.np_rng = np.random.RandomState()
+        
         obs_dim = observation_space.shape[0]
         act_dim = action_space.shape[0]
         act_limit = action_space.high[0]
@@ -177,6 +195,13 @@ class MLPActorCritic(nn.Module):
             list(self.q1_list[i].parameters()) + list(self.q2_list[i].parameters())
             for i in range(num_q_pairs)
         ]
+
+    def set_seed(self, seed):
+        """Set seeds for all random number generators"""
+        self.rng.manual_seed(seed)
+        self.np_rng.seed(seed)
+        if hasattr(self.pi, 'set_seed'):
+            self.pi.set_seed(seed)
 
     def act(self, obs, deterministic=False, get_logprob=False):
         with torch.no_grad():
