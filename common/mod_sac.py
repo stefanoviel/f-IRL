@@ -225,8 +225,6 @@ class SAC:
                              add_time=add_time, device=device, num_q_pairs=num_q_pairs, **ac_kwargs)
         self.ac_targ = deepcopy(self.ac)
 
-        
-
         # Freeze target networks with respect to optimizers
         for p in self.ac_targ.parameters():
             p.requires_grad = False

@@ -140,6 +140,12 @@ if __name__ == "__main__":
     device = torch.device(f"cuda:{v['cuda']}" if torch.cuda.is_available() and v['cuda'] >= 0 else "cpu")
     torch.set_num_threads(1)
     np.set_printoptions(precision=3, suppress=True)
+    
+    # Comprehensive seeding
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+    
     system.reproduce(seed)
     pid=os.getpid()
     
@@ -169,6 +175,7 @@ if __name__ == "__main__":
     # environment
     env_fn = lambda: gym.make(env_name)
     gym_env = env_fn()
+    gym_env.reset(seed=seed)  # Seed the main environment
     state_size = gym_env.observation_space.shape[0]
     action_size = gym_env.action_space.shape[0]
     if state_indices == 'all':
