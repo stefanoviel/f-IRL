@@ -240,6 +240,7 @@ class SAC:
 
         # Experience buffer
         self.replay_buffer = replay_buffer
+        self.replay_buffer.set_seed(seed)
 
         # Count variables (protip: try to get a feel for how different size networks behave!)
         self.var_counts = tuple(count_vars(module) for module in [self.ac.pi, self.ac.q1, self.ac.q2])
