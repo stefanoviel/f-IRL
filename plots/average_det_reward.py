@@ -55,7 +55,7 @@ for folder in folders:
     q = extract_q(folder)
     clip = extract_clip(folder)
     print(f"q={q}, clip={clip}")
-    if q is not None and clip is not None:
+    if q is not None and clip is not None and clip == 100.0 or clip == "no_clipping":
         print(f"Reading folder: {folder}")
         try:
             df = pd.read_csv(f'{folder}/progress.csv')
