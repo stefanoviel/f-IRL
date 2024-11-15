@@ -28,27 +28,25 @@ import dateutil.tz
 import json, copy
 from torch.utils.tensorboard import SummaryWriter
 
-def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step):
+def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step, seed=None):
+    """Add seed parameter and pass it through to evaluation functions"""
     assert policy_type in ["Running"]
     update_time = itr * v['reward']['gradient_step']
     env_steps = itr * v['sac']['epochs'] * v['env']['T']
     agent_emp_states = samples[0].copy()
     assert agent_emp_states.shape[0] == v['irl']['training_trajs']
 
+    # Generate evaluation seed
+    eval_seed = np.random.randint(0, 2**32-1) if seed is not None else None
+    
     metrics = eval.KL_summary(expert_samples, agent_emp_states.reshape(-1, agent_emp_states.shape[2]), 
-                         env_steps, policy_type)
-    # eval real reward
+                         env_steps, policy_type, seed=eval_seed)
+                         
+    # Pass seed to evaluation functions
     real_return_det = eval.evaluate_real_return(sac_agent.get_action, env_fn(), 
-                                            v['irl']['eval_episodes'], v['env']['T'], True)
-    metrics['Real Det Return'] = real_return_det
-    print(f"real det return avg: {real_return_det:.2f}")
-    logger.record_tabular("Real Det Return", round(real_return_det, 2))
-
+                                            v['irl']['eval_episodes'], v['env']['T'], True, seed=eval_seed)
     real_return_sto = eval.evaluate_real_return(sac_agent.get_action, env_fn(), 
-                                            v['irl']['eval_episodes'], v['env']['T'], False)
-    metrics['Real Sto Return'] = real_return_sto
-    print(f"real sto return avg: {real_return_sto:.2f}")
-    logger.record_tabular("Real Sto Return", round(real_return_sto, 2))
+                                            v['irl']['eval_episodes'], v['env']['T'], False, seed=eval_seed)
     
     # Log to tensorboard
     writer.add_scalar('Returns/Deterministic', real_return_det, global_step)
@@ -297,7 +295,7 @@ if __name__ == "__main__":
         global_step = log_metrics(itr, sac_agent, uncertainty_coef, loss, writer, v)
         
         # evaluating the learned reward
-        real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info, writer, global_step)
+        real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info, writer, global_step, seed=seed)
         if real_return_det > max_real_return_det and real_return_sto > max_real_return_sto:
             max_real_return_det, max_real_return_sto = real_return_det, real_return_sto
 
