@@ -34,6 +34,7 @@ class SquashedGaussianMLPActor(nn.Module):
         """Set seeds for all random number generators"""
         self.rng.manual_seed(seed)
         self.np_rng.seed(seed)
+        torch.manual_seed(seed)
 
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)
@@ -108,7 +109,7 @@ class SquashedGmmMLPActor(nn.Module):
 
         # n = batch size
         n, _ = mu.shape
-        mixture_components = torch.from_numpy(np.random.randint(0, self.k, (n))) # NOTE: fixed equal weight
+        mixture_components = torch.from_numpy(self.np_rng.randint(0, self.k, (n)))
 
         # change shape to k x batch_size x act_dim
         mu = mu.view(n, self.k, -1).permute(1, 0, 2)
