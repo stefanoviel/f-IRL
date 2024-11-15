@@ -78,7 +78,6 @@ class ReplayBuffer:
     def sample_batch(self, batch_size=32):
         """Update sampling to use seeded RNG"""
         idxs = self.rng.randint(0, self.size, size=batch_size)
-        print("idxs", idxs)
         batch = dict(obs=self.state[idxs],
                      obs2=self.next_state[idxs],
                      act=self.action[idxs],
@@ -568,6 +567,18 @@ class SAC:
     #     return test_rets, alphas, log_pis, test_time_steps
 
 
+    def sample_action(self):
+        """Sample a random action using seeded RNG"""
+        if isinstance(self.env.action_space, gym.spaces.Box):
+            return self.action_rng.uniform(
+                low=self.env.action_space.low,
+                high=self.env.action_space.high,
+                size=self.env.action_space.shape
+            )
+        else:
+            raise NotImplementedError("Only continuous action spaces supported")
+
+
     # Learns from single trajectories rather than batch
     def learn_mujoco(self, print_out=False, save_path=None):
         # Reset all seeds at the start of training
@@ -602,8 +613,7 @@ class SAC:
             if self.replay_buffer.size > self.start_steps:
                 a = self.get_action(o)
             else:
-                a = self.env.action_space.sample()
-
+                a = self.sample_action()
 
             # Step the env
             o2, r, d, _, _ = self.env.step(a)
