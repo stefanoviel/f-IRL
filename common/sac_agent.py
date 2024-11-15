@@ -53,7 +53,11 @@ class SquashedGaussianMLPActor(nn.Module):
             pi_action = mu
         else:
             # reparameterization trick
-            pi_action = pi_distribution.rsample(generator=self.rng)
+            # 1. Sample base noise from standard normal
+            epsilon = torch.randn(mu.shape, generator=self.rng, device=mu.device)  # ε ~ N(0,1)
+
+            # 2. Transform the noise using μ and σ
+            pi_action = mu + std * epsilon  # x = μ + σ * ε
 
         if with_logprob:
             logp_pi = pi_distribution.log_prob(pi_action).sum(axis=-1) # compute log probability of action

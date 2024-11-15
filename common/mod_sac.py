@@ -195,9 +195,7 @@ class SAC:
             q_std_clip (float): Maximum value to clip Q-value standard deviations. Default: 1.0
         """
 
-        # Add comprehensive seeding at initialization
-        self.seed = seed
-        self._setup_seeds(seed)
+
         
         self.env, self.test_env = env_fn(), env_fn()
         self.obs_dim = self.env.observation_space.shape
@@ -272,6 +270,11 @@ class SAC:
 
         self.uncertainty_coef = uncertainty_coef  # Store the coefficient
         self.q_std_clip = q_std_clip  # Store the clipping value
+
+
+        # Add comprehensive seeding at initialization
+        self.seed = seed
+        self._setup_seeds(seed)
 
     def _setup_seeds(self, seed):
         """Centralized seed setup for reproducibility"""
@@ -585,6 +588,10 @@ class SAC:
         alphas = []
         log_pis = []
         test_time_steps = []
+        local_time = time.time()
+        start_time = time.time()
+
+        best_eval = -np.inf
 
         
         for t in range(self.steps_per_epoch * self.epochs):
@@ -650,8 +657,6 @@ class SAC:
                         obs = batch['obs'][:, self.reward_state_indices]
                         batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
                         _, _, log_pi = self.update(data=batch) 
-
-
 
 
             # End of epoch handling
