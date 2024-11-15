@@ -135,9 +135,6 @@ def angry_ant_crippled(gear=150):
     ant.geom(fromto=[eye_x_offset-0.03,eye_y, eye_z+0.07, eye_x_offset+0.03, eye_y, eye_z+0.1], name='brow1', size='0.02', type='capsule', rgba=[0,0,0,1])
     ant.geom(fromto=[-eye_x_offset+0.03,eye_y, eye_z+0.07, -eye_x_offset-0.03, eye_y, eye_z+0.1], name='brow2', size='0.02', type='capsule', rgba=[0,0,0,1])
 
-
-
-
     front_left_leg = ant.body(name="front_left_leg", pos=[0, 0, 0])
     front_left_leg.geom(fromto=[0.0, 0.0, 0.0, 0.2, 0.2, 0.0], name="aux_1_geom", size="0.08", type="capsule")
     aux_1 = front_left_leg.body(name="aux_1", pos=[0.2, 0.2, 0])

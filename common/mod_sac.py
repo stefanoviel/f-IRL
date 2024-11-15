@@ -76,6 +76,7 @@ class ReplayBuffer:
     def sample_batch(self, batch_size=32):
         """Update sampling to use seeded RNG"""
         idxs = self.rng.randint(0, self.size, size=batch_size)
+        print("idxs", idxs)
         batch = dict(obs=self.state[idxs],
                      obs2=self.next_state[idxs],
                      act=self.action[idxs],
@@ -517,6 +518,8 @@ class SAC:
                     for j in range(n_parallel):
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         _, _, log_pi = self.update(data=batch)
+                    
+                    print(f"Update: {t+1:d} Loss: {log_pi:.3f}")
             else:
                 if self.replay_buffer.size>=self.update_after and (t * n_parallel) % self.update_every == 0:
                     for j in range(n_parallel):
@@ -608,6 +611,12 @@ class SAC:
                     for j in range(self.update_every):
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         _, _, log_pi = self.update(data=batch)
+
+                    test_epret = self.test_fn()
+                    if print_out:
+                        print(f"SAC Training | Evaluation: {test_epret:.3f} Timestep: {t+1:d} Elapsed {time.time() - local_time:.0f}s")        
+
+                    print(f"Update: {t+1:d} Loss: {log_pi:.3f}")
             else:
                 # NOTE: assert training agent policy
                 if self.replay_buffer.size>=self.update_after and t % self.update_every == 0:
@@ -615,7 +624,10 @@ class SAC:
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         obs = batch['obs'][:, self.reward_state_indices]
                         batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
-                        _, _, log_pi = self.update(data=batch)         
+                        _, _, log_pi = self.update(data=batch) 
+
+
+
 
             # End of epoch handling
             if t % self.log_step_interval == 0:

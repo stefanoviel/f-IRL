@@ -35,6 +35,9 @@ class SquashedGaussianMLPActor(nn.Module):
         self.rng.manual_seed(seed)
         self.np_rng.seed(seed)
 
+        torch.manual_seed(seed)
+
+
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)
         mu = self.mu_layer(net_out)
@@ -49,7 +52,7 @@ class SquashedGaussianMLPActor(nn.Module):
             pi_action = mu
         else:
             # reparameterization trick
-            pi_action = pi_distribution.rsample()
+            pi_action = pi_distribution.rsample(generator=self.rng)
 
         if with_logprob:
             logp_pi = pi_distribution.log_prob(pi_action).sum(axis=-1) # compute log probability of action
