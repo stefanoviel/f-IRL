@@ -9,7 +9,7 @@ import numpy as np
 import torch
 from torch.optim import Adam
 # import pdb
-import gym
+import gymnasium as gym
 import time
 import sys
 import common.sac_agent as core
@@ -303,6 +303,9 @@ class SAC:
         self.ac_targ.set_seed(seed+1)
         print(f"[SEED] Networks seeded with {seed} and {seed+1}")
 
+        self.action_rng = np.random.RandomState(seed)
+
+
     # Set up function for computing SAC Q-losses
     def compute_loss_q(self, data, q_idx):
         """Compute Q-loss for a specific pair of Q-networks"""
@@ -568,7 +571,7 @@ class SAC:
 
     def sample_action(self):
         """Sample a random action using seeded RNG"""
-        if isinstance(self.env.action_space, gym.spaces.Box):
+        if isinstance(self.env.action_space, gym.spaces.box.Box):
             return self.action_rng.uniform(
                 low=self.env.action_space.low,
                 high=self.env.action_space.high,
@@ -652,9 +655,7 @@ class SAC:
             # End of trajectory handling with incremented seed
             if d or ep_len == self.max_ep_len:
                 current_seed = train_seed_sequence.randint(0, 2**32-1)
-                print(f"[RESET] Episode ended at step {t}. New seed: {current_seed}")
                 o, info = self.env.reset(seed=current_seed)
-                print(f"[RESET] New observation: {o[:3]}...")
                 ep_len = 0
 
             # Update handling
