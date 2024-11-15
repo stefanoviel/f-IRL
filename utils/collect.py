@@ -41,16 +41,18 @@ def collect_trajectories_policy(env, sac_agent, n=10000, state_indices=None):
 
 
 
-def collect_trajectories_policy_single(env, sac_agent, n=2000, state_indices=None, render=False):
+def collect_trajectories_policy_single(env, sac_agent, n=2000, state_indices=None, render=False, seed=None):
+    if seed is not None:
+        rng = np.random.RandomState(seed)
+        
     T = sac_agent.max_ep_len
     s_buffer = np.empty((n, T+1, env.observation_space.shape[0]), dtype=np.float32)
     a_buffer = np.empty((n, T, env.action_space.shape[0]), dtype=np.float32)
     log_a_buffer = np.empty((n, T))
 
-
     for traj_no in range(n):
-
-        s, info = env.reset()
+        ep_seed = rng.randint(0, 2**32-1) if seed is not None else None
+        s, info = env.reset(seed=ep_seed)
         for i in range(T):
             a, logpi = sac_agent.get_action(s,get_logprob=True)
             s_nxt, _, _, _, _ = env.step(a) # assign reward online
@@ -102,10 +104,14 @@ def forward_kl_density_based(expert_states, rho_expert, agent_density):
 # NOTE: the above KL estimator is inaccurate especially for disjoint distributions. But they are smooth to plot and compare.
 # If we want accurate estimator, please use it_estimator.kldiv() as below
 
-def reverse_kl_knn_based(expert_states, agent_states):
+def reverse_kl_knn_based(expert_states, agent_states, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
     return kldiv(agent_states, expert_states)
 
-def forward_kl_knn_based(expert_states, agent_states):
+def forward_kl_knn_based(expert_states, agent_states, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
     return kldiv(expert_states, agent_states)
 
 def entropy(agent_states):

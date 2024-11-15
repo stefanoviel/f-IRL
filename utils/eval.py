@@ -7,10 +7,10 @@ import numpy as np
 import gym
 import time, copy
 
-def KL_summary(expert_samples, agent_emp_states, env_steps: int, policy_type: str, show_ent=False):
+def KL_summary(expert_samples, agent_emp_states, env_steps: int, policy_type: str, show_ent=False, seed=None):
     start = time.time()
-    fkl = collect.forward_kl_knn_based(expert_samples.copy(), agent_emp_states.copy())
-    rkl = collect.reverse_kl_knn_based(expert_samples.copy(), agent_emp_states.copy())
+    fkl = collect.forward_kl_knn_based(expert_samples.copy(), agent_emp_states.copy(), seed=seed)
+    rkl = collect.reverse_kl_knn_based(expert_samples.copy(), agent_emp_states.copy(), seed=seed)
 
     print("*****************************************")
     print(f'env_steps: {env_steps:d}: {policy_type} fkl: {fkl:.3f} rkl: {rkl:.3f} time: {time.time()-start:.0f}s')
@@ -27,10 +27,13 @@ def KL_summary(expert_samples, agent_emp_states, env_steps: int, policy_type: st
     else:
         return {'fkl': fkl, 'rkl': rkl}
 
-def evaluate_real_return(policy, env, n_episodes, horizon, deterministic):
+def evaluate_real_return(policy, env, n_episodes, horizon, deterministic, seed=None):
+    if seed is not None:
+        rng = np.random.RandomState(seed)
     returns = []
-    for _ in range(n_episodes):
-        obs, info = env.reset()
+    for ep in range(n_episodes):
+        ep_seed = rng.randint(0, 2**32-1) if seed is not None else None
+        obs, info = env.reset(seed=ep_seed)
         ret = 0
         for t in range(horizon):
             action = policy(obs, deterministic)
