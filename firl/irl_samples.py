@@ -7,6 +7,7 @@ import torch
 import gymnasium as gym 
 from ruamel.yaml import YAML
 import argparse
+import random
 
 from firl.divs.f_div_disc import f_div_disc_loss
 from firl.divs.f_div import maxentirl_loss
@@ -100,6 +101,24 @@ def log_metrics(itr: int, sac_agent, uncertainty_coef: float, loss: float, write
     
     return global_step
 
+def setup_experiment_seed(seed):
+    """Centralized seed setup for the entire experiment"""
+    # Set basic Python random seed
+    random.seed(seed)
+    
+    # Set NumPy seed
+    np.random.seed(seed)
+    
+    # Set PyTorch seeds
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+    
+    # Return a random number generator for generating other seeds
+    return np.random.RandomState(seed)
+
 if __name__ == "__main__":
     # Set up argument parser
     parser = argparse.ArgumentParser(description='f-IRL training script')
@@ -141,10 +160,14 @@ if __name__ == "__main__":
     torch.set_num_threads(1)
     np.set_printoptions(precision=3, suppress=True)
     
-    # Comprehensive seeding
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    np.random.seed(seed)
+    # Setup main experiment seed
+    seed = args.seed if args.seed is not None else v['seed']
+    rng = setup_experiment_seed(seed)
+    
+    # Generate separate seeds for different components
+    env_seed = rng.randint(0, 2**32-1)
+    buffer_seed = rng.randint(0, 2**32-1)
+    network_seed = rng.randint(0, 2**32-1)
     
     system.reproduce(seed)
     pid=os.getpid()
@@ -175,7 +198,7 @@ if __name__ == "__main__":
     # environment
     env_fn = lambda: gym.make(env_name)
     gym_env = env_fn()
-    gym_env.reset(seed=seed)  # Seed the main environment
+    gym_env.reset(seed=env_seed)  # Seed the main environment
     state_size = gym_env.observation_space.shape[0]
     action_size = gym_env.action_space.shape[0]
     if state_indices == 'all':
@@ -214,7 +237,7 @@ if __name__ == "__main__":
                 steps_per_epoch=v['env']['T'],
                 update_after=v['env']['T'] * v['sac']['random_explore_episodes'], 
                 max_ep_len=v['env']['T'],
-                seed=seed,
+                seed=network_seed,
                 start_steps=v['env']['T'] * v['sac']['random_explore_episodes'],
                 reward_state_indices=state_indices,
                 device=device,
