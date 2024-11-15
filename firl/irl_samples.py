@@ -45,8 +45,13 @@ def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step, seed
     # Pass seed to evaluation functions
     real_return_det = eval.evaluate_real_return(sac_agent.get_action, env_fn(), 
                                             v['irl']['eval_episodes'], v['env']['T'], True, seed=eval_seed)
+    print(f"real det return avg: {real_return_det:.2f}")
+    logger.record_tabular("Real Det Return", round(real_return_det, 2))
+
     real_return_sto = eval.evaluate_real_return(sac_agent.get_action, env_fn(), 
                                             v['irl']['eval_episodes'], v['env']['T'], False, seed=eval_seed)
+    print(f"real sto return avg: {real_return_sto:.2f}")
+    logger.record_tabular("Real Sto Return", round(real_return_sto, 2))
     
     # Log to tensorboard
     writer.add_scalar('Returns/Deterministic', real_return_det, global_step)

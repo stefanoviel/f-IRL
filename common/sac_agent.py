@@ -36,8 +36,6 @@ class SquashedGaussianMLPActor(nn.Module):
         self.np_rng.seed(seed)
         torch.manual_seed(seed)
 
-        torch.manual_seed(seed)
-
 
     def forward(self, obs, deterministic=False, with_logprob=True):
         net_out = self.net(obs)
