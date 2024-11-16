@@ -37,13 +37,9 @@ def extract_clip(folder_name):
     match = re.search(r'qstd(\d+\.\d+)', folder_name)
     if match:
         return float(match.group(1))
-    # Check if this is a no-clipping folder
-    if 'qstd' not in folder_name:
-        return 'no_clipping'
+
     return None
 
-# Get all folders after 2024-11-10 14-30
-target_date = datetime.strptime('2024_11_10_14_30_00', '%Y_%m_%d_%H_%M_%S')
 folders = glob.glob(f'{base_path}2024_*_seed*')
 
 # Dictionary to store results for each q and clip value combination
@@ -55,7 +51,7 @@ for folder in folders:
     q = extract_q(folder)
     clip = extract_clip(folder)
     print(f"q={q}, clip={clip}")
-    if q is not None and clip is not None and clip == 100.0 or clip == "no_clipping":
+    if q is not None and clip is not None:
         print(f"Reading folder: {folder}")
         try:
             df = pd.read_csv(f'{folder}/progress.csv')

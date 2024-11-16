@@ -624,7 +624,7 @@ class SAC:
                 if t % 1000 == 0:
                     print(f"[STEP {t}] Policy action: {a[:3]}...")
             else:
-                a = self.sample_action()
+                a = self.env.action_space.sample()
                 if t % 1000 == 0:
                     print(f"[STEP {t}] Random action: {a[:3]}...")
 

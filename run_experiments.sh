@@ -10,7 +10,7 @@ q_pairs=(2 3 5 10)
 seeds=(42 123 456 789 1024)
 
 # Array of q_std_clip
-q_std_clip=(0.1 1 10 100 1000)
+q_std_clip=(1)
 
 # Add delay between process launches
 delay_seconds=2
