@@ -1,9 +1,9 @@
-obj: airl
+obj: rkl
 IS: false
 seed: 1
 cuda: -1
 env:
-  env_name: AntFH-v0
+  env_name: Ant-v5
   T: 1000
   state_indices: all
 irl:
