@@ -11,8 +11,11 @@ import argparse
 # Base path
 BASE_PATH = "logs/Ant-v5/exp-16/rkl/"
 
+# Extract environment name from base path
+ENV_NAME = BASE_PATH.split('/')[1]  # Gets 'Ant-v5' from the path
+
 # Create output directory for the plot if it doesn't exist
-PLOT_DIR = "plots"
+PLOT_DIR = os.path.join("plots", ENV_NAME)  # Now creates plots/Ant-v5/
 os.makedirs(PLOT_DIR, exist_ok=True)
 
 # Define a set of distinct colors using tableau colors (more distinguishable than rainbow)
