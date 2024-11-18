@@ -348,6 +348,8 @@ class SAC:
             exploration_bonus = self.uncertainty_coef * q_std
         else:
             exploration_bonus = 0
+
+        print("exploration bonus ", exploration_bonus)
         
         # Use mean + exploration bonus in policy loss
         loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()

@@ -85,7 +85,7 @@ def plot_data(q_clip_results, show_confidence_interval, q_filter=None):
         mean = np.mean(data, axis=0)
         episodes = np.arange(min_length) * 5000
         color, line_style = style_mapping[(q, clip)]
-        label = f'num_of_nns={q}, ' + ('no_clipping' if clip == 0.0 else f'clip={clip}')
+        label = f'num_of_nns={q}, ' + ('no_clipping' if q == 1.0 else f'clip={clip}')
         plt.plot(episodes, mean, label=label, linestyle=line_style, color=color)
 
         if show_confidence_interval:
