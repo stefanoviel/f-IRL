@@ -23,7 +23,7 @@ for clip in "${q_std_clip[@]}"; do
         echo "Starting process with q_pairs=${q} and seed=${seed} and q_std_clip=${clip}"
         
         # Run process and wait for the specified delay
-        (python -m firl.irl_samples --config configs/samples/agents/ant.yml \
+        (python -m firl.irl_samples --config configs/samples/agents/hopper.yml \
             --num_q_pairs "${q}" \
             --seed "${seed}" \
             --q_std_clip "${clip}" \

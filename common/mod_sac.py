@@ -277,7 +277,6 @@ class SAC:
 
     def _setup_seeds(self, seed):
         """Centralized seed setup for reproducibility"""
-        print(f"[SEED] Setting up seeds with base seed {seed}")
         
         # Set seeds for PyTorch
         torch.manual_seed(seed)
@@ -286,22 +285,18 @@ class SAC:
         
         # Set seeds for NumPy
         np.random.seed(seed)
-        print(f"[SEED] First 3 numpy random numbers: {np.random.rand(3)}")
         
         # Set seeds for Python's random
         random.seed(seed)
-        print(f"[SEED] First 3 random numbers: {[random.random() for _ in range(3)]}")
         
         # Set seeds for environments
         self.env.reset(seed=seed)
         self.test_env.reset(seed=seed+10000)
-        print(f"[SEED] Environments seeded with {seed} and {seed+10000}")
         
         # Set seeds for replay buffer and networks
         self.replay_buffer.set_seed(seed)
         self.ac.set_seed(seed)
         self.ac_targ.set_seed(seed+1)
-        print(f"[SEED] Networks seeded with {seed} and {seed+1}")
 
         self.action_rng = np.random.RandomState(seed)
 
@@ -349,7 +344,6 @@ class SAC:
         else:
             exploration_bonus = 0
 
-        print("exploration bonus ", exploration_bonus)
         
         # Use mean + exploration bonus in policy loss
         loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()
@@ -586,17 +580,14 @@ class SAC:
     # Learns from single trajectories rather than batch
     def learn_mujoco(self, print_out=False, save_path=None):
         # Reset all seeds at the start of training
-        print(f"\n[TRAIN] Starting training with seed {self.seed}")
         self._setup_seeds(self.seed)
         
         # Use separate seed sequences for different aspects
         train_seed_sequence = np.random.RandomState(self.seed)
         eval_seed_sequence = np.random.RandomState(self.seed + 5000)
-        print(f"[TRAIN] First train sequence number: {train_seed_sequence.randint(0, 2**32-1)}")
         
         # Initialize environment with base seed
         o, info = self.env.reset(seed=self.seed)
-        print(f"[TRAIN] Initial observation: {o[:3]}...")  # Print first 3 elements
         
         current_seed = self.seed
         ep_len = 0
@@ -614,21 +605,19 @@ class SAC:
 
         
         for t in range(self.steps_per_epoch * self.epochs):
-            if t % 1000 == 0:  # Print every 1000 steps to avoid spam
-                print(f"[STEP {t}] Current seed: {current_seed}, Buffer size: {self.replay_buffer.size}")
-                print(f"[STEP {t}] Current observation: {o[:3]}...")
+            # if t % 1000 == 0:  # Print every 1000 steps to avoid spam
+            #     print(f"[STEP {t}] Current seed: {current_seed}, Buffer size: {self.replay_buffer.size}")
+            #     print(f"[STEP {t}] Current observation: {o[:3]}...")
             
             # Until start_steps have elapsed, randomly sample actions
             # from a uniform distribution for better exploration. Afterwards, 
             # use the learned policy. 
             if self.replay_buffer.size > self.start_steps:
                 a = self.get_action(o)
-                if t % 1000 == 0:
-                    print(f"[STEP {t}] Policy action: {a[:3]}...")
+
             else:
                 a = self.env.action_space.sample()
-                if t % 1000 == 0:
-                    print(f"[STEP {t}] Random action: {a[:3]}...")
+
 
             # Step the env
             o2, r, d, _, _ = self.env.step(a)
