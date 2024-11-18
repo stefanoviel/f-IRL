@@ -15,6 +15,10 @@ q_std_clip=(1 3 5)
 # Add delay between process launches
 delay_seconds=2
 
+env="hopper"
+
+
+
 # Validate arrays are not empty
 if [ ${#q_pairs[@]} -eq 0 ] || [ ${#seeds[@]} -eq 0 ] || [ ${#q_std_clip[@]} -eq 0 ]; then
     echo "Error: One or more parameter arrays are empty"
@@ -29,11 +33,11 @@ for q in "${q_pairs[@]}"; do
             echo "Starting process with q_pairs=${q} and seed=${seed} and q_std_clip=${clip}"
             
             # Run process and wait for the specified delay
-            # (python -m firl.irl_samples --config configs/samples/agents/ant.yml \
-            #     --num_q_pairs "${q}" \
-            #     --seed "${seed}" \
-            #     --q_std_clip "${clip}" \
-            #     > "outputs/run_q${q}_seed${seed}_clip${clip}.log" 2>&1) &
+            (python -m firl.irl_samples --config configs/samples/agents/${env}.yml \
+                --num_q_pairs "${q}" \
+                --seed "${seed}" \
+                --q_std_clip "${clip}" \
+                > "outputs/${env}/run_q${q}_seed${seed}_clip${clip}.log" 2>&1) &
             
             # sleep $delay_seconds
         else
@@ -42,11 +46,11 @@ for q in "${q_pairs[@]}"; do
                 echo "Starting process with q_pairs=${q} and seed=${seed} and q_std_clip=${clip}"
                 
                 # Run process and wait for the specified delay
-                # (python -m firl.irl_samples --config configs/samples/agents/ant.yml \
-                #     --num_q_pairs "${q}" \
-                #     --seed "${seed}" \
-                #     --q_std_clip "${clip}" \
-                #     > "outputs/run_q${q}_seed${seed}_clip${clip}.log" 2>&1) &
+                (python -m firl.irl_samples --config configs/samples/agents/${env}.yml \
+                    --num_q_pairs "${q}" \
+                    --seed "${seed}" \
+                    --q_std_clip "${clip}" \
+                    > "outputs/${env}/run_q${q}_seed${seed}_clip${clip}.log" 2>&1) &
                 
                 # sleep $delay_seconds
             done
