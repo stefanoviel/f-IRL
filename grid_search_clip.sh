@@ -16,10 +16,10 @@ q_std_clip=(1 2 3 5 10 20 50)
 # Add delay between process launches
 delay_seconds=2
 
-env="hopper"
+env="ant"
 
-
-
+# Create environment-specific output directory if it doesn't exist
+mkdir -p "outputs/${env}"
 
 for clip in "${q_std_clip[@]}"; do
     for seed in "${seeds[@]}"; do

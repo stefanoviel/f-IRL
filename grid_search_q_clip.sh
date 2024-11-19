@@ -17,7 +17,8 @@ delay_seconds=2
 
 env="hopper"
 
-
+# Create environment-specific output directory if it doesn't exist
+mkdir -p "outputs/${env}"
 
 # Validate arrays are not empty
 if [ ${#q_pairs[@]} -eq 0 ] || [ ${#seeds[@]} -eq 0 ] || [ ${#q_std_clip[@]} -eq 0 ]; then
