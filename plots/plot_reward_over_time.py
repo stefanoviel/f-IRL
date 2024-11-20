@@ -8,8 +8,6 @@ import os
 from scipy import stats
 import argparse
 
-# Base path
-BASE_PATH = "logs/Hopper-v5/exp-4/rkl/"
 
 # Extract environment name from base path
 ENV_NAME = BASE_PATH.split('/')[1]
@@ -66,7 +64,7 @@ def filter_results(q_clip_results, q_filter=None, clip_filter=None):
     if clip_filter is not None:
         filtered_results = {k: v for k, v in filtered_results.items() 
                             if (k[1] in clip_filter) or 
-                            (clip_filter is not None and k[1] is None)}
+                            (k[0] == 1)}
     
     return filtered_results
 
@@ -83,7 +81,7 @@ def plot_data(q_clip_results, show_confidence_interval, q_filter=None, clip_filt
         mean = np.mean(data, axis=0)
         episodes = np.arange(min_length) * 5000
         color, line_style = style_mapping[(q, clip)]
-        label = f'num_of_nns={q}, ' + ('no_clipping' if clip is None else f'clip={clip}')
+        label = f'num_of_nns={q}, ' + ('no_clipping' if clip is None or q == 1 else f'clip={clip}')
         plt.plot(episodes, mean, label=label, linestyle=line_style, color=color)
 
         if show_confidence_interval:
@@ -123,9 +121,16 @@ def main():
     parser.add_argument('--show_confidence_interval', action='store_true', help='Show confidence intervals in the plot')
     parser.add_argument('--q', type=int, nargs='+', help='Specify which q values to plot')
     parser.add_argument('--clip', type=float, nargs='+', help='Specify which clip values to plot')
+    parser.add_argument('--base_path', type=str, help='Specify the base path to load data from')
     args = parser.parse_args()
 
-    q_clip_results = load_data(BASE_PATH)
+    # Base path
+    # "logs/Ant-v5/exp-16/rkl/"
+    # "logs/Walker2d-v5/exp-16/rkl/"
+    # "logs/Hopper-v5/exp-4/rkl/"
+    # "logs/HalfCheetah-v5/exp-16/rkl/"
+
+    q_clip_results = load_data(args.base_path)
     plot_data(q_clip_results, args.show_confidence_interval, args.q, args.clip)
 
     print("\nNumber of runs for each q and clip value:")

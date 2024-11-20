@@ -5,13 +5,13 @@ mkdir -p outputs
 
 # Array of first parameters (number of q_pairs)
 # q_pairs=(1 2 3 5 10)
-q=4
+q=1
 
 # Array of seeds
 seeds=(42 123 456 789 1024)
 
 # Array of q_std_clip values
-q_std_clip=(0.1 1 2 3 5 10 20 30 50 100)
+q_std_clip=(0)
 
 # Add delay between process launches
 delay_seconds=2
