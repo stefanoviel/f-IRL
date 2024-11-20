@@ -8,24 +8,6 @@ import os
 from scipy import stats
 import argparse
 
-
-# Extract environment name from base path
-ENV_NAME = BASE_PATH.split('/')[1]
-
-# Create output directory for the plot if it doesn't exist
-PLOT_DIR = os.path.join("plots", ENV_NAME)
-os.makedirs(PLOT_DIR, exist_ok=True)
-
-# Define a set of distinct colors using tableau colors
-DISTINCT_COLORS = [
-    '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', 
-    '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', 
-    '#aec7e8', '#ffbb78', '#98df8a', '#ff9896', '#c5b0d5'
-]
-
-# Create distinct visual combinations for each line
-LINE_STYLES = ['-', '--', ':', '-.']
-
 def extract_q(folder_name):
     match = re.search(r'q(\d+)_', folder_name)
     return int(match.group(1)) if match else None
@@ -68,10 +50,37 @@ def filter_results(q_clip_results, q_filter=None, clip_filter=None):
     
     return filtered_results
 
-def plot_data(q_clip_results, show_confidence_interval, q_filter=None, clip_filter=None):
+def plot_data(base_path, q_clip_results, show_confidence_interval, q_filter=None, clip_filter=None):
+    # Extract environment name from base path
+    env_name = base_path.split('/')[1]
+    
+    # Create output directory for the plot if it doesn't exist
+    plot_dir = os.path.join("plots", env_name)
+    os.makedirs(plot_dir, exist_ok=True)
+
+    # Define a set of distinct colors using tableau colors
+    DISTINCT_COLORS = [
+        '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', 
+        '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf', 
+        '#aec7e8', '#ffbb78', '#98df8a', '#ff9896', '#c5b0d5'
+    ]
+
+    # Create distinct visual combinations for each line
+    LINE_STYLES = ['-', '--', ':', '-.']
+
     plt.figure(figsize=(12, 8))
     filtered_results = filter_results(q_clip_results, q_filter, clip_filter)
     
+    def create_style_mapping(q_clip_results):
+        style_mapping = {}
+        unique_combos = sorted(q_clip_results.keys())
+        for idx, combo in enumerate(unique_combos):
+            color_idx = idx % len(DISTINCT_COLORS)
+            style_idx = idx // len(DISTINCT_COLORS)
+            style = LINE_STYLES[style_idx % len(LINE_STYLES)]
+            style_mapping[combo] = (DISTINCT_COLORS[color_idx], style)
+        return style_mapping
+
     style_mapping = create_style_mapping(filtered_results)
 
     for idx, ((q, clip), series_list) in enumerate(sorted(filtered_results.items())):
@@ -91,7 +100,7 @@ def plot_data(q_clip_results, show_confidence_interval, q_filter=None, clip_filt
 
     plt.xlabel('Episodes')
     plt.ylabel('Average Real Det Return')
-    plt.title(f'{ENV_NAME}: Average Real Det Return by num of NNs and clip value')
+    plt.title(f'{env_name}: Average Real Det Return by num of NNs and clip value')
     plt.legend()
     plt.grid(True)
 
@@ -99,22 +108,12 @@ def plot_data(q_clip_results, show_confidence_interval, q_filter=None, clip_filt
     q_values_str = '_'.join(map(str, sorted(q_filter))) if q_filter else 'all_q'
     clip_values_str = '_'.join(map(str, sorted(clip_filter))) if clip_filter else 'all_clip'
     conf_int_str = 'with_conf_int' if show_confidence_interval else 'without_conf_int'
-    plot_filename = f'{ENV_NAME}_average_real_det_return_{q_values_str}_{conf_int_str}_{clip_values_str}.png'
-    plot_path = os.path.join(PLOT_DIR, plot_filename)
+    plot_filename = f'{env_name}_average_real_det_return_{q_values_str}_{conf_int_str}_{clip_values_str}.png'
+    plot_path = os.path.join(plot_dir, plot_filename)
 
     plt.savefig(plot_path, dpi=300, bbox_inches='tight')
     plt.close()
     print(f"\nPlot saved as: {plot_path}")
-
-def create_style_mapping(q_clip_results):
-    style_mapping = {}
-    unique_combos = sorted(q_clip_results.keys())
-    for idx, combo in enumerate(unique_combos):
-        color_idx = idx % len(DISTINCT_COLORS)
-        style_idx = idx // len(DISTINCT_COLORS)
-        style = LINE_STYLES[style_idx % len(LINE_STYLES)]
-        style_mapping[combo] = (DISTINCT_COLORS[color_idx], style)
-    return style_mapping
 
 def main():
     parser = argparse.ArgumentParser(description='Plot Average Real Det Return')
@@ -124,18 +123,19 @@ def main():
     parser.add_argument('--base_path', type=str, help='Specify the base path to load data from')
     args = parser.parse_args()
 
-    # Base path
-    # "logs/Ant-v5/exp-16/rkl/"
-    # "logs/Walker2d-v5/exp-16/rkl/"
-    # "logs/Hopper-v5/exp-4/rkl/"
-    # "logs/HalfCheetah-v5/exp-16/rkl/"
-
     q_clip_results = load_data(args.base_path)
-    plot_data(q_clip_results, args.show_confidence_interval, args.q, args.clip)
+    plot_data(args.base_path, q_clip_results, args.show_confidence_interval, args.q, args.clip)
 
     print("\nNumber of runs for each q and clip value:")
     for (q, clip) in sorted(q_clip_results.keys()):
         print(f"q={q}, clip={clip}: {len(q_clip_results[(q, clip)])} runs")
 
 if __name__ == "__main__":
+
+    # Base path
+    # "logs/Ant-v5/exp-16/rkl/"
+    # "logs/Walker2d-v5/exp-16/rkl/"
+    # "logs/Hopper-v5/exp-4/rkl/"
+    # "logs/HalfCheetah-v5/exp-16/rkl/"
+
     main()
