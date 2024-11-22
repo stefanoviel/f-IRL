@@ -19,8 +19,6 @@ delay_seconds=2
 env="hopper"
 
 
-
-
 for clip in "${q_std_clip[@]}"; do
     for seed in "${seeds[@]}"; do
 
