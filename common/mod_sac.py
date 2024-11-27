@@ -603,7 +603,6 @@ class SAC:
 
         best_eval = -np.inf
 
-        
         for t in range(self.steps_per_epoch * self.epochs):
             # if t % 1000 == 0:  # Print every 1000 steps to avoid spam
             #     print(f"[STEP {t}] Current seed: {current_seed}, Buffer size: {self.replay_buffer.size}")
