@@ -11,12 +11,12 @@ q=4
 seeds=(42 123 456 789 1024)
 
 # Array of q_std_clip values
-q_std_clip=(200 300 500 1000)
+q_std_clip=(0.1 1 10 100 500 1000) 
 
 # Add delay between process launches
 delay_seconds=2
 
-env="halfcheetah"
+env="humanoid"
 
 # Create environment-specific output directory if it doesn't exist
 mkdir -p "outputs/${env}"

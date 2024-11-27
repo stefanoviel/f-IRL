@@ -30,6 +30,10 @@ def load_data(base_path):
                 df = pd.read_csv(f'{folder}/progress.csv')
                 if key not in q_clip_results:
                     q_clip_results[key] = []
+                
+                # only consider the first 3 million steps
+                df = df[df['Running Env Steps'] <= 3e6]
+
                 q_clip_results[key].append(df['Real Det Return'].values)
             except Exception as e:
                 print(f"Error reading file in folder: {folder}")
@@ -139,3 +143,9 @@ if __name__ == "__main__":
     # "logs/HalfCheetah-v5/exp-16/rkl/"
 
     main()
+
+
+# python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 200 300 500 1000 --base_path logs/HalfCheetah-v5/exp-16/rkl/
+# python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Walker2d-v5/exp-16/rkl/
+# python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Ant-v5/exp-16/rkl/
+# python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 1 10 100 500 1000 --base_path logs/Humanoid-v5/exp-16/rkl/
