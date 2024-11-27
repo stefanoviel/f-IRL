@@ -148,3 +148,4 @@ if __name__ == "__main__":
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 200 300 500 1000 --base_path logs/HalfCheetah-v5/exp-16/rkl/
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Walker2d-v5/exp-16/rkl/
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Ant-v5/exp-16/rkl/
+# python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 1 10 100 500 1000 --base_path logs/Humanoid-v5/exp-16/rkl/

@@ -16,7 +16,7 @@ q_std_clip=(0)
 # Add delay between process launches
 delay_seconds=2
 
-env="halfcheetah"
+env="humanoid"
 
 # Create environment-specific output directory if it doesn't exist
 mkdir -p "outputs/${env}"
