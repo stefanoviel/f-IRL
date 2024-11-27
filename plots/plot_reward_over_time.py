@@ -16,7 +16,7 @@ def extract_clip(folder_name):
     match = re.search(r'qstd(\d+\.\d+)', folder_name)
     return float(match.group(1)) if match else None
 
-def load_data(base_path):
+def load_data(base_path, max_steps):
     folders = glob.glob(f'{base_path}2024_*_seed*')
     q_clip_results = {}
 
@@ -31,8 +31,7 @@ def load_data(base_path):
                 if key not in q_clip_results:
                     q_clip_results[key] = []
                 
-                # only consider the first 3 million steps
-                df = df[df['Running Env Steps'] <= 3e6]
+                df = df[df['Running Env Steps'] <= max_steps]
 
                 q_clip_results[key].append(df['Real Det Return'].values)
             except Exception as e:
@@ -125,9 +124,10 @@ def main():
     parser.add_argument('--q', type=int, nargs='+', help='Specify which q values to plot')
     parser.add_argument('--clip', type=float, nargs='+', help='Specify which clip values to plot')
     parser.add_argument('--base_path', type=str, help='Specify the base path to load data from')
+    parser.add_argument('--max_steps', type=float, default=3e6, help='Maximum number of environment steps to plot (default: 3e6)')
     args = parser.parse_args()
 
-    q_clip_results = load_data(args.base_path)
+    q_clip_results = load_data(args.base_path, args.max_steps)
     plot_data(args.base_path, q_clip_results, args.show_confidence_interval, args.q, args.clip)
 
     print("\nNumber of runs for each q and clip value:")
@@ -148,4 +148,4 @@ if __name__ == "__main__":
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 200 300 500 1000 --base_path logs/HalfCheetah-v5/exp-16/rkl/
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Walker2d-v5/exp-16/rkl/
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Ant-v5/exp-16/rkl/
-# python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 1 10 100 500 1000 --base_path logs/Humanoid-v5/exp-16/rkl/
+# python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 1 10 100 500 1000 --base_path logs/Humanoid-v5/exp-16/rkl/ --max_steps 1e6
