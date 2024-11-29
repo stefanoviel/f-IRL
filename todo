@@ -18,10 +18,13 @@ ablation su clipping e NN for hopper and ant to show that with more NN there isn
 
 
 TODO: 
-introduction of imitation learning at the begging
-update algorithm based on F-irl
+update explanation at the begging
 update proof of clipping
-one nn for humanoid
+rerun experiments for Ant with multiple neural network to proove 4 is a good number. 
 
 implement same but with other algos. 
 https://github.com/Cloud0723/ML-IRL
+just copy the reward from them 4nn e gridsearch su baseline (check if the best clipping is the same for both)
+
+update plot cutting at 1.4
+
