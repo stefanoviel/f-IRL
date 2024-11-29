@@ -136,6 +136,8 @@ if __name__ == "__main__":
     parser.add_argument('--q_std_clip', type=float, default=1.0,
                       help='Maximum value to clip Q-value standard deviations (default: 1.0)')
     
+
+    
     args = parser.parse_args()
 
     # Load config
@@ -318,3 +320,6 @@ if __name__ == "__main__":
         logger.dump_tabular()
 
     writer.close()
+
+
+# python -m firl.irl_samples --config configs/samples/agents/hopper.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0
