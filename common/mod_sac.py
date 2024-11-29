@@ -346,6 +346,7 @@ class SAC:
 
         
         # Use mean + exploration bonus in policy loss
+        # By minimizing the log probability of all the actions, we are maximizing the entropy of the policy.
         loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()
         return loss_pi, logp_pi
 
