@@ -9,12 +9,12 @@ from ruamel.yaml import YAML
 import argparse
 import random
 
-from firl.divs.f_div_disc import f_div_disc_loss
-from firl.divs.f_div import maxentirl_loss
-from firl.divs.ipm import ipm_loss
-from firl.models.reward import MLPReward
-from firl.models.discrim import SMMIRLDisc as Disc
-from firl.models.discrim import SMMIRLCritic as Critic
+from irl_methods.divs.f_div_disc import f_div_disc_loss
+from irl_methods.divs.f_div import maxentirl_loss
+from irl_methods.divs.ipm import ipm_loss
+from irl_methods.models.reward import MLPReward
+from irl_methods.models.discrim import SMMIRLDisc as Disc
+from irl_methods.models.discrim import SMMIRLCritic as Critic
 # from common.sac import ReplayBuffer, SAC
 from common.mod_sac import ReplayBuffer, SAC
 
@@ -28,7 +28,7 @@ import dateutil.tz
 import json, copy
 from torch.utils.tensorboard import SummaryWriter
 
-from firl.models.cisl_reward import CoherentReward
+from irl_methods.models.cisl_reward import CoherentReward
 def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step, seed=None):
     """Add seed parameter and pass it through to evaluation functions"""
     assert policy_type in ["Running"]
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     v = yaml.load(open(args.config))
 
     # assumptions
-    assert v['obj'] in ['maxentirl','maxentirl_sa']
+    assert v['obj'] in ['cisl']
     assert v['IS'] == False
     
     # Use parsed arguments
@@ -159,10 +159,6 @@ if __name__ == "__main__":
     system.reproduce(seed)
     pid=os.getpid()
     
-    # assumptions
-    assert v['obj'] in ['cisl']
-    assert v['IS'] == False
-
     # logs
     exp_id = f"logs/{env_name}/exp-{num_expert_trajs}/{v['obj']}" # task/obj/date structure
     # exp_id = 'debug'
@@ -209,7 +205,7 @@ if __name__ == "__main__":
     reward_func = CoherentReward(
         state_dim=state_size,
         action_dim=action_size,
-        alpha=v['reward']['initial_temperature'],
+        alpha=v['reward']['alpha'],
         device=device
     )
 
@@ -245,12 +241,13 @@ if __name__ == "__main__":
                 num_q_pairs=int(num_q_pairs),
                 uncertainty_coef=uncertainty_coef,
                 q_std_clip=q_std_clip,
+                use_actions_for_reward=True,
                 **v['sac']
             )
         
             sac_agent.reward_function = reward_func.get_reward
 
-        sac_info = sac_agent.learn_mujoco(print_out=True, use_actions_for_reward=True) 
+        sac_info = sac_agent.learn_mujoco(print_out=True) 
 
         samples = collect.collect_trajectories_policy_single(gym_env, sac_agent, 
                         n = v['irl']['training_trajs'], state_indices=state_indices)

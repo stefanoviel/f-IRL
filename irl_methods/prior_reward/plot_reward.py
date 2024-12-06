@@ -4,7 +4,7 @@ import torch
 from utils import system
 import argparse
 import numpy as np
-from firl.prior_reward.util import Discriminator_reward
+from irl_methods.prior_reward.util import Discriminator_reward
 import os
 from os import path as osp
 import json

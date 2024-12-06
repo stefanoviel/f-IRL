@@ -9,12 +9,12 @@ from ruamel.yaml import YAML
 import argparse
 import random
 
-from firl.divs.f_div_disc import f_div_disc_loss
-from firl.divs.f_div import maxentirl_loss
-from firl.divs.ipm import ipm_loss
-from firl.models.reward import MLPReward
-from firl.models.discrim import SMMIRLDisc as Disc
-from firl.models.discrim import SMMIRLCritic as Critic
+from irl_methods.divs.f_div_disc import f_div_disc_loss
+from irl_methods.divs.f_div import maxentirl_loss
+from irl_methods.divs.ipm import ipm_loss
+from irl_methods.models.reward import MLPReward
+from irl_methods.models.discrim import SMMIRLDisc as Disc
+from irl_methods.models.discrim import SMMIRLCritic as Critic
 # from common.sac import ReplayBuffer, SAC
 from common.mod_sac import ReplayBuffer, SAC
 

@@ -1,4 +1,4 @@
-obj: maxentirl
+obj: cisl
 IS: false
 seed: 23
 cuda: -1
@@ -42,6 +42,7 @@ reward:
   weight_decay: 1e-3
   gradient_step: 1
   momentum: 0.9
+  alpha: 0.1
 disc:
   reinit: false
   model_type: resnet_disc

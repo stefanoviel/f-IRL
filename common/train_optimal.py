@@ -11,7 +11,7 @@ import seaborn as sns
 
 import envs
 from common.sac import ReplayBuffer, SAC
-from firl.models.reward import MLPReward
+from irl_methods.models.reward import MLPReward
 from utils.plots.train_plot import plot_sac_curve
 
 if __name__ == "__main__":

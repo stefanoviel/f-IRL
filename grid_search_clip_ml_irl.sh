@@ -27,7 +27,7 @@ for clip in "${q_std_clip[@]}"; do
         echo "Starting process with q_pairs=${q} and seed=${seed} and q_std_clip=${clip}"
         
         # Run process and wait for the specified delay
-        (python -m firl.irl_samples_ml_irl --config configs/samples/agents/${env}.yml \
+        (python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/${env}.yml \
             --num_q_pairs "${q}" \
             --seed "${seed}" \
             --q_std_clip "${clip}" \
@@ -45,7 +45,7 @@ for seed in "${seeds[@]}"; do
     echo "Starting process with q_pairs=${q} and seed=${seed}"
     
     # Run process and wait for the specified delay
-    (python -m firl.irl_samples_ml_irl --config configs/samples/agents/${env}.yml \
+    (python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/${env}.yml \
         --num_q_pairs "${q}" \
         --seed "${seed}" \
         > "outputs/${env}/run_q${q}_seed${seed}_clip${clip}.log" 2>&1) &

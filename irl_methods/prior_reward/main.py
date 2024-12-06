@@ -5,7 +5,7 @@ import torch
 from utils import system
 import argparse
 import numpy as np
-from firl.prior_reward.util import Discriminator_reward
+from irl_methods.prior_reward.util import Discriminator_reward
 import os
 from os import path as osp
 import json
@@ -36,13 +36,13 @@ def run(reward_path, alpha=0.01, prior_reward_weight=0.1):
         print(v)
 
         if use_reward(v['obj']):
-            from firl.models.reward import MLPReward
+            from irl_methods.models.reward import MLPReward
             reward_kwargs = v['reward']
             reward_func = MLPReward(len(env_kwargs['state_indices']), **reward_kwargs, device=device)
             reward_func.load_state_dict(torch.load(reward_path))
             reward_func.to(device)
         else:
-            from firl.models.discrim import ResNetAIRLDisc
+            from irl_methods.models.discrim import ResNetAIRLDisc
             dis_kwargs = v['disc']
             dis_kwargs.update(
                 {

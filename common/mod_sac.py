@@ -95,7 +95,8 @@ class SAC:
             log_step_interval=None, reward_state_indices=None,
             save_freq=1, device=torch.device("cpu"), automatic_alpha_tuning=True, reinitialize=True,
             num_q_pairs=3, uncertainty_coef=1.0, q_std_clip=1.0,  # Add q_std_clip parameter
-            **kwargs):
+            use_actions_for_reward=False, **kwargs):
+
         """
         Soft Actor-Critic (SAC)
 
@@ -202,7 +203,8 @@ class SAC:
         self.max_ep_len=max_ep_len
         self.start_steps=start_steps
         self.batch_size=batch_size
-        self.gamma=gamma
+        self.gamma=gamma    
+        self.use_actions_for_reward = use_actions_for_reward
         
         self.polyak=polyak
         # Action limit for clamping: critically, assumes all dimensions share the same bound!
@@ -426,12 +428,19 @@ class SAC:
             test_seed = self.seed + test_seed_offset + j
             o, info = self.test_env.reset(seed=test_seed)
             obs = np.zeros((self.max_ep_len, o.shape[0]))
+            acts = np.zeros((self.max_ep_len, self.act_dim))
             for t in range(self.max_ep_len):
                 # Take deterministic actions at test time?
-                o, _, _, _, _ = self.test_env.step(self.get_action(o, True))
+                o, a, _, _, _ = self.test_env.step(self.get_action(o, True))
                 obs[t] = o.copy()
+                acts[t] = a.copy()
             obs = torch.FloatTensor(obs).to(self.device)[:, self.reward_state_indices]
-            avg_ep_return += self.reward_function(obs).sum() # (T, d) -> (T)
+            acts = torch.FloatTensor(acts).to(self.device)
+            if self.use_actions_for_reward:
+                # Compute reward using both states and actions
+                avg_ep_return += self.reward_function(obs, acts).sum()
+            else:
+                avg_ep_return += self.reward_function(obs).sum() # (T, d) -> (T)
         return avg_ep_return/self.num_test_episodes
 
     def test_agent_ori_env(self, deterministic=True):
@@ -486,7 +495,7 @@ class SAC:
 
 
     # Learns from single trajectories rather than batch
-    def learn_mujoco(self, print_out=False, save_path=None, use_actions_for_reward=False):
+    def learn_mujoco(self, print_out=False, save_path=None):
         # Reset all seeds at the start of training
         self._setup_seeds(self.seed)
         
@@ -577,7 +586,7 @@ class SAC:
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         obs = batch['obs'][:, self.reward_state_indices]
                         
-                        if use_actions_for_reward:
+                        if self.use_actions_for_reward:
                             # Compute reward using both states and actions
                             acts = batch['act']
                             batch['rew'] = torch.FloatTensor(self.reward_function(obs, acts)).to(self.device)
