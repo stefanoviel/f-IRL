@@ -222,7 +222,7 @@ if __name__ == "__main__":
     pid=os.getpid()
     
     # assumptions
-    assert v['obj'] in ['fkl', 'rkl', 'js', 'emd', 'maxentirl']
+    assert v['obj'] in ['maxentirl', 'maxentirl_sa']
     assert v['IS'] == False
 
     # logs

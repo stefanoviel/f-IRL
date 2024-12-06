@@ -1,28 +1,4 @@
-idea, incorporare incertezza nel update - theoretical introduction
-nei diversi env ottengo un miglioramento mettendo incertezza (4 env con migliore clipping e baseline)
-TODO: ant, q nn and smaller clipping
+run halfchetaah with mlIRL
 
-
-why we need clipping? 
-far vedere che il clipping e' necessario, plot in cui non funzionava (hopper)
-
-ablation sul clipping per i diversi env
-
-why no more networks?
-aumentando il numero di network non peggiora la performance quindi teniamo un valore tra due e cinque NN
-ablation su clipping e NN for hopper and ant to show that with more NN there isn't a drastic increase in the performance
-
-
-
-
-TODO: 
-update explanation at the begging
-update proof of clipping
-rerun experiments for Ant with multiple neural network to proove 4 is a good number. 
-
-implement same but with other algos. 
-https://github.com/Cloud0723/ML-IRL
-just copy the reward from them 4nn e gridsearch su baseline (check if the best clipping is the same for both)
-
-update plot cutting at 1.4
-
+questions: 
+is it fine that the reward is only on the states?  
