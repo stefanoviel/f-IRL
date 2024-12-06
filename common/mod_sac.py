@@ -471,100 +471,7 @@ class SAC:
 
         return ep_ret.mean(), log_pi.mean()
 
-    # def learn(self, print_out=False, n_parallel=1):
-    #     # only called by SMM-IRL
-    #     # Prepare for interaction with environment
-    #     total_steps = self.steps_per_epoch * self.epochs
-    #     start_time = time.time()
-
-    #     # Initialize with base seed for all parallel environments
-    #     o, info = self.env.reset(seed=self.seed)
-    #     current_seeds = np.arange(self.seed, self.seed + n_parallel)
-    #     ep_len = np.ones(n_parallel).astype(np.int)
-
-    #     print(f"Training SAC for IRL agent: Total steps {total_steps:d}")
-    #     # Main loop: collect experience in env and update/log each epoch
-    #     test_rets = []
-    #     alphas = []
-    #     log_pis = []
-    #     test_time_steps = []
-
-        
-    #     for t in range(total_steps // n_parallel):
-            
-    #         # Until start_steps have elapsed, randomly sample actions
-    #         # from a uniform distribution for better exploration. Afterwards, 
-    #         # use the learned policy. 
-    #         if self.replay_buffer.size > self.start_steps:
-    #         # if t * n_parallel > self.start_steps:
-    #             # print("using policy to get actions")
-    #             a, _ = self.get_action_batch(o)
-    #             # a = self.get_action(o)
-    #             # print("Taking action from sac agent")
-    #         else:
-    #             # print("using random sample to get actions")
-    #             a = np.concatenate([self.env.action_space.sample() for i in range(n_parallel)]).reshape(
-    #                 n_parallel, self.env.action_space.shape[0]
-    #             )
-    #             # a = self.env.action_space.sample()
-
-
-    #         # Step the env
-    #         o2, r, d, _, _ = self.env.step(a)
-
-    #         ep_len += 1
-
-    #         # Ignore the "done" signal if it comes from hitting the time
-    #         # horizon (that is, when it's an artificial terminal signal
-    #         # that isn't based on the agent's state)
-    #         # important, assume all trajecotires are synchronized.
-    #         d = False # keep false for pointmass env. if np.any(ep_len==self.max_ep_len) else d
-
-
-    #         # Store experience to replay buffer
-    #         self.replay_buffer.store_batch(o, a, r, o2, d)
-    #         # self.replay_buffer.store(o, a, r, o2, d)
-
-
-    #         # Super critical, easy to overlook step: make sure to update 
-    #         # most recent observation!
-    #         o = o2
-
-    #         # End of trajectory handling with incremented seeds
-    #         if d or np.any(ep_len == self.max_ep_len):
-    #             # Update seeds for environments that need reset
-    #             current_seeds += n_parallel  # Increment by n_parallel to ensure unique seeds
-    #             o, info = self.env.reset(seed=current_seeds[0])  # Assuming vectorized env takes single seed
-    #             ep_len = np.ones(n_parallel).astype(np.int)
-
-    #         # Update handling
-    #         log_pi = 0
-    #         if self.reinitialize:
-    #             if (t * n_parallel) >= self.update_after and (t * n_parallel) % self.update_every == 0:
-    #                 for j in range(n_parallel):
-    #                     batch = self.replay_buffer.sample_batch(self.batch_size)
-    #                     _, _, log_pi = self.update(data=batch)
-    #         else:
-    #             if self.replay_buffer.size>=self.update_after and (t * n_parallel) % self.update_every == 0:
-    #                 for j in range(n_parallel):
-    #                     batch = self.replay_buffer.sample_batch(self.batch_size)
-    #                     obs = batch['obs'][:, self.reward_state_indices]
-    #                     batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
-    #                     _, _, log_pi = self.update(data=batch)         
-
-    #         # End of epoch handling
-    #         if (t * n_parallel) % self.log_step_interval == 0:
-    #             test_epret, log_pi = self.test_agent_batch()
-    #             if print_out:
-    #                 print(f"SAC Training | Evaluation: {test_epret:.3f} Timestep: {t+1:d}")
-
-    #             alphas.append(self.alpha.item() if self.automatic_alpha_tuning else self.alpha)
-    #             test_rets.append(test_epret)
-    #             log_pis.append(log_pi)
-    #             test_time_steps.append(t+1)
-    #     print(f"SAC Training End: time {time.time() - start_time:.0f}s")
-    #     return test_rets, alphas, log_pis, test_time_steps
-
+   
 
     def sample_action(self):
         """Sample a random action using seeded RNG"""
@@ -579,7 +486,7 @@ class SAC:
 
 
     # Learns from single trajectories rather than batch
-    def learn_mujoco(self, print_out=False, save_path=None):
+    def learn_mujoco(self, print_out=False, save_path=None, use_actions_for_reward=False):
         # Reset all seeds at the start of training
         self._setup_seeds(self.seed)
         
@@ -669,7 +576,15 @@ class SAC:
                     for j in range(self.update_every):
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         obs = batch['obs'][:, self.reward_state_indices]
-                        batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
+                        
+                        if use_actions_for_reward:
+                            # Compute reward using both states and actions
+                            acts = batch['act']
+                            batch['rew'] = torch.FloatTensor(self.reward_function(obs, acts)).to(self.device)
+                        else:
+                            # Compute reward using only states
+                            batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
+                            
                         _, _, log_pi = self.update(data=batch) 
 
 

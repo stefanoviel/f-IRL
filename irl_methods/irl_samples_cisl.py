@@ -205,7 +205,7 @@ if __name__ == "__main__":
     print(expert_trajs.shape, expert_samples_sa.shape) # ignored starting state
 
 
-    # Initialize
+    # Initialize reward function
     reward_func = CoherentReward(
         state_dim=state_size,
         action_dim=action_size,
@@ -213,16 +213,14 @@ if __name__ == "__main__":
         device=device
     )
 
-    # Train the policy using expert demonstrations
-    reward_func.train_policy(expert_states, expert_actions) # with behavior cloning
-    reward_optimizer = torch.optim.Adam(reward_func.parameters(), lr=v['reward']['lr'], 
-        weight_decay=v['reward']['weight_decay'], betas=(v['reward']['momentum'], 0.999))
-    
+    # Train the reward function using expert demonstrations
+    reward_func.train_policy(expert_samples, expert_a_samples)
+
     # Initilialize discriminator
-    if v['obj'] in ["emd"]:
-        critic = Critic(len(state_indices), **v['critic'], device=device)
-    elif v['obj'] != 'maxentirl':
-        disc = Disc(len(state_indices), **v['disc'], device=device)
+    # if v['obj'] in ["emd"]:
+    #     critic = Critic(len(state_indices), **v['critic'], device=device)
+    # elif v['obj'] != 'maxentirl':
+    #     disc = Disc(len(state_indices), **v['disc'], device=device)
 
     max_real_return_det, max_real_return_sto = -np.inf, -np.inf
     for itr in range(v['irl']['n_itrs']):
@@ -250,8 +248,9 @@ if __name__ == "__main__":
                 **v['sac']
             )
         
-        sac_agent.reward_function = reward_func.get_scalar_reward # only need to change reward in sac
-        sac_info = sac_agent.learn_mujoco(print_out=True)
+            sac_agent.reward_function = reward_func.get_reward
+
+        sac_info = sac_agent.learn_mujoco(print_out=True, use_actions_for_reward=True) 
 
         samples = collect.collect_trajectories_policy_single(gym_env, sac_agent, 
                         n = v['irl']['training_trajs'], state_indices=state_indices)
@@ -274,3 +273,6 @@ if __name__ == "__main__":
         logger.dump_tabular()
 
     writer.close()
+
+
+# python -m irl_methods.irl_samles_cisl --config configs/samples/agents/hopper.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
