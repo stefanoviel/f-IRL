@@ -20,9 +20,13 @@ def load_data(base_path, max_steps):
     folders = glob.glob(f'{base_path}2024_*_seed*')
     q_clip_results = {}
 
+    print(f"base_path: {base_path}")
+
     for folder in folders:
         q = extract_q(folder)
         clip = extract_clip(folder)
+
+        print(f"Loading data from folder: {folder}, q={q}, clip={clip}")
         
         if q is not None:
             key = (q, clip)
@@ -56,9 +60,10 @@ def filter_results(q_clip_results, q_filter=None, clip_filter=None):
 def plot_data(base_path, q_clip_results, show_confidence_interval, q_filter=None, clip_filter=None):
     # Extract environment name from base path
     env_name = base_path.split('/')[1]
+    method_type = base_path.split('/')[3]
     
     # Create output directory for the plot if it doesn't exist
-    plot_dir = os.path.join("plots", env_name)
+    plot_dir = os.path.join("plots", env_name, method_type)
     os.makedirs(plot_dir, exist_ok=True)
 
     # Define a set of distinct colors using tableau colors

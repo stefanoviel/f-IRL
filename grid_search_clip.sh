@@ -16,7 +16,7 @@ q_std_clip=(0.1 0.5 1 5 10 50 100 500 1000)
 # Add delay between process launches
 delay_seconds=2
 
-env="humanoid"
+env="hopper"
 
 # Create environment-specific output directory if it doesn't exist
 mkdir -p "outputs/${env}"
@@ -36,6 +36,22 @@ for clip in "${q_std_clip[@]}"; do
         sleep $delay_seconds
 
     done
+done
+
+# baseline with one neural network
+q=1
+for seed in "${seeds[@]}"; do
+
+    echo "Starting process with q_pairs=${q} and seed=${seed}"
+    
+    # Run process and wait for the specified delay
+    (python -m firl.irl_samples --config configs/samples/agents/${env}.yml \
+        --num_q_pairs "${q}" \
+        --seed "${seed}" \
+        > "outputs/${env}/run_q${q}_seed${seed}_clip${clip}.log" 2>&1) &
+    
+    sleep $delay_seconds
+
 done
 
 wait
