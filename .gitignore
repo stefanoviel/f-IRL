@@ -10,7 +10,7 @@ build/
 .vscode/
 
 # logs, a soft link to disk
-logs/
+*.pkl
 
 # videos, a soft link to disk
 data/videos

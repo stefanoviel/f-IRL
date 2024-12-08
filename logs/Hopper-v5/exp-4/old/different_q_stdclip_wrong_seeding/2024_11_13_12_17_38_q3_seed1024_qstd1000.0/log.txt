@@ -1,0 +1,2001 @@
+Logging to logs/Hopper-v5/exp-4/rkl/2024_11_13_12_17_38_q3_seed1024_qstd1000.0
+--2024-11-13 12:20:07.221441 CET---
+| Itration            | 0         |
+| Real Det Return     | 245       |
+| Real Sto Return     | 249       |
+| Reward Loss         | -1.28e+03 |
+| Running Env Steps   | 0         |
+| Running Forward KL  | 31.2      |
+| Running Reverse KL  | 16.8      |
+| Running Update Time | 0         |
+-----------------------------------
+--2024-11-13 12:23:23.525224 CET--
+| Itration            | 1        |
+| Real Det Return     | 262      |
+| Real Sto Return     | 247      |
+| Reward Loss         | -1.2e+03 |
+| Running Env Steps   | 5000     |
+| Running Forward KL  | 31       |
+| Running Reverse KL  | 15.6     |
+| Running Update Time | 1        |
+----------------------------------
+--2024-11-13 12:26:50.363804 CET--
+| Itration            | 2        |
+| Real Det Return     | 352      |
+| Real Sto Return     | 347      |
+| Reward Loss         | -916     |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 30.2     |
+| Running Reverse KL  | 15.3     |
+| Running Update Time | 2        |
+----------------------------------
+--2024-11-13 12:30:25.396589 CET---
+| Itration            | 3         |
+| Real Det Return     | 333       |
+| Real Sto Return     | 329       |
+| Reward Loss         | -1.08e+03 |
+| Running Env Steps   | 15000     |
+| Running Forward KL  | 32.2      |
+| Running Reverse KL  | 17.8      |
+| Running Update Time | 3         |
+-----------------------------------
+--2024-11-13 12:33:49.557680 CET---
+| Itration            | 4         |
+| Real Det Return     | 256       |
+| Real Sto Return     | 183       |
+| Reward Loss         | -1.59e+03 |
+| Running Env Steps   | 20000     |
+| Running Forward KL  | 32.3      |
+| Running Reverse KL  | 21.7      |
+| Running Update Time | 4         |
+-----------------------------------
+--2024-11-13 12:37:45.977065 CET---
+| Itration            | 5         |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -2.06e+03 |
+| Running Env Steps   | 25000     |
+| Running Forward KL  | 37.2      |
+| Running Reverse KL  | 29.7      |
+| Running Update Time | 5         |
+-----------------------------------
+--2024-11-13 12:41:39.981395 CET---
+| Itration            | 6         |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 990       |
+| Reward Loss         | -1.88e+03 |
+| Running Env Steps   | 30000     |
+| Running Forward KL  | 35.4      |
+| Running Reverse KL  | 20.3      |
+| Running Update Time | 6         |
+-----------------------------------
+--2024-11-13 12:45:37.788403 CET---
+| Itration            | 7         |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -2.01e+03 |
+| Running Env Steps   | 35000     |
+| Running Forward KL  | 35.1      |
+| Running Reverse KL  | 19.8      |
+| Running Update Time | 7         |
+-----------------------------------
+--2024-11-13 12:49:10.650793 CET--
+| Itration            | 8        |
+| Real Det Return     | 239      |
+| Real Sto Return     | 242      |
+| Reward Loss         | -871     |
+| Running Env Steps   | 40000    |
+| Running Forward KL  | 32.2     |
+| Running Reverse KL  | 54.7     |
+| Running Update Time | 8        |
+----------------------------------
+--2024-11-13 12:52:39.696702 CET---
+| Itration            | 9         |
+| Real Det Return     | 331       |
+| Real Sto Return     | 322       |
+| Reward Loss         | -1.52e+03 |
+| Running Env Steps   | 45000     |
+| Running Forward KL  | 31.7      |
+| Running Reverse KL  | 20        |
+| Running Update Time | 9         |
+-----------------------------------
+--2024-11-13 12:56:12.956262 CET--
+| Itration            | 10       |
+| Real Det Return     | 276      |
+| Real Sto Return     | 287      |
+| Reward Loss         | -959     |
+| Running Env Steps   | 50000    |
+| Running Forward KL  | 31.9     |
+| Running Reverse KL  | 18.7     |
+| Running Update Time | 10       |
+----------------------------------
+--2024-11-13 13:00:10.290764 CET---
+| Itration            | 11        |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -2.12e+03 |
+| Running Env Steps   | 55000     |
+| Running Forward KL  | 35.6      |
+| Running Reverse KL  | 21.6      |
+| Running Update Time | 11        |
+-----------------------------------
+--2024-11-13 13:04:04.369140 CET---
+| Itration            | 12        |
+| Real Det Return     | 987       |
+| Real Sto Return     | 990       |
+| Reward Loss         | -2.17e+03 |
+| Running Env Steps   | 60000     |
+| Running Forward KL  | 35.2      |
+| Running Reverse KL  | 22.1      |
+| Running Update Time | 12        |
+-----------------------------------
+--2024-11-13 13:07:31.425190 CET---
+| Itration            | 13        |
+| Real Det Return     | 276       |
+| Real Sto Return     | 292       |
+| Reward Loss         | -1.45e+03 |
+| Running Env Steps   | 65000     |
+| Running Forward KL  | 30        |
+| Running Reverse KL  | 17.4      |
+| Running Update Time | 13        |
+-----------------------------------
+--2024-11-13 13:11:09.335532 CET---
+| Itration            | 14        |
+| Real Det Return     | 288       |
+| Real Sto Return     | 286       |
+| Reward Loss         | -1.99e+03 |
+| Running Env Steps   | 70000     |
+| Running Forward KL  | 32.4      |
+| Running Reverse KL  | 33.7      |
+| Running Update Time | 14        |
+-----------------------------------
+--2024-11-13 13:15:14.858094 CET---
+| Itration            | 15        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -2.44e+03 |
+| Running Env Steps   | 75000     |
+| Running Forward KL  | 36.3      |
+| Running Reverse KL  | 35.6      |
+| Running Update Time | 15        |
+-----------------------------------
+--2024-11-13 13:19:22.692736 CET---
+| Itration            | 16        |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -2.48e+03 |
+| Running Env Steps   | 80000     |
+| Running Forward KL  | 36.4      |
+| Running Reverse KL  | 25.6      |
+| Running Update Time | 16        |
+-----------------------------------
+--2024-11-13 13:23:24.486660 CET---
+| Itration            | 17        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -2.46e+03 |
+| Running Env Steps   | 85000     |
+| Running Forward KL  | 33.9      |
+| Running Reverse KL  | 20.5      |
+| Running Update Time | 17        |
+-----------------------------------
+--2024-11-13 13:27:17.393417 CET---
+| Itration            | 18        |
+| Real Det Return     | 534       |
+| Real Sto Return     | 532       |
+| Reward Loss         | -2.13e+03 |
+| Running Env Steps   | 90000     |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 35.1      |
+| Running Update Time | 18        |
+-----------------------------------
+--2024-11-13 13:30:54.829600 CET--
+| Itration            | 19       |
+| Real Det Return     | 83       |
+| Real Sto Return     | 133      |
+| Reward Loss         | -2.2e+03 |
+| Running Env Steps   | 95000    |
+| Running Forward KL  | 31.9     |
+| Running Reverse KL  | 22.3     |
+| Running Update Time | 19       |
+----------------------------------
+--2024-11-13 13:34:32.353781 CET---
+| Itration            | 20        |
+| Real Det Return     | 208       |
+| Real Sto Return     | 205       |
+| Reward Loss         | -2.57e+03 |
+| Running Env Steps   | 100000    |
+| Running Forward KL  | 33.1      |
+| Running Reverse KL  | 44        |
+| Running Update Time | 20        |
+-----------------------------------
+--2024-11-13 13:38:07.501649 CET--
+| Itration            | 21       |
+| Real Det Return     | 243      |
+| Real Sto Return     | 246      |
+| Reward Loss         | -1.6e+03 |
+| Running Env Steps   | 105000   |
+| Running Forward KL  | 30.4     |
+| Running Reverse KL  | 18.3     |
+| Running Update Time | 21       |
+----------------------------------
+--2024-11-13 13:42:07.472930 CET---
+| Itration            | 22        |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 1.08e+03  |
+| Reward Loss         | -2.75e+03 |
+| Running Env Steps   | 110000    |
+| Running Forward KL  | 36.1      |
+| Running Reverse KL  | 29        |
+| Running Update Time | 22        |
+-----------------------------------
+--2024-11-13 13:45:59.800279 CET---
+| Itration            | 23        |
+| Real Det Return     | 457       |
+| Real Sto Return     | 449       |
+| Reward Loss         | -2.23e+03 |
+| Running Env Steps   | 115000    |
+| Running Forward KL  | 31.5      |
+| Running Reverse KL  | 43.3      |
+| Running Update Time | 23        |
+-----------------------------------
+--2024-11-13 13:49:51.795691 CET---
+| Itration            | 24        |
+| Real Det Return     | 498       |
+| Real Sto Return     | 493       |
+| Reward Loss         | -2.64e+03 |
+| Running Env Steps   | 120000    |
+| Running Forward KL  | 33.2      |
+| Running Reverse KL  | 32        |
+| Running Update Time | 24        |
+-----------------------------------
+--2024-11-13 13:53:37.009446 CET---
+| Itration            | 25        |
+| Real Det Return     | 441       |
+| Real Sto Return     | 445       |
+| Reward Loss         | -2.85e+03 |
+| Running Env Steps   | 125000    |
+| Running Forward KL  | 32.4      |
+| Running Reverse KL  | 21.7      |
+| Running Update Time | 25        |
+-----------------------------------
+--2024-11-13 13:57:44.297374 CET---
+| Itration            | 26        |
+| Real Det Return     | 986       |
+| Real Sto Return     | 984       |
+| Reward Loss         | -2.95e+03 |
+| Running Env Steps   | 130000    |
+| Running Forward KL  | 38.2      |
+| Running Reverse KL  | 34.8      |
+| Running Update Time | 26        |
+-----------------------------------
+--2024-11-13 14:01:39.480462 CET---
+| Itration            | 27        |
+| Real Det Return     | 299       |
+| Real Sto Return     | 292       |
+| Reward Loss         | -2.65e+03 |
+| Running Env Steps   | 135000    |
+| Running Forward KL  | 32.1      |
+| Running Reverse KL  | 28.9      |
+| Running Update Time | 27        |
+-----------------------------------
+--2024-11-13 14:05:24.035460 CET---
+| Itration            | 28        |
+| Real Det Return     | 323       |
+| Real Sto Return     | 335       |
+| Reward Loss         | -2.21e+03 |
+| Running Env Steps   | 140000    |
+| Running Forward KL  | 31.5      |
+| Running Reverse KL  | 30        |
+| Running Update Time | 28        |
+-----------------------------------
+--2024-11-13 14:09:13.543463 CET---
+| Itration            | 29        |
+| Real Det Return     | 337       |
+| Real Sto Return     | 325       |
+| Reward Loss         | -2.69e+03 |
+| Running Env Steps   | 145000    |
+| Running Forward KL  | 32.2      |
+| Running Reverse KL  | 20.1      |
+| Running Update Time | 29        |
+-----------------------------------
+--2024-11-13 14:13:01.124876 CET---
+| Itration            | 30        |
+| Real Det Return     | 86.1      |
+| Real Sto Return     | 135       |
+| Reward Loss         | -3.15e+03 |
+| Running Env Steps   | 150000    |
+| Running Forward KL  | 32        |
+| Running Reverse KL  | 26.5      |
+| Running Update Time | 30        |
+-----------------------------------
+--2024-11-13 14:17:14.337785 CET---
+| Itration            | 31        |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -3.15e+03 |
+| Running Env Steps   | 155000    |
+| Running Forward KL  | 36.3      |
+| Running Reverse KL  | 29.3      |
+| Running Update Time | 31        |
+-----------------------------------
+--2024-11-13 14:21:11.270349 CET---
+| Itration            | 32        |
+| Real Det Return     | 33.8      |
+| Real Sto Return     | 33.5      |
+| Reward Loss         | -3.68e+03 |
+| Running Env Steps   | 160000    |
+| Running Forward KL  | 38.3      |
+| Running Reverse KL  | 217       |
+| Running Update Time | 32        |
+-----------------------------------
+--2024-11-13 14:25:04.887274 CET---
+| Itration            | 33        |
+| Real Det Return     | 400       |
+| Real Sto Return     | 421       |
+| Reward Loss         | -2.91e+03 |
+| Running Env Steps   | 165000    |
+| Running Forward KL  | 31        |
+| Running Reverse KL  | 31.1      |
+| Running Update Time | 33        |
+-----------------------------------
+--2024-11-13 14:28:56.733177 CET---
+| Itration            | 34        |
+| Real Det Return     | 184       |
+| Real Sto Return     | 192       |
+| Reward Loss         | -2.63e+03 |
+| Running Env Steps   | 170000    |
+| Running Forward KL  | 28.4      |
+| Running Reverse KL  | 34.6      |
+| Running Update Time | 34        |
+-----------------------------------
+--2024-11-13 14:33:12.114757 CET---
+| Itration            | 35        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -3.37e+03 |
+| Running Env Steps   | 175000    |
+| Running Forward KL  | 39.7      |
+| Running Reverse KL  | 42.5      |
+| Running Update Time | 35        |
+-----------------------------------
+--2024-11-13 14:37:34.964808 CET---
+| Itration            | 36        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -3.45e+03 |
+| Running Env Steps   | 180000    |
+| Running Forward KL  | 36.6      |
+| Running Reverse KL  | 39.4      |
+| Running Update Time | 36        |
+-----------------------------------
+--2024-11-13 14:41:50.647803 CET---
+| Itration            | 37        |
+| Real Det Return     | 1.08e+03  |
+| Real Sto Return     | 1.09e+03  |
+| Reward Loss         | -3.23e+03 |
+| Running Env Steps   | 185000    |
+| Running Forward KL  | 36.2      |
+| Running Reverse KL  | 28.6      |
+| Running Update Time | 37        |
+-----------------------------------
+--2024-11-13 14:46:10.157917 CET---
+| Itration            | 38        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -3.27e+03 |
+| Running Env Steps   | 190000    |
+| Running Forward KL  | 37.2      |
+| Running Reverse KL  | 25.6      |
+| Running Update Time | 38        |
+-----------------------------------
+--2024-11-13 14:50:26.223222 CET---
+| Itration            | 39        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -3.51e+03 |
+| Running Env Steps   | 195000    |
+| Running Forward KL  | 37.6      |
+| Running Reverse KL  | 32.6      |
+| Running Update Time | 39        |
+-----------------------------------
+--2024-11-13 14:54:39.570635 CET---
+| Itration            | 40        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -3.58e+03 |
+| Running Env Steps   | 200000    |
+| Running Forward KL  | 37.6      |
+| Running Reverse KL  | 36.6      |
+| Running Update Time | 40        |
+-----------------------------------
+--2024-11-13 14:58:54.473727 CET---
+| Itration            | 41        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -3.63e+03 |
+| Running Env Steps   | 205000    |
+| Running Forward KL  | 37.7      |
+| Running Reverse KL  | 27        |
+| Running Update Time | 41        |
+-----------------------------------
+--2024-11-13 15:03:13.751069 CET---
+| Itration            | 42        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -3.63e+03 |
+| Running Env Steps   | 210000    |
+| Running Forward KL  | 38.1      |
+| Running Reverse KL  | 43.1      |
+| Running Update Time | 42        |
+-----------------------------------
+--2024-11-13 15:07:15.062755 CET---
+| Itration            | 43        |
+| Real Det Return     | 121       |
+| Real Sto Return     | 172       |
+| Reward Loss         | -4.03e+03 |
+| Running Env Steps   | 215000    |
+| Running Forward KL  | 34.9      |
+| Running Reverse KL  | 123       |
+| Running Update Time | 43        |
+-----------------------------------
+--2024-11-13 15:11:31.803334 CET--
+| Itration            | 44       |
+| Real Det Return     | 983      |
+| Real Sto Return     | 983      |
+| Reward Loss         | -3.8e+03 |
+| Running Env Steps   | 220000   |
+| Running Forward KL  | 39.3     |
+| Running Reverse KL  | 45.6     |
+| Running Update Time | 44       |
+----------------------------------
+--2024-11-13 15:15:54.480401 CET---
+| Itration            | 45        |
+| Real Det Return     | 993       |
+| Real Sto Return     | 995       |
+| Reward Loss         | -3.81e+03 |
+| Running Env Steps   | 225000    |
+| Running Forward KL  | 37.1      |
+| Running Reverse KL  | 32.4      |
+| Running Update Time | 45        |
+-----------------------------------
+--2024-11-13 15:20:12.936386 CET---
+| Itration            | 46        |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -3.94e+03 |
+| Running Env Steps   | 230000    |
+| Running Forward KL  | 36.2      |
+| Running Reverse KL  | 38.2      |
+| Running Update Time | 46        |
+-----------------------------------
+--2024-11-13 15:24:29.748341 CET---
+| Itration            | 47        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -3.87e+03 |
+| Running Env Steps   | 235000    |
+| Running Forward KL  | 34        |
+| Running Reverse KL  | 34.6      |
+| Running Update Time | 47        |
+-----------------------------------
+--2024-11-13 15:28:46.347944 CET---
+| Itration            | 48        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -3.65e+03 |
+| Running Env Steps   | 240000    |
+| Running Forward KL  | 33.9      |
+| Running Reverse KL  | 23.3      |
+| Running Update Time | 48        |
+-----------------------------------
+--2024-11-13 15:32:54.826088 CET---
+| Itration            | 49        |
+| Real Det Return     | 719       |
+| Real Sto Return     | 675       |
+| Reward Loss         | -3.28e+03 |
+| Running Env Steps   | 245000    |
+| Running Forward KL  | 31.4      |
+| Running Reverse KL  | 21.5      |
+| Running Update Time | 49        |
+-----------------------------------
+--2024-11-13 15:37:14.784944 CET---
+| Itration            | 50        |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -4.11e+03 |
+| Running Env Steps   | 250000    |
+| Running Forward KL  | 34.9      |
+| Running Reverse KL  | 27.6      |
+| Running Update Time | 50        |
+-----------------------------------
+--2024-11-13 15:41:38.822254 CET---
+| Itration            | 51        |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -4.26e+03 |
+| Running Env Steps   | 255000    |
+| Running Forward KL  | 34.9      |
+| Running Reverse KL  | 30.1      |
+| Running Update Time | 51        |
+-----------------------------------
+--2024-11-13 15:46:01.806232 CET---
+| Itration            | 52        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -4.28e+03 |
+| Running Env Steps   | 260000    |
+| Running Forward KL  | 35.5      |
+| Running Reverse KL  | 30        |
+| Running Update Time | 52        |
+-----------------------------------
+--2024-11-13 15:50:29.410224 CET---
+| Itration            | 53        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -4.36e+03 |
+| Running Env Steps   | 265000    |
+| Running Forward KL  | 35.9      |
+| Running Reverse KL  | 32.1      |
+| Running Update Time | 53        |
+-----------------------------------
+--2024-11-13 15:54:52.057236 CET---
+| Itration            | 54        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -4.34e+03 |
+| Running Env Steps   | 270000    |
+| Running Forward KL  | 36.4      |
+| Running Reverse KL  | 27.4      |
+| Running Update Time | 54        |
+-----------------------------------
+--2024-11-13 15:58:50.765595 CET---
+| Itration            | 55        |
+| Real Det Return     | 199       |
+| Real Sto Return     | 166       |
+| Reward Loss         | -3.12e+03 |
+| Running Env Steps   | 275000    |
+| Running Forward KL  | 32.4      |
+| Running Reverse KL  | 34.6      |
+| Running Update Time | 55        |
+-----------------------------------
+--2024-11-13 16:03:15.730031 CET---
+| Itration            | 56        |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -4.46e+03 |
+| Running Env Steps   | 280000    |
+| Running Forward KL  | 37.5      |
+| Running Reverse KL  | 41.8      |
+| Running Update Time | 56        |
+-----------------------------------
+--2024-11-13 16:07:42.012453 CET---
+| Itration            | 57        |
+| Real Det Return     | 992       |
+| Real Sto Return     | 992       |
+| Reward Loss         | -4.55e+03 |
+| Running Env Steps   | 285000    |
+| Running Forward KL  | 36.5      |
+| Running Reverse KL  | 58.4      |
+| Running Update Time | 57        |
+-----------------------------------
+--2024-11-13 16:12:02.223613 CET---
+| Itration            | 58        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -4.66e+03 |
+| Running Env Steps   | 290000    |
+| Running Forward KL  | 35.2      |
+| Running Reverse KL  | 31.8      |
+| Running Update Time | 58        |
+-----------------------------------
+--2024-11-13 16:16:24.206797 CET---
+| Itration            | 59        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -4.85e+03 |
+| Running Env Steps   | 295000    |
+| Running Forward KL  | 34.1      |
+| Running Reverse KL  | 41.4      |
+| Running Update Time | 59        |
+-----------------------------------
+--2024-11-13 16:20:49.079218 CET---
+| Itration            | 60        |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -4.68e+03 |
+| Running Env Steps   | 300000    |
+| Running Forward KL  | 38.1      |
+| Running Reverse KL  | 38.9      |
+| Running Update Time | 60        |
+-----------------------------------
+--2024-11-13 16:24:47.120693 CET---
+| Itration            | 61        |
+| Real Det Return     | 288       |
+| Real Sto Return     | 280       |
+| Reward Loss         | -4.18e+03 |
+| Running Env Steps   | 305000    |
+| Running Forward KL  | 33.3      |
+| Running Reverse KL  | 29.5      |
+| Running Update Time | 61        |
+-----------------------------------
+--2024-11-13 16:28:51.217305 CET---
+| Itration            | 62        |
+| Real Det Return     | 464       |
+| Real Sto Return     | 451       |
+| Reward Loss         | -4.34e+03 |
+| Running Env Steps   | 310000    |
+| Running Forward KL  | 34.1      |
+| Running Reverse KL  | 46.1      |
+| Running Update Time | 62        |
+-----------------------------------
+--2024-11-13 16:33:03.067687 CET---
+| Itration            | 63        |
+| Real Det Return     | 400       |
+| Real Sto Return     | 398       |
+| Reward Loss         | -4.21e+03 |
+| Running Env Steps   | 315000    |
+| Running Forward KL  | 33.5      |
+| Running Reverse KL  | 42.3      |
+| Running Update Time | 63        |
+-----------------------------------
+--2024-11-13 16:37:06.984145 CET---
+| Itration            | 64        |
+| Real Det Return     | 471       |
+| Real Sto Return     | 359       |
+| Reward Loss         | -4.27e+03 |
+| Running Env Steps   | 320000    |
+| Running Forward KL  | 32        |
+| Running Reverse KL  | 32.2      |
+| Running Update Time | 64        |
+-----------------------------------
+--2024-11-13 16:41:26.554242 CET---
+| Itration            | 65        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -4.96e+03 |
+| Running Env Steps   | 325000    |
+| Running Forward KL  | 34.3      |
+| Running Reverse KL  | 24.4      |
+| Running Update Time | 65        |
+-----------------------------------
+--2024-11-13 16:45:47.116706 CET---
+| Itration            | 66        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -5.22e+03 |
+| Running Env Steps   | 330000    |
+| Running Forward KL  | 34.2      |
+| Running Reverse KL  | 40.4      |
+| Running Update Time | 66        |
+-----------------------------------
+--2024-11-13 16:50:12.659147 CET---
+| Itration            | 67        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -5.21e+03 |
+| Running Env Steps   | 335000    |
+| Running Forward KL  | 34.1      |
+| Running Reverse KL  | 28.3      |
+| Running Update Time | 67        |
+-----------------------------------
+--2024-11-13 16:54:39.852961 CET---
+| Itration            | 68        |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 988       |
+| Reward Loss         | -5.12e+03 |
+| Running Env Steps   | 340000    |
+| Running Forward KL  | 34.1      |
+| Running Reverse KL  | 45.3      |
+| Running Update Time | 68        |
+-----------------------------------
+--2024-11-13 16:58:47.555651 CET---
+| Itration            | 69        |
+| Real Det Return     | 443       |
+| Real Sto Return     | 440       |
+| Reward Loss         | -4.12e+03 |
+| Running Env Steps   | 345000    |
+| Running Forward KL  | 30.5      |
+| Running Reverse KL  | 43.2      |
+| Running Update Time | 69        |
+-----------------------------------
+--2024-11-13 17:02:52.050570 CET--
+| Itration            | 70       |
+| Real Det Return     | 326      |
+| Real Sto Return     | 322      |
+| Reward Loss         | -4.6e+03 |
+| Running Env Steps   | 350000   |
+| Running Forward KL  | 31.2     |
+| Running Reverse KL  | 39.5     |
+| Running Update Time | 70       |
+----------------------------------
+--2024-11-13 17:07:14.860330 CET--
+| Itration            | 71       |
+| Real Det Return     | 1.04e+03 |
+| Real Sto Return     | 1.04e+03 |
+| Reward Loss         | -5.4e+03 |
+| Running Env Steps   | 355000   |
+| Running Forward KL  | 40.2     |
+| Running Reverse KL  | 28.6     |
+| Running Update Time | 71       |
+----------------------------------
+--2024-11-13 17:11:41.715998 CET---
+| Itration            | 72        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -5.39e+03 |
+| Running Env Steps   | 360000    |
+| Running Forward KL  | 38.2      |
+| Running Reverse KL  | 29.5      |
+| Running Update Time | 72        |
+-----------------------------------
+--2024-11-13 17:16:06.003948 CET---
+| Itration            | 73        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -5.73e+03 |
+| Running Env Steps   | 365000    |
+| Running Forward KL  | 37.2      |
+| Running Reverse KL  | 40        |
+| Running Update Time | 73        |
+-----------------------------------
+--2024-11-13 17:20:06.859444 CET---
+| Itration            | 74        |
+| Real Det Return     | 99.8      |
+| Real Sto Return     | 121       |
+| Reward Loss         | -6.43e+03 |
+| Running Env Steps   | 370000    |
+| Running Forward KL  | 33.9      |
+| Running Reverse KL  | 95.6      |
+| Running Update Time | 74        |
+-----------------------------------
+--2024-11-13 17:24:09.604078 CET---
+| Itration            | 75        |
+| Real Det Return     | 166       |
+| Real Sto Return     | 166       |
+| Reward Loss         | -4.99e+03 |
+| Running Env Steps   | 375000    |
+| Running Forward KL  | 33.5      |
+| Running Reverse KL  | 36.4      |
+| Running Update Time | 75        |
+-----------------------------------
+--2024-11-13 17:28:19.336655 CET---
+| Itration            | 76        |
+| Real Det Return     | 573       |
+| Real Sto Return     | 748       |
+| Reward Loss         | -5.27e+03 |
+| Running Env Steps   | 380000    |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 28        |
+| Running Update Time | 76        |
+-----------------------------------
+--2024-11-13 17:32:38.523765 CET--
+| Itration            | 77       |
+| Real Det Return     | 1.03e+03 |
+| Real Sto Return     | 942      |
+| Reward Loss         | -5.2e+03 |
+| Running Env Steps   | 385000   |
+| Running Forward KL  | 34.6     |
+| Running Reverse KL  | 22.7     |
+| Running Update Time | 77       |
+----------------------------------
+--2024-11-13 17:37:04.258328 CET---
+| Itration            | 78        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -5.95e+03 |
+| Running Env Steps   | 390000    |
+| Running Forward KL  | 35.5      |
+| Running Reverse KL  | 41.4      |
+| Running Update Time | 78        |
+-----------------------------------
+--2024-11-13 17:41:31.998693 CET---
+| Itration            | 79        |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -5.14e+03 |
+| Running Env Steps   | 395000    |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 24.6      |
+| Running Update Time | 79        |
+-----------------------------------
+--2024-11-13 17:46:03.748034 CET---
+| Itration            | 80        |
+| Real Det Return     | 983       |
+| Real Sto Return     | 983       |
+| Reward Loss         | -6.01e+03 |
+| Running Env Steps   | 400000    |
+| Running Forward KL  | 39.5      |
+| Running Reverse KL  | 55.6      |
+| Running Update Time | 80        |
+-----------------------------------
+--2024-11-13 17:50:31.628114 CET---
+| Itration            | 81        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -5.88e+03 |
+| Running Env Steps   | 405000    |
+| Running Forward KL  | 34.5      |
+| Running Reverse KL  | 37.3      |
+| Running Update Time | 81        |
+-----------------------------------
+--2024-11-13 17:54:57.510428 CET---
+| Itration            | 82        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -6.24e+03 |
+| Running Env Steps   | 410000    |
+| Running Forward KL  | 35.8      |
+| Running Reverse KL  | 40.5      |
+| Running Update Time | 82        |
+-----------------------------------
+--2024-11-13 17:59:25.805474 CET---
+| Itration            | 83        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -6.27e+03 |
+| Running Env Steps   | 415000    |
+| Running Forward KL  | 36.1      |
+| Running Reverse KL  | 40        |
+| Running Update Time | 83        |
+-----------------------------------
+--2024-11-13 18:03:53.755130 CET---
+| Itration            | 84        |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -6.23e+03 |
+| Running Env Steps   | 420000    |
+| Running Forward KL  | 34.8      |
+| Running Reverse KL  | 39.1      |
+| Running Update Time | 84        |
+-----------------------------------
+--2024-11-13 18:08:21.966242 CET---
+| Itration            | 85        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -6.25e+03 |
+| Running Env Steps   | 425000    |
+| Running Forward KL  | 35.1      |
+| Running Reverse KL  | 29.8      |
+| Running Update Time | 85        |
+-----------------------------------
+--2024-11-13 18:12:43.986180 CET---
+| Itration            | 86        |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 802       |
+| Reward Loss         | -5.88e+03 |
+| Running Env Steps   | 430000    |
+| Running Forward KL  | 34.4      |
+| Running Reverse KL  | 29.9      |
+| Running Update Time | 86        |
+-----------------------------------
+--2024-11-13 18:16:53.272522 CET---
+| Itration            | 87        |
+| Real Det Return     | 282       |
+| Real Sto Return     | 278       |
+| Reward Loss         | -5.31e+03 |
+| Running Env Steps   | 435000    |
+| Running Forward KL  | 33.3      |
+| Running Reverse KL  | 40.3      |
+| Running Update Time | 87        |
+-----------------------------------
+--2024-11-13 18:21:15.304729 CET---
+| Itration            | 88        |
+| Real Det Return     | 724       |
+| Real Sto Return     | 689       |
+| Reward Loss         | -6.45e+03 |
+| Running Env Steps   | 440000    |
+| Running Forward KL  | 34.6      |
+| Running Reverse KL  | 81.2      |
+| Running Update Time | 88        |
+-----------------------------------
+--2024-11-13 18:25:23.084193 CET---
+| Itration            | 89        |
+| Real Det Return     | 94.4      |
+| Real Sto Return     | 95.5      |
+| Reward Loss         | -6.11e+03 |
+| Running Env Steps   | 445000    |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 27.6      |
+| Running Update Time | 89        |
+-----------------------------------
+--2024-11-13 18:29:59.009476 CET---
+| Itration            | 90        |
+| Real Det Return     | 1e+03     |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -6.55e+03 |
+| Running Env Steps   | 450000    |
+| Running Forward KL  | 38.5      |
+| Running Reverse KL  | 39.2      |
+| Running Update Time | 90        |
+-----------------------------------
+--2024-11-13 18:34:03.496891 CET---
+| Itration            | 91        |
+| Real Det Return     | 52.7      |
+| Real Sto Return     | 53.1      |
+| Reward Loss         | -5.32e+03 |
+| Running Env Steps   | 455000    |
+| Running Forward KL  | 32        |
+| Running Reverse KL  | 26.4      |
+| Running Update Time | 91        |
+-----------------------------------
+--2024-11-13 18:38:09.231962 CET---
+| Itration            | 92        |
+| Real Det Return     | 230       |
+| Real Sto Return     | 230       |
+| Reward Loss         | -5.52e+03 |
+| Running Env Steps   | 460000    |
+| Running Forward KL  | 32.9      |
+| Running Reverse KL  | 31.7      |
+| Running Update Time | 92        |
+-----------------------------------
+--2024-11-13 18:42:36.317624 CET---
+| Itration            | 93        |
+| Real Det Return     | 1e+03     |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -6.86e+03 |
+| Running Env Steps   | 465000    |
+| Running Forward KL  | 37.3      |
+| Running Reverse KL  | 42.2      |
+| Running Update Time | 93        |
+-----------------------------------
+--2024-11-13 18:47:02.262619 CET---
+| Itration            | 94        |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -6.92e+03 |
+| Running Env Steps   | 470000    |
+| Running Forward KL  | 36.5      |
+| Running Reverse KL  | 38.3      |
+| Running Update Time | 94        |
+-----------------------------------
+--2024-11-13 18:51:29.184683 CET---
+| Itration            | 95        |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -7.01e+03 |
+| Running Env Steps   | 475000    |
+| Running Forward KL  | 36.9      |
+| Running Reverse KL  | 40.2      |
+| Running Update Time | 95        |
+-----------------------------------
+--2024-11-13 18:55:56.672000 CET---
+| Itration            | 96        |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -6.77e+03 |
+| Running Env Steps   | 480000    |
+| Running Forward KL  | 34.7      |
+| Running Reverse KL  | 24.1      |
+| Running Update Time | 96        |
+-----------------------------------
+--2024-11-13 19:00:19.309343 CET---
+| Itration            | 97        |
+| Real Det Return     | 641       |
+| Real Sto Return     | 597       |
+| Reward Loss         | -6.62e+03 |
+| Running Env Steps   | 485000    |
+| Running Forward KL  | 33.6      |
+| Running Reverse KL  | 23.1      |
+| Running Update Time | 97        |
+-----------------------------------
+--2024-11-13 19:04:22.523551 CET---
+| Itration            | 98        |
+| Real Det Return     | 122       |
+| Real Sto Return     | 123       |
+| Reward Loss         | -6.18e+03 |
+| Running Env Steps   | 490000    |
+| Running Forward KL  | 32.9      |
+| Running Reverse KL  | 45.9      |
+| Running Update Time | 98        |
+-----------------------------------
+--2024-11-13 19:08:32.391188 CET---
+| Itration            | 99        |
+| Real Det Return     | 230       |
+| Real Sto Return     | 227       |
+| Reward Loss         | -6.73e+03 |
+| Running Env Steps   | 495000    |
+| Running Forward KL  | 32.9      |
+| Running Reverse KL  | 42.5      |
+| Running Update Time | 99        |
+-----------------------------------
+--2024-11-13 19:13:01.215872 CET---
+| Itration            | 100       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -7.26e+03 |
+| Running Env Steps   | 500000    |
+| Running Forward KL  | 34        |
+| Running Reverse KL  | 39.3      |
+| Running Update Time | 100       |
+-----------------------------------
+--2024-11-13 19:17:28.648361 CET---
+| Itration            | 101       |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -7.45e+03 |
+| Running Env Steps   | 505000    |
+| Running Forward KL  | 34.4      |
+| Running Reverse KL  | 29.2      |
+| Running Update Time | 101       |
+-----------------------------------
+--2024-11-13 19:22:05.704960 CET---
+| Itration            | 102       |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -7.48e+03 |
+| Running Env Steps   | 510000    |
+| Running Forward KL  | 36.4      |
+| Running Reverse KL  | 32.1      |
+| Running Update Time | 102       |
+-----------------------------------
+--2024-11-13 19:26:42.204661 CET---
+| Itration            | 103       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -7.18e+03 |
+| Running Env Steps   | 515000    |
+| Running Forward KL  | 35.6      |
+| Running Reverse KL  | 25.7      |
+| Running Update Time | 103       |
+-----------------------------------
+--2024-11-13 19:31:15.150401 CET---
+| Itration            | 104       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -7.55e+03 |
+| Running Env Steps   | 520000    |
+| Running Forward KL  | 35.8      |
+| Running Reverse KL  | 33.7      |
+| Running Update Time | 104       |
+-----------------------------------
+--2024-11-13 19:35:48.844631 CET---
+| Itration            | 105       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 1.06e+03  |
+| Reward Loss         | -6.88e+03 |
+| Running Env Steps   | 525000    |
+| Running Forward KL  | 35.3      |
+| Running Reverse KL  | 30.4      |
+| Running Update Time | 105       |
+-----------------------------------
+--2024-11-13 19:40:19.973180 CET---
+| Itration            | 106       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -7.76e+03 |
+| Running Env Steps   | 530000    |
+| Running Forward KL  | 37        |
+| Running Reverse KL  | 37.2      |
+| Running Update Time | 106       |
+-----------------------------------
+--2024-11-13 19:44:32.457621 CET---
+| Itration            | 107       |
+| Real Det Return     | 523       |
+| Real Sto Return     | 519       |
+| Reward Loss         | -6.76e+03 |
+| Running Env Steps   | 535000    |
+| Running Forward KL  | 32.2      |
+| Running Reverse KL  | 30.2      |
+| Running Update Time | 107       |
+-----------------------------------
+--2024-11-13 19:48:38.535366 CET---
+| Itration            | 108       |
+| Real Det Return     | 207       |
+| Real Sto Return     | 209       |
+| Reward Loss         | -8.13e+03 |
+| Running Env Steps   | 540000    |
+| Running Forward KL  | 32.3      |
+| Running Reverse KL  | 67.3      |
+| Running Update Time | 108       |
+-----------------------------------
+--2024-11-13 19:52:54.440306 CET---
+| Itration            | 109       |
+| Real Det Return     | 537       |
+| Real Sto Return     | 521       |
+| Reward Loss         | -7.75e+03 |
+| Running Env Steps   | 545000    |
+| Running Forward KL  | 31.4      |
+| Running Reverse KL  | 78.1      |
+| Running Update Time | 109       |
+-----------------------------------
+--2024-11-13 19:57:05.970041 CET--
+| Itration            | 110      |
+| Real Det Return     | 512      |
+| Real Sto Return     | 502      |
+| Reward Loss         | -7.3e+03 |
+| Running Env Steps   | 550000   |
+| Running Forward KL  | 32       |
+| Running Reverse KL  | 40.2     |
+| Running Update Time | 110      |
+----------------------------------
+--2024-11-13 20:01:19.813957 CET---
+| Itration            | 111       |
+| Real Det Return     | 535       |
+| Real Sto Return     | 515       |
+| Reward Loss         | -7.73e+03 |
+| Running Env Steps   | 555000    |
+| Running Forward KL  | 31.7      |
+| Running Reverse KL  | 28.8      |
+| Running Update Time | 111       |
+-----------------------------------
+--2024-11-13 20:05:37.602676 CET---
+| Itration            | 112       |
+| Real Det Return     | 392       |
+| Real Sto Return     | 371       |
+| Reward Loss         | -7.48e+03 |
+| Running Env Steps   | 560000    |
+| Running Forward KL  | 32.2      |
+| Running Reverse KL  | 41        |
+| Running Update Time | 112       |
+-----------------------------------
+--2024-11-13 20:09:48.344433 CET---
+| Itration            | 113       |
+| Real Det Return     | 300       |
+| Real Sto Return     | 296       |
+| Reward Loss         | -7.22e+03 |
+| Running Env Steps   | 565000    |
+| Running Forward KL  | 31.7      |
+| Running Reverse KL  | 20.8      |
+| Running Update Time | 113       |
+-----------------------------------
+--2024-11-13 20:14:17.544455 CET--
+| Itration            | 114      |
+| Real Det Return     | 976      |
+| Real Sto Return     | 976      |
+| Reward Loss         | -8.3e+03 |
+| Running Env Steps   | 570000   |
+| Running Forward KL  | 36.9     |
+| Running Reverse KL  | 44       |
+| Running Update Time | 114      |
+----------------------------------
+--2024-11-13 20:18:54.367389 CET---
+| Itration            | 115       |
+| Real Det Return     | 984       |
+| Real Sto Return     | 985       |
+| Reward Loss         | -8.29e+03 |
+| Running Env Steps   | 575000    |
+| Running Forward KL  | 34.9      |
+| Running Reverse KL  | 29.1      |
+| Running Update Time | 115       |
+-----------------------------------
+--2024-11-13 20:23:25.541197 CET---
+| Itration            | 116       |
+| Real Det Return     | 1e+03     |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -8.26e+03 |
+| Running Env Steps   | 580000    |
+| Running Forward KL  | 36.8      |
+| Running Reverse KL  | 30.1      |
+| Running Update Time | 116       |
+-----------------------------------
+--2024-11-13 20:27:40.306785 CET---
+| Itration            | 117       |
+| Real Det Return     | 334       |
+| Real Sto Return     | 324       |
+| Reward Loss         | -7.77e+03 |
+| Running Env Steps   | 585000    |
+| Running Forward KL  | 33.8      |
+| Running Reverse KL  | 36.1      |
+| Running Update Time | 117       |
+-----------------------------------
+--2024-11-13 20:31:56.798022 CET---
+| Itration            | 118       |
+| Real Det Return     | 301       |
+| Real Sto Return     | 302       |
+| Reward Loss         | -6.58e+03 |
+| Running Env Steps   | 590000    |
+| Running Forward KL  | 30.8      |
+| Running Reverse KL  | 58.5      |
+| Running Update Time | 118       |
+-----------------------------------
+--2024-11-13 20:36:16.966240 CET---
+| Itration            | 119       |
+| Real Det Return     | 793       |
+| Real Sto Return     | 520       |
+| Reward Loss         | -7.69e+03 |
+| Running Env Steps   | 595000    |
+| Running Forward KL  | 31.9      |
+| Running Reverse KL  | 27.9      |
+| Running Update Time | 119       |
+-----------------------------------
+--2024-11-13 20:40:46.305547 CET---
+| Itration            | 120       |
+| Real Det Return     | 998       |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -8.55e+03 |
+| Running Env Steps   | 600000    |
+| Running Forward KL  | 37.3      |
+| Running Reverse KL  | 29.7      |
+| Running Update Time | 120       |
+-----------------------------------
+--2024-11-13 20:45:12.958108 CET---
+| Itration            | 121       |
+| Real Det Return     | 749       |
+| Real Sto Return     | 776       |
+| Reward Loss         | -7.88e+03 |
+| Running Env Steps   | 605000    |
+| Running Forward KL  | 32.6      |
+| Running Reverse KL  | 25.9      |
+| Running Update Time | 121       |
+-----------------------------------
+--2024-11-13 20:49:42.742681 CET---
+| Itration            | 122       |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -8.63e+03 |
+| Running Env Steps   | 610000    |
+| Running Forward KL  | 37.5      |
+| Running Reverse KL  | 27.3      |
+| Running Update Time | 122       |
+-----------------------------------
+--2024-11-13 20:54:13.688896 CET--
+| Itration            | 123      |
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 1.01e+03 |
+| Reward Loss         | -8.6e+03 |
+| Running Env Steps   | 615000   |
+| Running Forward KL  | 36.8     |
+| Running Reverse KL  | 29       |
+| Running Update Time | 123      |
+----------------------------------
+--2024-11-13 20:58:45.120391 CET---
+| Itration            | 124       |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -8.98e+03 |
+| Running Env Steps   | 620000    |
+| Running Forward KL  | 34.4      |
+| Running Reverse KL  | 25        |
+| Running Update Time | 124       |
+-----------------------------------
+--2024-11-13 21:03:21.901005 CET---
+| Itration            | 125       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -9.27e+03 |
+| Running Env Steps   | 625000    |
+| Running Forward KL  | 36.1      |
+| Running Reverse KL  | 29        |
+| Running Update Time | 125       |
+-----------------------------------
+--2024-11-13 21:07:53.436949 CET---
+| Itration            | 126       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -9.25e+03 |
+| Running Env Steps   | 630000    |
+| Running Forward KL  | 36.5      |
+| Running Reverse KL  | 39.3      |
+| Running Update Time | 126       |
+-----------------------------------
+--2024-11-13 21:11:57.877860 CET--
+| Itration            | 127      |
+| Real Det Return     | 28.8     |
+| Real Sto Return     | 28.9     |
+| Reward Loss         | -9.1e+03 |
+| Running Env Steps   | 635000   |
+| Running Forward KL  | 35.4     |
+| Running Reverse KL  | 86.5     |
+| Running Update Time | 127      |
+----------------------------------
+--2024-11-13 21:16:28.711184 CET---
+| Itration            | 128       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -9.64e+03 |
+| Running Env Steps   | 640000    |
+| Running Forward KL  | 36.7      |
+| Running Reverse KL  | 37.5      |
+| Running Update Time | 128       |
+-----------------------------------
+--2024-11-13 21:20:59.031569 CET---
+| Itration            | 129       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -9.42e+03 |
+| Running Env Steps   | 645000    |
+| Running Forward KL  | 38.4      |
+| Running Reverse KL  | 33.7      |
+| Running Update Time | 129       |
+-----------------------------------
+--2024-11-13 21:25:26.131040 CET---
+| Itration            | 130       |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -9.35e+03 |
+| Running Env Steps   | 650000    |
+| Running Forward KL  | 36.8      |
+| Running Reverse KL  | 33.5      |
+| Running Update Time | 130       |
+-----------------------------------
+--2024-11-13 21:29:55.350789 CET---
+| Itration            | 131       |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.01e+03  |
+| Reward Loss         | -9.62e+03 |
+| Running Env Steps   | 655000    |
+| Running Forward KL  | 36.4      |
+| Running Reverse KL  | 40.5      |
+| Running Update Time | 131       |
+-----------------------------------
+--2024-11-13 21:34:27.560520 CET--
+| Itration            | 132      |
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 1.01e+03 |
+| Reward Loss         | -9.6e+03 |
+| Running Env Steps   | 660000   |
+| Running Forward KL  | 37       |
+| Running Reverse KL  | 40.6     |
+| Running Update Time | 132      |
+----------------------------------
+--2024-11-13 21:38:57.670961 CET--
+| Itration            | 133      |
+| Real Det Return     | 986      |
+| Real Sto Return     | 986      |
+| Reward Loss         | -9.9e+03 |
+| Running Env Steps   | 665000   |
+| Running Forward KL  | 37       |
+| Running Reverse KL  | 40.6     |
+| Running Update Time | 133      |
+----------------------------------
+--2024-11-13 21:43:28.471433 CET---
+| Itration            | 134       |
+| Real Det Return     | 997       |
+| Real Sto Return     | 998       |
+| Reward Loss         | -9.79e+03 |
+| Running Env Steps   | 670000    |
+| Running Forward KL  | 35.1      |
+| Running Reverse KL  | 32.6      |
+| Running Update Time | 134       |
+-----------------------------------
+--2024-11-13 21:47:54.847912 CET---
+| Itration            | 135       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 1.07e+03  |
+| Reward Loss         | -9.53e+03 |
+| Running Env Steps   | 675000    |
+| Running Forward KL  | 33.6      |
+| Running Reverse KL  | 23.4      |
+| Running Update Time | 135       |
+-----------------------------------
+--2024-11-13 21:52:14.944911 CET---
+| Itration            | 136       |
+| Real Det Return     | 750       |
+| Real Sto Return     | 739       |
+| Reward Loss         | -9.12e+03 |
+| Running Env Steps   | 680000    |
+| Running Forward KL  | 33.8      |
+| Running Reverse KL  | 26.7      |
+| Running Update Time | 136       |
+-----------------------------------
+--2024-11-13 21:56:43.502797 CET--
+| Itration            | 137      |
+| Real Det Return     | 1.04e+03 |
+| Real Sto Return     | 1.04e+03 |
+| Reward Loss         | -1e+04   |
+| Running Env Steps   | 685000   |
+| Running Forward KL  | 33.1     |
+| Running Reverse KL  | 36.8     |
+| Running Update Time | 137      |
+----------------------------------
+--2024-11-13 22:00:56.230359 CET---
+| Itration            | 138       |
+| Real Det Return     | 378       |
+| Real Sto Return     | 425       |
+| Reward Loss         | -9.13e+03 |
+| Running Env Steps   | 690000    |
+| Running Forward KL  | 33.1      |
+| Running Reverse KL  | 26        |
+| Running Update Time | 138       |
+-----------------------------------
+--2024-11-13 22:05:18.340409 CET---
+| Itration            | 139       |
+| Real Det Return     | 961       |
+| Real Sto Return     | 789       |
+| Reward Loss         | -9.39e+03 |
+| Running Env Steps   | 695000    |
+| Running Forward KL  | 32.7      |
+| Running Reverse KL  | 20.1      |
+| Running Update Time | 139       |
+-----------------------------------
+--2024-11-13 22:09:47.796050 CET---
+| Itration            | 140       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -1.03e+04 |
+| Running Env Steps   | 700000    |
+| Running Forward KL  | 34        |
+| Running Reverse KL  | 23.6      |
+| Running Update Time | 140       |
+-----------------------------------
+--2024-11-13 22:14:16.312376 CET---
+| Itration            | 141       |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -1.03e+04 |
+| Running Env Steps   | 705000    |
+| Running Forward KL  | 33.7      |
+| Running Reverse KL  | 23.1      |
+| Running Update Time | 141       |
+-----------------------------------
+--2024-11-13 22:18:43.507963 CET---
+| Itration            | 142       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 1.06e+03  |
+| Reward Loss         | -1.03e+04 |
+| Running Env Steps   | 710000    |
+| Running Forward KL  | 33.4      |
+| Running Reverse KL  | 24.4      |
+| Running Update Time | 142       |
+-----------------------------------
+--2024-11-13 22:23:16.704164 CET---
+| Itration            | 143       |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -1.06e+04 |
+| Running Env Steps   | 715000    |
+| Running Forward KL  | 33.4      |
+| Running Reverse KL  | 32.6      |
+| Running Update Time | 143       |
+-----------------------------------
+--2024-11-13 22:27:46.336370 CET---
+| Itration            | 144       |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.06e+03  |
+| Reward Loss         | -1.04e+04 |
+| Running Env Steps   | 720000    |
+| Running Forward KL  | 32.8      |
+| Running Reverse KL  | 23.9      |
+| Running Update Time | 144       |
+-----------------------------------
+--2024-11-13 22:32:08.730432 CET---
+| Itration            | 145       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 982       |
+| Reward Loss         | -9.45e+03 |
+| Running Env Steps   | 725000    |
+| Running Forward KL  | 32.1      |
+| Running Reverse KL  | 18.4      |
+| Running Update Time | 145       |
+-----------------------------------
+--2024-11-13 22:36:34.841893 CET---
+| Itration            | 146       |
+| Real Det Return     | 1e+03     |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -1.05e+04 |
+| Running Env Steps   | 730000    |
+| Running Forward KL  | 38.8      |
+| Running Reverse KL  | 37.5      |
+| Running Update Time | 146       |
+-----------------------------------
+--2024-11-13 22:40:33.686341 CET---
+| Itration            | 147       |
+| Real Det Return     | 5.2       |
+| Real Sto Return     | 56.4      |
+| Reward Loss         | -1.13e+04 |
+| Running Env Steps   | 735000    |
+| Running Forward KL  | 36.8      |
+| Running Reverse KL  | 71.1      |
+| Running Update Time | 147       |
+-----------------------------------
+--2024-11-13 22:44:55.190698 CET---
+| Itration            | 148       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -1.07e+04 |
+| Running Env Steps   | 740000    |
+| Running Forward KL  | 37.4      |
+| Running Reverse KL  | 33.1      |
+| Running Update Time | 148       |
+-----------------------------------
+--2024-11-13 22:49:12.893260 CET---
+| Itration            | 149       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.05e+03  |
+| Reward Loss         | -1.08e+04 |
+| Running Env Steps   | 745000    |
+| Running Forward KL  | 34.9      |
+| Running Reverse KL  | 25.6      |
+| Running Update Time | 149       |
+-----------------------------------
+--2024-11-13 22:53:32.880123 CET---
+| Itration            | 150       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -1.12e+04 |
+| Running Env Steps   | 750000    |
+| Running Forward KL  | 34.6      |
+| Running Reverse KL  | 29.3      |
+| Running Update Time | 150       |
+-----------------------------------
+--2024-11-13 22:57:50.396222 CET---
+| Itration            | 151       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.11e+04 |
+| Running Env Steps   | 755000    |
+| Running Forward KL  | 36.4      |
+| Running Reverse KL  | 25.1      |
+| Running Update Time | 151       |
+-----------------------------------
+--2024-11-13 23:02:10.387219 CET--
+| Itration            | 152      |
+| Real Det Return     | 1.02e+03 |
+| Real Sto Return     | 1.05e+03 |
+| Reward Loss         | -1.1e+04 |
+| Running Env Steps   | 760000   |
+| Running Forward KL  | 34.7     |
+| Running Reverse KL  | 24.6     |
+| Running Update Time | 152      |
+----------------------------------
+--2024-11-13 23:06:21.408499 CET---
+| Itration            | 153       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.13e+04 |
+| Running Env Steps   | 765000    |
+| Running Forward KL  | 34.2      |
+| Running Reverse KL  | 22        |
+| Running Update Time | 153       |
+-----------------------------------
+--2024-11-13 23:10:32.564947 CET---
+| Itration            | 154       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -1.14e+04 |
+| Running Env Steps   | 770000    |
+| Running Forward KL  | 35.5      |
+| Running Reverse KL  | 21.8      |
+| Running Update Time | 154       |
+-----------------------------------
+--2024-11-13 23:14:39.465196 CET---
+| Itration            | 155       |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -1.13e+04 |
+| Running Env Steps   | 775000    |
+| Running Forward KL  | 37.3      |
+| Running Reverse KL  | 31.4      |
+| Running Update Time | 155       |
+-----------------------------------
+--2024-11-13 23:18:47.692929 CET---
+| Itration            | 156       |
+| Real Det Return     | 997       |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.15e+04 |
+| Running Env Steps   | 780000    |
+| Running Forward KL  | 36.4      |
+| Running Reverse KL  | 23.4      |
+| Running Update Time | 156       |
+-----------------------------------
+--2024-11-13 23:22:52.690604 CET---
+| Itration            | 157       |
+| Real Det Return     | 977       |
+| Real Sto Return     | 976       |
+| Reward Loss         | -1.16e+04 |
+| Running Env Steps   | 785000    |
+| Running Forward KL  | 38.6      |
+| Running Reverse KL  | 42.5      |
+| Running Update Time | 157       |
+-----------------------------------
+--2024-11-13 23:26:58.345871 CET--
+| Itration            | 158      |
+| Real Det Return     | 1.03e+03 |
+| Real Sto Return     | 1.04e+03 |
+| Reward Loss         | -1.1e+04 |
+| Running Env Steps   | 790000   |
+| Running Forward KL  | 33.3     |
+| Running Reverse KL  | 20.5     |
+| Running Update Time | 158      |
+----------------------------------
+--2024-11-13 23:30:34.222153 CET---
+| Itration            | 159       |
+| Real Det Return     | 2.66      |
+| Real Sto Return     | 2.63      |
+| Reward Loss         | -1.29e+04 |
+| Running Env Steps   | 795000    |
+| Running Forward KL  | 40.7      |
+| Running Reverse KL  | 42.8      |
+| Running Update Time | 159       |
+-----------------------------------
+--2024-11-13 23:34:14.794916 CET---
+| Itration            | 160       |
+| Real Det Return     | 63.6      |
+| Real Sto Return     | 64.3      |
+| Reward Loss         | -1.18e+04 |
+| Running Env Steps   | 800000    |
+| Running Forward KL  | 36.5      |
+| Running Reverse KL  | 26        |
+| Running Update Time | 160       |
+-----------------------------------
+--2024-11-13 23:38:06.912372 CET---
+| Itration            | 161       |
+| Real Det Return     | 508       |
+| Real Sto Return     | 506       |
+| Reward Loss         | -1.19e+04 |
+| Running Env Steps   | 805000    |
+| Running Forward KL  | 36.5      |
+| Running Reverse KL  | 52.3      |
+| Running Update Time | 161       |
+-----------------------------------
+--2024-11-13 23:42:07.335271 CET---
+| Itration            | 162       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.21e+04 |
+| Running Env Steps   | 810000    |
+| Running Forward KL  | 35.9      |
+| Running Reverse KL  | 36.4      |
+| Running Update Time | 162       |
+-----------------------------------
+--2024-11-13 23:46:17.324818 CET---
+| Itration            | 163       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.23e+04 |
+| Running Env Steps   | 815000    |
+| Running Forward KL  | 34.5      |
+| Running Reverse KL  | 32.5      |
+| Running Update Time | 163       |
+-----------------------------------
+--2024-11-13 23:50:22.201241 CET---
+| Itration            | 164       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.24e+04 |
+| Running Env Steps   | 820000    |
+| Running Forward KL  | 34        |
+| Running Reverse KL  | 30.5      |
+| Running Update Time | 164       |
+-----------------------------------
+--2024-11-13 23:54:19.023040 CET---
+| Itration            | 165       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.25e+04 |
+| Running Env Steps   | 825000    |
+| Running Forward KL  | 33.8      |
+| Running Reverse KL  | 30.2      |
+| Running Update Time | 165       |
+-----------------------------------
+--2024-11-13 23:58:21.437246 CET---
+| Itration            | 166       |
+| Real Det Return     | 1.04e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -1.29e+04 |
+| Running Env Steps   | 830000    |
+| Running Forward KL  | 34.2      |
+| Running Reverse KL  | 52.3      |
+| Running Update Time | 166       |
+-----------------------------------
+--2024-11-14 00:02:29.524205 CET--
+| Itration            | 167      |
+| Real Det Return     | 1.04e+03 |
+| Real Sto Return     | 1.04e+03 |
+| Reward Loss         | -1.3e+04 |
+| Running Env Steps   | 835000   |
+| Running Forward KL  | 35.5     |
+| Running Reverse KL  | 36.6     |
+| Running Update Time | 167      |
+----------------------------------
+--2024-11-14 00:06:11.434799 CET--
+| Itration            | 168      |
+| Real Det Return     | 4.59     |
+| Real Sto Return     | 4.61     |
+| Reward Loss         | -1.3e+04 |
+| Running Env Steps   | 840000   |
+| Running Forward KL  | 36.5     |
+| Running Reverse KL  | 44.2     |
+| Running Update Time | 168      |
+----------------------------------
+--2024-11-14 00:09:57.893752 CET---
+| Itration            | 169       |
+| Real Det Return     | 133       |
+| Real Sto Return     | 129       |
+| Reward Loss         | -9.38e+03 |
+| Running Env Steps   | 845000    |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 20.4      |
+| Running Update Time | 169       |
+-----------------------------------
+--2024-11-14 00:13:37.026580 CET---
+| Itration            | 170       |
+| Real Det Return     | 264       |
+| Real Sto Return     | 264       |
+| Reward Loss         | -1.08e+04 |
+| Running Env Steps   | 850000    |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 23.6      |
+| Running Update Time | 170       |
+-----------------------------------
+--2024-11-14 00:17:29.231527 CET---
+| Itration            | 171       |
+| Real Det Return     | 606       |
+| Real Sto Return     | 582       |
+| Reward Loss         | -1.12e+04 |
+| Running Env Steps   | 855000    |
+| Running Forward KL  | 32.5      |
+| Running Reverse KL  | 30.3      |
+| Running Update Time | 171       |
+-----------------------------------
+--2024-11-14 00:21:26.988270 CET---
+| Itration            | 172       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.31e+04 |
+| Running Env Steps   | 860000    |
+| Running Forward KL  | 33.7      |
+| Running Reverse KL  | 33.3      |
+| Running Update Time | 172       |
+-----------------------------------
+--2024-11-14 00:25:24.911104 CET--
+| Itration            | 173      |
+| Real Det Return     | 1.03e+03 |
+| Real Sto Return     | 1.03e+03 |
+| Reward Loss         | -1.3e+04 |
+| Running Env Steps   | 865000   |
+| Running Forward KL  | 37.4     |
+| Running Reverse KL  | 37.8     |
+| Running Update Time | 173      |
+----------------------------------
+--2024-11-14 00:29:31.502356 CET---
+| Itration            | 174       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.37e+04 |
+| Running Env Steps   | 870000    |
+| Running Forward KL  | 37.5      |
+| Running Reverse KL  | 33.3      |
+| Running Update Time | 174       |
+-----------------------------------
+--2024-11-14 00:33:35.239997 CET---
+| Itration            | 175       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.39e+04 |
+| Running Env Steps   | 875000    |
+| Running Forward KL  | 35.5      |
+| Running Reverse KL  | 43.4      |
+| Running Update Time | 175       |
+-----------------------------------
+--2024-11-14 00:37:36.569847 CET---
+| Itration            | 176       |
+| Real Det Return     | 992       |
+| Real Sto Return     | 993       |
+| Reward Loss         | -1.34e+04 |
+| Running Env Steps   | 880000    |
+| Running Forward KL  | 38.6      |
+| Running Reverse KL  | 33.5      |
+| Running Update Time | 176       |
+-----------------------------------
+--2024-11-14 00:41:37.048514 CET---
+| Itration            | 177       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.33e+04 |
+| Running Env Steps   | 885000    |
+| Running Forward KL  | 35.9      |
+| Running Reverse KL  | 26.1      |
+| Running Update Time | 177       |
+-----------------------------------
+--2024-11-14 00:45:35.792420 CET--
+| Itration            | 178      |
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 1e+03    |
+| Reward Loss         | -1.4e+04 |
+| Running Env Steps   | 890000   |
+| Running Forward KL  | 39.1     |
+| Running Reverse KL  | 38.8     |
+| Running Update Time | 178      |
+----------------------------------
+--2024-11-14 00:49:38.672680 CET--
+| Itration            | 179      |
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 1e+03    |
+| Reward Loss         | -1.4e+04 |
+| Running Env Steps   | 895000   |
+| Running Forward KL  | 38.8     |
+| Running Reverse KL  | 37       |
+| Running Update Time | 179      |
+----------------------------------
+--2024-11-14 00:53:31.137200 CET---
+| Itration            | 180       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 630       |
+| Reward Loss         | -1.29e+04 |
+| Running Env Steps   | 900000    |
+| Running Forward KL  | 33.5      |
+| Running Reverse KL  | 36.5      |
+| Running Update Time | 180       |
+-----------------------------------
+--2024-11-14 00:57:23.002367 CET---
+| Itration            | 181       |
+| Real Det Return     | 450       |
+| Real Sto Return     | 636       |
+| Reward Loss         | -1.32e+04 |
+| Running Env Steps   | 905000    |
+| Running Forward KL  | 34.1      |
+| Running Reverse KL  | 23.4      |
+| Running Update Time | 181       |
+-----------------------------------
+--2024-11-14 01:00:58.940995 CET---
+| Itration            | 182       |
+| Real Det Return     | 277       |
+| Real Sto Return     | 278       |
+| Reward Loss         | -1.36e+04 |
+| Running Env Steps   | 910000    |
+| Running Forward KL  | 33        |
+| Running Reverse KL  | 47.7      |
+| Running Update Time | 182       |
+-----------------------------------
+--2024-11-14 01:04:50.784370 CET---
+| Itration            | 183       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 803       |
+| Reward Loss         | -1.36e+04 |
+| Running Env Steps   | 915000    |
+| Running Forward KL  | 34.3      |
+| Running Reverse KL  | 30.1      |
+| Running Update Time | 183       |
+-----------------------------------
+--2024-11-14 01:08:55.501224 CET---
+| Itration            | 184       |
+| Real Det Return     | 1.05e+03  |
+| Real Sto Return     | 1.04e+03  |
+| Reward Loss         | -1.45e+04 |
+| Running Env Steps   | 920000    |
+| Running Forward KL  | 35.7      |
+| Running Reverse KL  | 27        |
+| Running Update Time | 184       |
+-----------------------------------
+--2024-11-14 01:12:53.680953 CET---
+| Itration            | 185       |
+| Real Det Return     | 979       |
+| Real Sto Return     | 934       |
+| Reward Loss         | -1.42e+04 |
+| Running Env Steps   | 925000    |
+| Running Forward KL  | 34.8      |
+| Running Reverse KL  | 26.7      |
+| Running Update Time | 185       |
+-----------------------------------
+--2024-11-14 01:16:34.938474 CET---
+| Itration            | 186       |
+| Real Det Return     | 424       |
+| Real Sto Return     | 460       |
+| Reward Loss         | -1.45e+04 |
+| Running Env Steps   | 930000    |
+| Running Forward KL  | 35.4      |
+| Running Reverse KL  | 43.1      |
+| Running Update Time | 186       |
+-----------------------------------
+--2024-11-14 01:20:20.994088 CET---
+| Itration            | 187       |
+| Real Det Return     | 1.06e+03  |
+| Real Sto Return     | 808       |
+| Reward Loss         | -1.23e+04 |
+| Running Env Steps   | 935000    |
+| Running Forward KL  | 32.9      |
+| Running Reverse KL  | 26.5      |
+| Running Update Time | 187       |
+-----------------------------------
+--2024-11-14 01:24:12.662370 CET---
+| Itration            | 188       |
+| Real Det Return     | 1e+03     |
+| Real Sto Return     | 1e+03     |
+| Reward Loss         | -1.48e+04 |
+| Running Env Steps   | 940000    |
+| Running Forward KL  | 36.8      |
+| Running Reverse KL  | 38.2      |
+| Running Update Time | 188       |
+-----------------------------------
+--2024-11-14 01:28:03.190679 CET--
+| Itration            | 189      |
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 1.01e+03 |
+| Reward Loss         | -1.5e+04 |
+| Running Env Steps   | 945000   |
+| Running Forward KL  | 36.5     |
+| Running Reverse KL  | 41.1     |
+| Running Update Time | 189      |
+----------------------------------
+--2024-11-14 01:31:53.203816 CET---
+| Itration            | 190       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.51e+04 |
+| Running Env Steps   | 950000    |
+| Running Forward KL  | 35.4      |
+| Running Reverse KL  | 39.7      |
+| Running Update Time | 190       |
+-----------------------------------
+--2024-11-14 01:35:41.620157 CET---
+| Itration            | 191       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.52e+04 |
+| Running Env Steps   | 955000    |
+| Running Forward KL  | 35.8      |
+| Running Reverse KL  | 44.2      |
+| Running Update Time | 191       |
+-----------------------------------
+--2024-11-14 01:39:31.116339 CET---
+| Itration            | 192       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.52e+04 |
+| Running Env Steps   | 960000    |
+| Running Forward KL  | 34.5      |
+| Running Reverse KL  | 40.1      |
+| Running Update Time | 192       |
+-----------------------------------
+--2024-11-14 01:43:21.337501 CET---
+| Itration            | 193       |
+| Real Det Return     | 1.03e+03  |
+| Real Sto Return     | 1.03e+03  |
+| Reward Loss         | -1.52e+04 |
+| Running Env Steps   | 965000    |
+| Running Forward KL  | 35.2      |
+| Running Reverse KL  | 42.8      |
+| Running Update Time | 193       |
+-----------------------------------
+--2024-11-14 01:47:07.060452 CET---
+| Itration            | 194       |
+| Real Det Return     | 1.01e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.36e+04 |
+| Running Env Steps   | 970000    |
+| Running Forward KL  | 35.3      |
+| Running Reverse KL  | 31.9      |
+| Running Update Time | 194       |
+-----------------------------------
+--2024-11-14 01:50:57.646063 CET---
+| Itration            | 195       |
+| Real Det Return     | 973       |
+| Real Sto Return     | 973       |
+| Reward Loss         | -1.56e+04 |
+| Running Env Steps   | 975000    |
+| Running Forward KL  | 37.7      |
+| Running Reverse KL  | 51.2      |
+| Running Update Time | 195       |
+-----------------------------------
+--2024-11-14 01:54:24.824203 CET---
+| Itration            | 196       |
+| Real Det Return     | 214       |
+| Real Sto Return     | 216       |
+| Reward Loss         | -1.44e+04 |
+| Running Env Steps   | 980000    |
+| Running Forward KL  | 32.4      |
+| Running Reverse KL  | 35.6      |
+| Running Update Time | 196       |
+-----------------------------------
+--2024-11-14 01:57:55.029668 CET---
+| Itration            | 197       |
+| Real Det Return     | 564       |
+| Real Sto Return     | 530       |
+| Reward Loss         | -1.56e+04 |
+| Running Env Steps   | 985000    |
+| Running Forward KL  | 34.3      |
+| Running Reverse KL  | 45.5      |
+| Running Update Time | 197       |
+-----------------------------------
+--2024-11-14 02:01:39.043360 CET---
+| Itration            | 198       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.59e+04 |
+| Running Env Steps   | 990000    |
+| Running Forward KL  | 37.5      |
+| Running Reverse KL  | 28        |
+| Running Update Time | 198       |
+-----------------------------------
+--2024-11-14 02:05:24.503034 CET---
+| Itration            | 199       |
+| Real Det Return     | 1.02e+03  |
+| Real Sto Return     | 1.02e+03  |
+| Reward Loss         | -1.55e+04 |
+| Running Env Steps   | 995000    |
+| Running Forward KL  | 37.1      |
+| Running Reverse KL  | 27        |
+| Running Update Time | 199       |
+-----------------------------------

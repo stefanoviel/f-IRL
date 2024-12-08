@@ -200,7 +200,6 @@ if __name__ == "__main__":
     expert_samples_sa=np.concatenate([expert_samples,expert_a_samples],1)
     print(expert_trajs.shape, expert_samples_sa.shape) # ignored starting state
 
-
     # Initialize reward function
     reward_func = CoherentReward(
         state_dim=state_size,
@@ -212,13 +211,8 @@ if __name__ == "__main__":
     # Train the reward function using expert demonstrations
     reward_func.train_policy(expert_samples, expert_a_samples)
 
-    # Initilialize discriminator
-    # if v['obj'] in ["emd"]:
-    #     critic = Critic(len(state_indices), **v['critic'], device=device)
-    # elif v['obj'] != 'maxentirl':
-    #     disc = Disc(len(state_indices), **v['disc'], device=device)
-
     max_real_return_det, max_real_return_sto = -np.inf, -np.inf
+
     for itr in range(v['irl']['n_itrs']):
 
         if v['sac']['reinitialize'] or itr == 0:

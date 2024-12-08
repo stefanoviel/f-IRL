@@ -1,0 +1,33 @@
+Logging to logs/Hopper-v5/exp-4/f-max-rkl/2024_11_05_17_51_18
+--2024-11-05 17:51:26.907452 CET--
+| Real Det Return     | 14.4     |
+| Real Sto Return     | 16.8     |
+| Running Env Steps   | 0        |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 12.9     |
+| Running Update Time | 0        |
+----------------------------------
+--2024-11-05 17:56:20.945809 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 700      |
+| Running Env Steps   | 100000   |
+| Running Forward KL  | 103      |
+| Running Reverse KL  | 25.4     |
+| Running Update Time | 9600     |
+----------------------------------
+--2024-11-05 18:01:27.435682 CET--
+| Real Det Return     | 997      |
+| Real Sto Return     | 944      |
+| Running Env Steps   | 200000   |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 16.8     |
+| Running Update Time | 19600    |
+----------------------------------
+--2024-11-05 18:06:32.126777 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 810      |
+| Running Env Steps   | 300000   |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 17.2     |
+| Running Update Time | 29600    |
+----------------------------------

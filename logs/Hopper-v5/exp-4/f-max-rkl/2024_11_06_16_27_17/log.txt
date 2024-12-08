@@ -1,0 +1,809 @@
+Logging to logs/Hopper-v5/exp-4/f-max-rkl/2024_11_06_16_27_17
+--2024-11-06 16:27:25.952337 CET--
+| Real Det Return     | 14.4     |
+| Real Sto Return     | 14.4     |
+| Running Env Steps   | 0        |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 12.8     |
+| Running Update Time | 0        |
+----------------------------------
+--2024-11-06 16:32:15.250669 CET--
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 718      |
+| Running Env Steps   | 100000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 29       |
+| Running Update Time | 9600     |
+----------------------------------
+--2024-11-06 16:37:16.506701 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 887      |
+| Running Env Steps   | 200000   |
+| Running Forward KL  | 103      |
+| Running Reverse KL  | 17.7     |
+| Running Update Time | 19600    |
+----------------------------------
+--2024-11-06 16:42:16.823535 CET--
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 722      |
+| Running Env Steps   | 300000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 17.2     |
+| Running Update Time | 29600    |
+----------------------------------
+--2024-11-06 16:47:23.807035 CET--
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 737      |
+| Running Env Steps   | 400000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.5     |
+| Running Update Time | 39600    |
+----------------------------------
+--2024-11-06 16:52:25.125100 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 913      |
+| Running Env Steps   | 500000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.1     |
+| Running Update Time | 49600    |
+----------------------------------
+--2024-11-06 16:57:24.779985 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 810      |
+| Running Env Steps   | 600000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.9     |
+| Running Update Time | 59600    |
+----------------------------------
+--2024-11-06 17:02:29.180982 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 650      |
+| Running Env Steps   | 700000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.3     |
+| Running Update Time | 69600    |
+----------------------------------
+--2024-11-06 17:07:48.166130 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 969      |
+| Running Env Steps   | 800000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.2     |
+| Running Update Time | 79600    |
+----------------------------------
+--2024-11-06 17:13:10.546145 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 875      |
+| Running Env Steps   | 900000   |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.3     |
+| Running Update Time | 89600    |
+----------------------------------
+--2024-11-06 17:18:33.952457 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 869      |
+| Running Env Steps   | 1000000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15       |
+| Running Update Time | 99600    |
+----------------------------------
+--2024-11-06 17:23:59.591695 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 878      |
+| Running Env Steps   | 1100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 109600   |
+----------------------------------
+--2024-11-06 17:29:26.750407 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 860      |
+| Running Env Steps   | 1200000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15       |
+| Running Update Time | 119600   |
+----------------------------------
+--2024-11-06 17:34:56.231295 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 955      |
+| Running Env Steps   | 1300000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 13.7     |
+| Running Update Time | 129600   |
+----------------------------------
+--2024-11-06 17:40:26.761214 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 948      |
+| Running Env Steps   | 1400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.3     |
+| Running Update Time | 139600   |
+----------------------------------
+--2024-11-06 17:45:54.984388 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 728      |
+| Running Env Steps   | 1500000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 149600   |
+----------------------------------
+--2024-11-06 17:51:24.963815 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 838      |
+| Running Env Steps   | 1600000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.9     |
+| Running Update Time | 159600   |
+----------------------------------
+--2024-11-06 17:56:56.637741 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 909      |
+| Running Env Steps   | 1700000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.5     |
+| Running Update Time | 169600   |
+----------------------------------
+--2024-11-06 18:02:28.037264 CET--
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 820      |
+| Running Env Steps   | 1800000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.2     |
+| Running Update Time | 179600   |
+----------------------------------
+--2024-11-06 18:08:00.779083 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 850      |
+| Running Env Steps   | 1900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.2     |
+| Running Update Time | 189600   |
+----------------------------------
+--2024-11-06 18:13:31.221207 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 769      |
+| Running Env Steps   | 2000000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 13.9     |
+| Running Update Time | 199600   |
+----------------------------------
+--2024-11-06 18:19:05.147883 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 890      |
+| Running Env Steps   | 2100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.3     |
+| Running Update Time | 209600   |
+----------------------------------
+--2024-11-06 18:24:44.997657 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 911      |
+| Running Env Steps   | 2200000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 13.2     |
+| Running Update Time | 219600   |
+----------------------------------
+--2024-11-06 18:30:18.752570 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 900      |
+| Running Env Steps   | 2300000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16       |
+| Running Update Time | 229600   |
+----------------------------------
+--2024-11-06 18:35:52.752868 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 811      |
+| Running Env Steps   | 2400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.5     |
+| Running Update Time | 239600   |
+----------------------------------
+--2024-11-06 18:41:25.625913 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 803      |
+| Running Env Steps   | 2500000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 13.7     |
+| Running Update Time | 249600   |
+----------------------------------
+--2024-11-06 18:47:00.162900 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 886      |
+| Running Env Steps   | 2600000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.8     |
+| Running Update Time | 259600   |
+----------------------------------
+--2024-11-06 18:52:36.042147 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 957      |
+| Running Env Steps   | 2700000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.7     |
+| Running Update Time | 269600   |
+----------------------------------
+--2024-11-06 18:58:11.855092 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 949      |
+| Running Env Steps   | 2800000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 16.9     |
+| Running Update Time | 279600   |
+----------------------------------
+--2024-11-06 19:03:46.592503 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 895      |
+| Running Env Steps   | 2900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 289600   |
+----------------------------------
+--2024-11-06 19:09:20.573632 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 818      |
+| Running Env Steps   | 3000000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 13.1     |
+| Running Update Time | 299600   |
+----------------------------------
+--2024-11-06 19:14:54.921313 CET--
+| Real Det Return     | 997      |
+| Real Sto Return     | 849      |
+| Running Env Steps   | 3100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.4     |
+| Running Update Time | 309600   |
+----------------------------------
+--2024-11-06 19:20:31.060470 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 941      |
+| Running Env Steps   | 3200000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 17.4     |
+| Running Update Time | 319600   |
+----------------------------------
+--2024-11-06 19:26:08.502047 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 988      |
+| Running Env Steps   | 3300000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 329600   |
+----------------------------------
+--2024-11-06 19:31:44.294849 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 925      |
+| Running Env Steps   | 3400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.6     |
+| Running Update Time | 339600   |
+----------------------------------
+--2024-11-06 19:37:19.442204 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 861      |
+| Running Env Steps   | 3500000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.5     |
+| Running Update Time | 349600   |
+----------------------------------
+--2024-11-06 19:42:55.400510 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 938      |
+| Running Env Steps   | 3600000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 359600   |
+----------------------------------
+--2024-11-06 19:48:31.801543 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 941      |
+| Running Env Steps   | 3700000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 15.8     |
+| Running Update Time | 369600   |
+----------------------------------
+--2024-11-06 19:54:08.174982 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 920      |
+| Running Env Steps   | 3800000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 16.7     |
+| Running Update Time | 379600   |
+----------------------------------
+--2024-11-06 19:59:51.188060 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 862      |
+| Running Env Steps   | 3900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.4     |
+| Running Update Time | 389600   |
+----------------------------------
+--2024-11-06 20:05:26.574631 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 794      |
+| Running Env Steps   | 4000000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.8     |
+| Running Update Time | 399600   |
+----------------------------------
+--2024-11-06 20:11:03.687154 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 936      |
+| Running Env Steps   | 4100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.7     |
+| Running Update Time | 409600   |
+----------------------------------
+--2024-11-06 20:16:41.392397 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 975      |
+| Running Env Steps   | 4200000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.7     |
+| Running Update Time | 419600   |
+----------------------------------
+--2024-11-06 20:22:17.791663 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 885      |
+| Running Env Steps   | 4300000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 429600   |
+----------------------------------
+--2024-11-06 20:27:55.929200 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 931      |
+| Running Env Steps   | 4400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.9     |
+| Running Update Time | 439600   |
+----------------------------------
+--2024-11-06 20:33:34.699031 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 956      |
+| Running Env Steps   | 4500000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.3     |
+| Running Update Time | 449600   |
+----------------------------------
+--2024-11-06 20:39:12.523983 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 933      |
+| Running Env Steps   | 4600000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.6     |
+| Running Update Time | 459600   |
+----------------------------------
+--2024-11-06 20:44:50.759804 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 877      |
+| Running Env Steps   | 4700000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16       |
+| Running Update Time | 469600   |
+----------------------------------
+--2024-11-06 20:50:29.977437 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 1.01e+03 |
+| Running Env Steps   | 4800000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16       |
+| Running Update Time | 479600   |
+----------------------------------
+--2024-11-06 20:56:06.538084 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 904      |
+| Running Env Steps   | 4900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16       |
+| Running Update Time | 489600   |
+----------------------------------
+--2024-11-06 21:01:44.643290 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 991      |
+| Running Env Steps   | 5000000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.4     |
+| Running Update Time | 499600   |
+----------------------------------
+--2024-11-06 21:07:21.780725 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 904      |
+| Running Env Steps   | 5100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.2     |
+| Running Update Time | 509600   |
+----------------------------------
+--2024-11-06 21:12:59.552617 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 999      |
+| Running Env Steps   | 5200000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.5     |
+| Running Update Time | 519600   |
+----------------------------------
+--2024-11-06 21:18:36.560383 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 890      |
+| Running Env Steps   | 5300000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 17.3     |
+| Running Update Time | 529600   |
+----------------------------------
+--2024-11-06 21:24:14.923001 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 978      |
+| Running Env Steps   | 5400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.9     |
+| Running Update Time | 539600   |
+----------------------------------
+--2024-11-06 21:29:51.062887 CET--
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 825      |
+| Running Env Steps   | 5500000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 549600   |
+----------------------------------
+--2024-11-06 21:35:36.187477 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 957      |
+| Running Env Steps   | 5600000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.8     |
+| Running Update Time | 559600   |
+----------------------------------
+--2024-11-06 21:41:15.097766 CET--
+| Real Det Return     | 997      |
+| Real Sto Return     | 941      |
+| Running Env Steps   | 5700000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.7     |
+| Running Update Time | 569600   |
+----------------------------------
+--2024-11-06 21:46:53.582750 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 954      |
+| Running Env Steps   | 5800000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 579600   |
+----------------------------------
+--2024-11-06 21:52:30.351385 CET--
+| Real Det Return     | 1.01e+03 |
+| Real Sto Return     | 813      |
+| Running Env Steps   | 5900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.7     |
+| Running Update Time | 589600   |
+----------------------------------
+--2024-11-06 21:58:08.726311 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 974      |
+| Running Env Steps   | 6000000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 17.2     |
+| Running Update Time | 599600   |
+----------------------------------
+--2024-11-06 22:03:46.272348 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 877      |
+| Running Env Steps   | 6100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.1     |
+| Running Update Time | 609600   |
+----------------------------------
+--2024-11-06 22:09:24.169857 CET--
+| Real Det Return     | 998      |
+| Real Sto Return     | 872      |
+| Running Env Steps   | 6200000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.6     |
+| Running Update Time | 619600   |
+----------------------------------
+--2024-11-06 22:15:00.862263 CET--
+| Real Det Return     | 997      |
+| Real Sto Return     | 771      |
+| Running Env Steps   | 6300000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.5     |
+| Running Update Time | 629600   |
+----------------------------------
+--2024-11-06 22:20:38.140518 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 878      |
+| Running Env Steps   | 6400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.3     |
+| Running Update Time | 639600   |
+----------------------------------
+--2024-11-06 22:26:15.276022 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 849      |
+| Running Env Steps   | 6500000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 15.3     |
+| Running Update Time | 649600   |
+----------------------------------
+--2024-11-06 22:31:53.842690 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 929      |
+| Running Env Steps   | 6600000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.5     |
+| Running Update Time | 659600   |
+----------------------------------
+--2024-11-06 22:37:31.976362 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 922      |
+| Running Env Steps   | 6700000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.5     |
+| Running Update Time | 669600   |
+----------------------------------
+--2024-11-06 22:43:11.155321 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 967      |
+| Running Env Steps   | 6800000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 679600   |
+----------------------------------
+--2024-11-06 22:48:49.371603 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 918      |
+| Running Env Steps   | 6900000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 15.6     |
+| Running Update Time | 689600   |
+----------------------------------
+--2024-11-06 22:54:24.651058 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 789      |
+| Running Env Steps   | 7000000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.5     |
+| Running Update Time | 699600   |
+----------------------------------
+--2024-11-06 23:00:02.158884 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 923      |
+| Running Env Steps   | 7100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.6     |
+| Running Update Time | 709600   |
+----------------------------------
+--2024-11-06 23:05:39.414466 CET--
+| Real Det Return     | 998      |
+| Real Sto Return     | 846      |
+| Running Env Steps   | 7200000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15       |
+| Running Update Time | 719600   |
+----------------------------------
+--2024-11-06 23:11:24.916741 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 1.02e+03 |
+| Running Env Steps   | 7300000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.4     |
+| Running Update Time | 729600   |
+----------------------------------
+--2024-11-06 23:17:02.540461 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 892      |
+| Running Env Steps   | 7400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.5     |
+| Running Update Time | 739600   |
+----------------------------------
+--2024-11-06 23:22:40.248027 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 938      |
+| Running Env Steps   | 7500000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 14.1     |
+| Running Update Time | 749600   |
+----------------------------------
+--2024-11-06 23:28:19.185452 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 1.02e+03 |
+| Running Env Steps   | 7600000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 16.7     |
+| Running Update Time | 759600   |
+----------------------------------
+--2024-11-06 23:33:56.595147 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 883      |
+| Running Env Steps   | 7700000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 13.7     |
+| Running Update Time | 769600   |
+----------------------------------
+--2024-11-06 23:39:35.024963 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 902      |
+| Running Env Steps   | 7800000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 779600   |
+----------------------------------
+--2024-11-06 23:45:12.687448 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 876      |
+| Running Env Steps   | 7900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 789600   |
+----------------------------------
+--2024-11-06 23:50:48.903643 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 779      |
+| Running Env Steps   | 8000000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 13.8     |
+| Running Update Time | 799600   |
+----------------------------------
+--2024-11-06 23:56:26.158656 CET--
+| Real Det Return     | 996      |
+| Real Sto Return     | 847      |
+| Running Env Steps   | 8100000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.9     |
+| Running Update Time | 809600   |
+----------------------------------
+--2024-11-07 00:02:04.677290 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 914      |
+| Running Env Steps   | 8200000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 17.2     |
+| Running Update Time | 819600   |
+----------------------------------
+--2024-11-07 00:07:42.546644 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 878      |
+| Running Env Steps   | 8300000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.6     |
+| Running Update Time | 829600   |
+----------------------------------
+--2024-11-07 00:13:20.268807 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 846      |
+| Running Env Steps   | 8400000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.5     |
+| Running Update Time | 839600   |
+----------------------------------
+--2024-11-07 00:18:58.965981 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 906      |
+| Running Env Steps   | 8500000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.4     |
+| Running Update Time | 849600   |
+----------------------------------
+--2024-11-07 00:24:37.078850 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 866      |
+| Running Env Steps   | 8600000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.6     |
+| Running Update Time | 859600   |
+----------------------------------
+--2024-11-07 00:30:16.313918 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 813      |
+| Running Env Steps   | 8700000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.9     |
+| Running Update Time | 869600   |
+----------------------------------
+--2024-11-07 00:35:55.191398 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 912      |
+| Running Env Steps   | 8800000  |
+| Running Forward KL  | 104      |
+| Running Reverse KL  | 16.6     |
+| Running Update Time | 879600   |
+----------------------------------
+--2024-11-07 00:41:35.202010 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 944      |
+| Running Env Steps   | 8900000  |
+| Running Forward KL  | 103      |
+| Running Reverse KL  | 17.1     |
+| Running Update Time | 889600   |
+----------------------------------
+--2024-11-07 00:47:22.158990 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 973      |
+| Running Env Steps   | 9000000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 17.9     |
+| Running Update Time | 899600   |
+----------------------------------
+--2024-11-07 00:53:00.870795 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 908      |
+| Running Env Steps   | 9100000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.5     |
+| Running Update Time | 909600   |
+----------------------------------
+--2024-11-07 00:58:39.533063 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 909      |
+| Running Env Steps   | 9200000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.2     |
+| Running Update Time | 919600   |
+----------------------------------
+--2024-11-07 01:04:17.050040 CET--
+| Real Det Return     | 997      |
+| Real Sto Return     | 828      |
+| Running Env Steps   | 9300000  |
+| Running Forward KL  | 105      |
+| Running Reverse KL  | 16.8     |
+| Running Update Time | 929600   |
+----------------------------------
+--2024-11-07 01:09:56.207523 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 974      |
+| Running Env Steps   | 9400000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 15.1     |
+| Running Update Time | 939600   |
+----------------------------------
+--2024-11-07 01:15:34.457986 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 853      |
+| Running Env Steps   | 9500000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.3     |
+| Running Update Time | 949600   |
+----------------------------------
+--2024-11-07 01:21:14.041790 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 951      |
+| Running Env Steps   | 9600000  |
+| Running Forward KL  | 101      |
+| Running Reverse KL  | 14.5     |
+| Running Update Time | 959600   |
+----------------------------------
+--2024-11-07 01:26:52.265866 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 824      |
+| Running Env Steps   | 9700000  |
+| Running Forward KL  | 104      |
+| Running Reverse KL  | 16.5     |
+| Running Update Time | 969600   |
+----------------------------------
+--2024-11-07 01:32:29.741007 CET--
+| Real Det Return     | 999      |
+| Real Sto Return     | 873      |
+| Running Env Steps   | 9800000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.9     |
+| Running Update Time | 979600   |
+----------------------------------
+--2024-11-07 01:38:07.314755 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 831      |
+| Running Env Steps   | 9900000  |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 15.3     |
+| Running Update Time | 989600   |
+----------------------------------
+--2024-11-07 01:43:45.635939 CET--
+| Real Det Return     | 1e+03    |
+| Real Sto Return     | 842      |
+| Running Env Steps   | 10000000 |
+| Running Forward KL  | 102      |
+| Running Reverse KL  | 16.1     |
+| Running Update Time | 999600   |
+----------------------------------
