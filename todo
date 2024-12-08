@@ -1,10 +1,6 @@
-run halfchetaah with mlIRL
-is it fine that the reward is only on the states? you need to do both for state action
-script to extract rewards from row data
+run ml-irl with state actions
+script to extract rewards from row data and put it in a nice table
+do plots for everyone with 10 (which seem to perform fine across)
 
-
-why do you want do make comparison between different ones? 
-halfcethaa hyperparasm are the same... start ml-ir
-
-
+questions:
 is there a way to not choose the clipping value manually? 

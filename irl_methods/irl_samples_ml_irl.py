@@ -220,10 +220,6 @@ if __name__ == "__main__":
     
     system.reproduce(seed)
     pid=os.getpid()
-    
-    # assumptions
-    assert v['obj'] in ['maxentirl', 'maxentirl_sa']
-    assert v['IS'] == False
 
     # logs
     exp_id = f"logs/{env_name}/exp-{num_expert_trajs}/{v['obj']}" # task/obj/date structure
