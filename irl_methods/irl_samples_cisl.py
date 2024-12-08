@@ -207,14 +207,15 @@ if __name__ == "__main__":
         alpha=v['reward']['alpha'],
         hidden_sizes=v['reward']['hidden_sizes'],
         device=device,
-        action_low=gym_env.action_space.low,
-        action_high=gym_env.action_space.high,
+        action_low=gym_env.action_space.low[0],  # Assume symmetric action space (true in Mujoco envs)
+        action_high=gym_env.action_space.high[0],
         learning_rate=v['reward']['lr'],
         weight_decay=v['reward']['weight_decay']
     )
 
+
     # Train the reward function using expert demonstrations
-    reward_func.train_policy(expert_samples, expert_a_samples, num_epochs=v['reward']['num_epochs'], batch_size=v['reward']['batch_size'])
+    reward_func.train_policy(expert_samples, expert_a_samples, num_epochs=10, batch_size=v['reward']['batch_size'])
 
     max_real_return_det, max_real_return_sto = -np.inf, -np.inf
 
@@ -271,4 +272,4 @@ if __name__ == "__main__":
     writer.close()
 
 
-# python -m irl_methods.irl_samples_cisl --config configs/samples/agents/hopper.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
+# python -m irl_methods.irl_samples_cisl --config configs/samples/agents/ant.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
