@@ -25,7 +25,7 @@ class CoherentReward:
         self.action_low = action_low
         self.action_high = action_high
 
-    def train_policy(self, expert_states, expert_actions, num_epochs=1000, batch_size=256):
+    def train_policy(self, expert_states, expert_actions, num_epochs=100, batch_size=256):
         """Train policy using behavioral cloning with L2 regularization"""
         optimizer = torch.optim.Adam(self.policy.parameters(), lr=3e-4, weight_decay=1e-4)
         

@@ -209,7 +209,7 @@ if __name__ == "__main__":
     )
 
     # Train the reward function using expert demonstrations
-    reward_func.train_policy(expert_samples, expert_a_samples)
+    reward_func.train_policy(expert_samples, expert_a_samples, num_epochs=v['reward']['num_epochs'], batch_size=v['reward']['batch_size'])
 
     max_real_return_det, max_real_return_sto = -np.inf, -np.inf
 

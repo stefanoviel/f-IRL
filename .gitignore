@@ -9,7 +9,7 @@ build/
 
 .vscode/
 
-# logs, a soft link to disk
+# not pushing reward models 
 *.pkl
 
 # videos, a soft link to disk
