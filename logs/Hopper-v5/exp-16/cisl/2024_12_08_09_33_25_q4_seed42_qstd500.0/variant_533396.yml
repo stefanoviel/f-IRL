@@ -1,14 +1,14 @@
-obj: cisl 
+obj: cisl
 IS: false
-seed: 1
+seed: 23
 cuda: -1
 env:
-  env_name: Ant-v5
+  env_name: Hopper-v5
   T: 1000
   state_indices: all
 irl:
   training_trajs: 10
-  n_itrs: 600
+  n_itrs: 200
   save_interval: 0
   eval_episodes: 20
   expert_episodes: 16
@@ -26,20 +26,19 @@ sac:
   random_explore_episodes: 1
   update_num: 1
   batch_size: 100
-  lr: 0.001
+  lr: 1e-3
   alpha: 0.2
   automatic_alpha_tuning: false
   buffer_size: 1000000
   num_test_episodes: 10
   reinitialize: false
-
 reward:
   use_bn: false
   residual: false
   hid_act: relu
-  hidden_sizes: [128, 128]
+  hidden_sizes: [64, 64]
   clamp_magnitude: 10
-  lr: 0.0001
+  lr: 1e-4
   weight_decay: 1e-3
   gradient_step: 1
   momentum: 0.9
@@ -49,7 +48,7 @@ reward:
 disc:
   reinit: false
   model_type: resnet_disc
-  num_layer_blocks: 6
+  num_layer_blocks: 3
   hid_dim: 128
   hid_act: tanh
   use_bn: false
