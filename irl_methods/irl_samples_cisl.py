@@ -205,7 +205,12 @@ if __name__ == "__main__":
         state_dim=state_size,
         action_dim=action_size,
         alpha=v['reward']['alpha'],
-        device=device
+        hidden_sizes=v['reward']['hidden_sizes'],
+        device=device,
+        action_low=gym_env.action_space.low,
+        action_high=gym_env.action_space.high,
+        learning_rate=v['reward']['lr'],
+        weight_decay=v['reward']['weight_decay']
     )
 
     # Train the reward function using expert demonstrations

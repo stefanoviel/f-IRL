@@ -6,20 +6,26 @@ from torch.utils.data import TensorDataset, DataLoader
 
 
 class CoherentReward:
-    def __init__(self, state_dim, action_dim, alpha=1.0, device="cpu", action_low=-1.0, action_high=1.0):
+    def __init__(self, state_dim, action_dim, alpha=1.0, device="cpu", action_low=-1.0, action_high=1.0, hidden_sizes=[256, 256], learning_rate=3e-4, weight_decay=1e-4):
         self.state_dim = state_dim
         self.action_dim = action_dim
         self.alpha = alpha
         self.device = device
+        self.learning_rate = learning_rate
+        self.weight_decay = weight_decay
         
-        # Policy network for q(a|s) - using standard MLP architecture
-        self.policy = nn.Sequential(
-            nn.Linear(state_dim, 256),
-            nn.ReLU(),
-            nn.Linear(256, 256),
-            nn.ReLU(),
-            nn.Linear(256, 2 * action_dim)  # Output mean and log_std
-        ).to(device)
+        # Policy network for q(a|s) - build MLP with specified hidden sizes
+        layers = []
+        prev_size = state_dim
+        for h in hidden_sizes:
+            layers.extend([
+                nn.Linear(prev_size, h),
+                nn.ReLU()
+            ])
+            prev_size = h
+        layers.append(nn.Linear(prev_size, 2 * action_dim))  # Output mean and log_std
+        
+        self.policy = nn.Sequential(*layers).to(device)
         
         # Define uniform prior bounds
         self.action_low = action_low
@@ -27,7 +33,9 @@ class CoherentReward:
 
     def train_policy(self, expert_states, expert_actions, num_epochs=100, batch_size=256):
         """Train policy using behavioral cloning with L2 regularization"""
-        optimizer = torch.optim.Adam(self.policy.parameters(), lr=3e-4, weight_decay=1e-4)
+        optimizer = torch.optim.Adam(self.policy.parameters(), 
+                                   lr=self.learning_rate, 
+                                   weight_decay=self.weight_decay)
         
         dataset = TensorDataset(
             torch.FloatTensor(expert_states).to(self.device),
