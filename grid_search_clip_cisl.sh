@@ -16,7 +16,7 @@ q_std_clip=(0.1 0.5 1 5 10 50 100 500 1000)
 # Add delay between process launches
 delay_seconds=2
 
-env="hopper"
+env="humanoid"
 
 # Create environment-specific output directory if it doesn't exist
 mkdir -p "outputs/${env}"

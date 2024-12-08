@@ -367,3 +367,6 @@ if __name__ == "__main__":
         logger.dump_tabular()
 
     writer.close()
+
+
+# python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/halfcheetah.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
