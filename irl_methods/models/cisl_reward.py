@@ -75,3 +75,7 @@ class CoherentReward:
             reward = self.alpha * (log_q - log_p)
             
             return reward.cpu().numpy()
+        
+
+    def state_dict(self):
+        return self.policy.state_dict()
