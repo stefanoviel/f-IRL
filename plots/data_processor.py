@@ -38,7 +38,6 @@ class ExperimentDataProcessor:
             print(f"Loading cached data from {cache_path}")
             return pd.read_csv(cache_path)
 
-        print(f"Processing data from {self.base_path}")
         data_rows = []
         folders = glob.glob(f'{self.base_path}2024_*_seed*')
         
@@ -46,7 +45,6 @@ class ExperimentDataProcessor:
         env_name = self.base_path.split('/')[1]
 
         for folder in folders:
-            print(folder)
             q = self._extract_q(folder)
             clip = self._extract_clip(folder)
             seed = self._extract_seed(folder)
@@ -100,8 +98,8 @@ class ExperimentDataProcessor:
         print(f"Found {len(exp_folders)} experiment folders to process")
         
         for exp_folder in exp_folders:
-            if 'Ant' not in exp_folder:
-                continue
+
+
             try:
                 # Create processor for this experiment
                 processor = cls(exp_folder)
