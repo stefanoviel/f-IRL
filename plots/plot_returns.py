@@ -151,11 +151,11 @@ def plot_multiple_files(
 if __name__ == "__main__":
     # Example parameters
     q_values = [1.0, 4.0]
-    clip_values = [0.1, 0.5, 1.0, 5.0, 10.0, 50.0, 100.0, 500.0, 1000.0]
+    clip_values = [0.5]
     
     # Dictionary specifying max episodes for each environment
     max_episodes_dict = {
-        # "Hopper-v5": 1000,
+        "Hopper-v5": 1e6,
         "Walker2d-v5": 1.5e6,
         "Ant-v5": 1.5e6,
         "Humanoid-v5": 1e6,
@@ -164,21 +164,21 @@ if __name__ == "__main__":
     }
     
     # Single file example
-    # plot_single_file(
-    #     "plots/cached_data/Hopper-v5_exp-4_rkl_data.csv",
-    #     q_values,
-    #     clip_values,
-    #     show_confidence=True,
-    #     max_episodes_dict=max_episodes_dict
-    # )
-    
-    # Multiple files example - now using folder path
-    plot_multiple_files(
-        "plots/cached_data",  # Just specify the folder path
+    plot_single_file(
+        "plots/cached_data/Walker2d-v5_exp-16_cisl_data.csv",
         q_values,
         clip_values,
-        show_confidence=False,
+        show_confidence=True,
         max_episodes_dict=max_episodes_dict
     )
+    
+    # Multiple files example - now using folder path
+    # plot_multiple_files(
+    #     "plots/cached_data",  # Just specify the folder path
+    #     q_values,
+    #     clip_values,
+    #     show_confidence=False,
+    #     max_episodes_dict=max_episodes_dict
+    # )
 
     
