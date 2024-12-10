@@ -1,5 +1,10 @@
 run ml-irl with state actions
-script to extract rewards from row data and put it in a nice table
+script to extract rewards from raw data and put it in a nice table
+    * one csv for every env
+    * columns: method, seed, number nn, iteration, real reward
+
+
+
 do plots for everyone with 10 (which seem to perform fine across)
 
 questions:

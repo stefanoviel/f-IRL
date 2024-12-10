@@ -35,7 +35,7 @@ def load_data(base_path, max_steps):
                 if key not in q_clip_results:
                     q_clip_results[key] = []
                 
-                df = df[df['Running Env Steps'] <= max_steps]
+                df = df[df['Itration']*5000 <= max_steps]
 
                 q_clip_results[key].append(df['Real Det Return'].values)
             except Exception as e:
@@ -92,6 +92,7 @@ def plot_data(base_path, q_clip_results, show_confidence_interval, q_filter=None
     style_mapping = create_style_mapping(filtered_results)
 
     for idx, ((q, clip), series_list) in enumerate(sorted(filtered_results.items())):
+        print([len(series) for series in series_list])
         min_length = min(len(series) for series in series_list)
         aligned_series = [series[:min_length] for series in series_list]
         data = np.array(aligned_series)
@@ -154,3 +155,6 @@ if __name__ == "__main__":
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Walker2d-v5/exp-16/rkl/
 # python plots/plot_reward_over_time.py --q 1 4 --clip 1 2 3 5 10 20 50 0.8 0.5 0.1 100 --base_path logs/Ant-v5/exp-16/rkl/
 # python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 1 10 100 500 1000 --base_path logs/Humanoid-v5/exp-16/rkl/ --max_steps 1e6
+
+
+#python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 0.5 1 5 10 50 100 500 1000 --base_path logs/Ant-v5/exp-16/cisl/
