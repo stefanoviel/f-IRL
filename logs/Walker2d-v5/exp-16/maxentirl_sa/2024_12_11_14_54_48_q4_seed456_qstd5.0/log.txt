@@ -1,1 +1,31 @@
 Logging to logs/Walker2d-v5/exp-16/maxentirl_sa/2024_12_11_14_54_48_q4_seed456_qstd5.0
+--2024-12-11 15:07:18.400087 CET--
+| Itration            | 0        |
+| Real Det Return     | 269      |
+| Real Sto Return     | 279      |
+| Reward Loss         | -251     |
+| Running Env Steps   | 0        |
+| Running Forward KL  | 49.3     |
+| Running Reverse KL  | 15       |
+| Running Update Time | 0        |
+----------------------------------
+--2024-12-11 15:22:01.981401 CET--
+| Itration            | 1        |
+| Real Det Return     | 359      |
+| Real Sto Return     | 391      |
+| Reward Loss         | -205     |
+| Running Env Steps   | 5000     |
+| Running Forward KL  | 49       |
+| Running Reverse KL  | 18.9     |
+| Running Update Time | 1        |
+----------------------------------
+--2024-12-11 15:35:49.381464 CET--
+| Itration            | 2        |
+| Real Det Return     | 484      |
+| Real Sto Return     | 423      |
+| Reward Loss         | -279     |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 49       |
+| Running Reverse KL  | 14.1     |
+| Running Update Time | 2        |
+----------------------------------

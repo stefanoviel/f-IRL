@@ -9,3 +9,23 @@ Logging to logs/Hopper-v5/exp-16/maxentirl_sa/2024_12_11_14_46_32_q4_seed456_qst
 | Running Reverse KL  | 26.3     |
 | Running Update Time | 0        |
 ----------------------------------
+--2024-12-11 15:11:13.590375 CET--
+| Itration            | 1        |
+| Real Det Return     | 235      |
+| Real Sto Return     | 234      |
+| Reward Loss         | -140     |
+| Running Env Steps   | 5000     |
+| Running Forward KL  | 38.1     |
+| Running Reverse KL  | 37.2     |
+| Running Update Time | 1        |
+----------------------------------
+--2024-12-11 15:25:39.632522 CET--
+| Itration            | 2        |
+| Real Det Return     | 323      |
+| Real Sto Return     | 320      |
+| Reward Loss         | -150     |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 38.5     |
+| Running Reverse KL  | 40.4     |
+| Running Update Time | 2        |
+----------------------------------

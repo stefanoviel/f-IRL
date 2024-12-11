@@ -9,3 +9,23 @@ Logging to logs/HalfCheetah-v5/exp-16/maxentirl_sa/2024_12_11_14_50_33_q4_seed12
 | Running Reverse KL  | 11.4     |
 | Running Update Time | 0        |
 ----------------------------------
+--2024-12-11 15:20:20.529538 CET--
+| Itration            | 1        |
+| Real Det Return     | 223      |
+| Real Sto Return     | -122     |
+| Reward Loss         | -334     |
+| Running Env Steps   | 5000     |
+| Running Forward KL  | 158      |
+| Running Reverse KL  | 11.5     |
+| Running Update Time | 1        |
+----------------------------------
+--2024-12-11 15:35:05.714300 CET--
+| Itration            | 2        |
+| Real Det Return     | 398      |
+| Real Sto Return     | 50.5     |
+| Reward Loss         | -345     |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 158      |
+| Running Reverse KL  | 11.8     |
+| Running Update Time | 2        |
+----------------------------------

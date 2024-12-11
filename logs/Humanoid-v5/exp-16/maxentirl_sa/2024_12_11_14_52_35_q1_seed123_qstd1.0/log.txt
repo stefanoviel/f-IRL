@@ -9,3 +9,23 @@ Logging to logs/Humanoid-v5/exp-16/maxentirl_sa/2024_12_11_14_52_35_q1_seed123_q
 | Running Reverse KL  | 252      |
 | Running Update Time | 0        |
 ----------------------------------
+--2024-12-11 15:13:58.684042 CET---
+| Itration            | 1         |
+| Real Det Return     | 313       |
+| Real Sto Return     | 339       |
+| Reward Loss         | -1.65e+03 |
+| Running Env Steps   | 5000      |
+| Running Forward KL  | 440       |
+| Running Reverse KL  | 311       |
+| Running Update Time | 1         |
+-----------------------------------
+--2024-12-11 15:27:48.326012 CET--
+| Itration            | 2        |
+| Real Det Return     | 487      |
+| Real Sto Return     | 437      |
+| Reward Loss         | -946     |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 422      |
+| Running Reverse KL  | 284      |
+| Running Update Time | 2        |
+----------------------------------

@@ -9,3 +9,33 @@ Logging to logs/Walker2d-v5/exp-16/maxentirl_sa/2024_12_11_14_54_45_q4_seed42_qs
 | Running Reverse KL  | 13       |
 | Running Update Time | 0        |
 ----------------------------------
+--2024-12-11 15:11:53.079114 CET--
+| Itration            | 1        |
+| Real Det Return     | 340      |
+| Real Sto Return     | 276      |
+| Reward Loss         | -103     |
+| Running Env Steps   | 5000     |
+| Running Forward KL  | 49.1     |
+| Running Reverse KL  | 15.4     |
+| Running Update Time | 1        |
+----------------------------------
+--2024-12-11 15:21:35.536398 CET--
+| Itration            | 2        |
+| Real Det Return     | 463      |
+| Real Sto Return     | 395      |
+| Reward Loss         | -191     |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 48.5     |
+| Running Reverse KL  | 12.3     |
+| Running Update Time | 2        |
+----------------------------------
+--2024-12-11 15:31:20.774734 CET--
+| Itration            | 3        |
+| Real Det Return     | 350      |
+| Real Sto Return     | 372      |
+| Reward Loss         | -144     |
+| Running Env Steps   | 15000    |
+| Running Forward KL  | 49.1     |
+| Running Reverse KL  | 14.4     |
+| Running Update Time | 3        |
+----------------------------------
