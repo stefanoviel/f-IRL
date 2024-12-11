@@ -16,7 +16,7 @@ from irl_methods.models.reward import MLPReward
 from irl_methods.models.discrim import SMMIRLDisc as Disc
 from irl_methods.models.discrim import SMMIRLCritic as Critic
 # from common.sac import ReplayBuffer, SAC
-from common.mod_sac import ReplayBuffer, SAC
+from common.sac_dynamic_clipping import ReplayBuffer, SAC
 
 import envs
 from utils import system, collect, logger, eval
@@ -302,6 +302,7 @@ if __name__ == "__main__":
                 uncertainty_coef=uncertainty_coef,
                 q_std_clip=q_std_clip,
                 use_actions_for_reward=use_actions_for_reward,
+                writer=writer,
                 **v['sac']
             )
         

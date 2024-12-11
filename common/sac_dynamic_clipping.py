@@ -94,8 +94,8 @@ class SAC:
             update_after=1000, update_every=50, num_test_episodes=10, max_ep_len=1000, 
             log_step_interval=None, reward_state_indices=None,
             save_freq=1, device=torch.device("cpu"), automatic_alpha_tuning=True, reinitialize=True,
-            num_q_pairs=3, uncertainty_coef=1.0, q_std_clip=1.0,  # Add q_std_clip parameter
-            use_actions_for_reward=False, **kwargs):
+            num_q_pairs=3, uncertainty_coef=1.0, q_std_clip=1.0,
+            use_actions_for_reward=False, writer=None, **kwargs):
 
         """
         Soft Actor-Critic (SAC)
@@ -272,6 +272,7 @@ class SAC:
         self.uncertainty_coef = uncertainty_coef  # Store the coefficient
         self.q_std_clip = q_std_clip  # Store the clipping value
 
+        self.writer = writer  # Store the TensorBoard writer
 
         # Add comprehensive seeding at initialization
         self.seed = seed
@@ -522,6 +523,14 @@ class SAC:
 
         best_eval = -np.inf
 
+        # Add tracking variables for discounted rewards
+        current_discounted_reward = 0
+        gamma_power = 1
+        trajectory_states = []  # Store states for computing rewards later
+        trajectory_actions = []  # Store actions if needed
+        trajectory_returns = []
+        current_clip_value = None
+        
         for t in range(self.steps_per_epoch * self.epochs):
             # if t % 1000 == 0:  # Print every 1000 steps to avoid spam
             #     print(f"[STEP {t}] Current seed: {current_seed}, Buffer size: {self.replay_buffer.size}")
@@ -539,7 +548,12 @@ class SAC:
 
             # Step the env
             o2, r, d, _, _ = self.env.step(a)
-
+            
+            # Store state and action for reward computation
+            trajectory_states.append(o.copy())
+            if self.use_actions_for_reward:
+                trajectory_actions.append(a.copy())
+            
             ep_len += 1
 
             # Ignore the "done" signal if it comes from hitting the time
@@ -561,43 +575,75 @@ class SAC:
             # most recent observation!
             o = o2
 
-            # End of trajectory handling with incremented seed
-            if d or ep_len == self.max_ep_len:
+            # End of trajectory handling
+            if d:
+                # Compute rewards for the entire trajectory using reward network
+                traj_states = torch.FloatTensor(trajectory_states).to(self.device)
+                if self.reward_state_indices is not None:
+                    traj_states = traj_states[:, self.reward_state_indices]
+                
+                if self.use_actions_for_reward:
+                    traj_actions = torch.FloatTensor(trajectory_actions).to(self.device)
+                    combined_input = torch.cat([traj_states, traj_actions], dim=1)
+                    learned_rewards = self.reward_function(combined_input).detach().cpu().numpy()
+                else:
+                    learned_rewards = self.reward_function(traj_states).detach().cpu().numpy()
+                
+                # Compute discounted sum of rewards
+                discounted_sum = 0
+                for r in reversed(learned_rewards):
+                    discounted_sum = r + self.gamma * discounted_sum
+                
+                # Store the discounted return for this trajectory
+                trajectory_returns.append(discounted_sum)
+                
+                # Calculate new clip value as average of recent trajectory returns
+                # Only use last 10 trajectories to be more responsive to recent performance
+                if len(trajectory_returns) > 0:
+                    current_clip_value = np.mean(trajectory_returns[-10:])
+                    # Log the clip value to TensorBoard
+                    if self.writer is not None:
+                        self.writer.add_scalar('training/reward_clip_value', current_clip_value, t)
+                        self.writer.add_scalar('training/trajectory_return', trajectory_returns[-1], t)
+                
+                # Reset trajectory tracking variables
+                trajectory_states = []
+                trajectory_actions = []
+                
+                # Reset environment
                 current_seed = train_seed_sequence.randint(0, 2**32-1)
                 o, info = self.env.reset(seed=current_seed)
                 ep_len = 0
 
             # Update handling
             log_pi = 0
-            if self.reinitialize: # default True
-                # NOTE: assert training expert policy
+            if self.reinitialize:
                 if t >= self.update_after and t % self.update_every == 0:
                     for j in range(self.update_every):
                         batch = self.replay_buffer.sample_batch(self.batch_size)
-                        _, _, log_pi = self.update(data=batch)
-
+                        # Pass the current clip value to update
+                        _, _, log_pi = self.update(data=batch, clip_value=current_clip_value)
+                
                     test_epret = self.test_fn()
                     if print_out:
                         print(f"SAC Training | Evaluation: {test_epret:.3f} Timestep: {t+1:d} Elapsed {time.time() - local_time:.0f}s")        
 
                     print(f"Update: {t+1:d} Loss: {log_pi:.3f}")
             else:
-                # NOTE: assert training agent policy
-                if self.replay_buffer.size>=self.update_after and t % self.update_every == 0:
+                if self.replay_buffer.size >= self.update_after and t % self.update_every == 0:
                     for j in range(self.update_every):
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         obs = batch['obs'][:, self.reward_state_indices]
                         
                         if self.use_actions_for_reward:
-                            # Compute reward using both states and actions
                             acts = batch['act']
                             combined_input = torch.cat([obs, acts], dim=1)
                             batch['rew'] = torch.FloatTensor(self.reward_function(combined_input)).to(self.device)
                         else:
-                            # Compute reward using only states
                             batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
-                            
-                        _, _, log_pi = self.update(data=batch) 
+                        
+                        # Pass the current clip value to update
+                        _, _, log_pi = self.update(data=batch, clip_value=current_clip_value)
 
 
             # End of epoch handling

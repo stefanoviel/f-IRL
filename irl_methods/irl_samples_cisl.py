@@ -29,6 +29,7 @@ import json, copy
 from torch.utils.tensorboard import SummaryWriter
 
 from irl_methods.models.cisl_reward import CoherentReward
+
 def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step, seed=None):
     """Add seed parameter and pass it through to evaluation functions"""
     assert policy_type in ["Running"]
