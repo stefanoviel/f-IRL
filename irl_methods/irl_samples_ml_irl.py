@@ -51,7 +51,7 @@ def ML_sa_loss(div: str, agent_samples, expert_samples, reward_func, device):
         agent_samples is numpy array of shape (N, T, d) 
         expert_samples is numpy array of shape (N, T, d) or (N, d)
     '''
-    #assert div in ['maxentirl']
+    assert div in ['maxentirl_sa']
     sA, aA, _ = agent_samples
     print(sA.shape,aA.shape)
     sA=np.concatenate([sA,aA],2)
@@ -176,7 +176,6 @@ if __name__ == "__main__":
                       help='Maximum value to clip Q-value standard deviations (default: 1.0)')
     
 
-    
     args = parser.parse_args()
 
 
@@ -264,6 +263,12 @@ if __name__ == "__main__":
 
     # Initilialize reward as a neural network
     reward_func = MLPReward(len(state_indices), **v['reward'], device=device).to(device)
+    use_actions_for_reward = False
+    if v['obj']=='maxentirl_sa':
+        use_actions_for_reward=True
+        reward_func = MLPReward(len(state_indices)+action_size, **v['reward'], device=device).to(device)
+
+
     reward_optimizer = torch.optim.Adam(reward_func.parameters(), lr=v['reward']['lr'], 
         weight_decay=v['reward']['weight_decay'], betas=(v['reward']['momentum'], 0.999))
     
@@ -296,6 +301,7 @@ if __name__ == "__main__":
                 num_q_pairs=int(num_q_pairs),
                 uncertainty_coef=uncertainty_coef,
                 q_std_clip=q_std_clip,
+                use_actions_for_reward=use_actions_for_reward,
                 **v['sac']
             )
         
@@ -365,4 +371,4 @@ if __name__ == "__main__":
     writer.close()
 
 
-# python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/halfcheetah.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
+# python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/hopper.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 

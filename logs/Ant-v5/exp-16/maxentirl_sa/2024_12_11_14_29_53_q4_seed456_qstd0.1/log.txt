@@ -1,0 +1,31 @@
+Logging to logs/Ant-v5/exp-16/maxentirl_sa/2024_12_11_14_29_53_q4_seed456_qstd0.1
+--2024-12-11 14:38:09.202759 CET--
+| Itration            | 0        |
+| Real Det Return     | 406      |
+| Real Sto Return     | -78.5    |
+| Reward Loss         | 8.42     |
+| Running Env Steps   | 0        |
+| Running Forward KL  | 75.1     |
+| Running Reverse KL  | 26.2     |
+| Running Update Time | 0        |
+----------------------------------
+--2024-12-11 14:48:04.535261 CET--
+| Itration            | 1        |
+| Real Det Return     | 564      |
+| Real Sto Return     | -36.8    |
+| Reward Loss         | 1.7      |
+| Running Env Steps   | 5000     |
+| Running Forward KL  | 73.8     |
+| Running Reverse KL  | 24.8     |
+| Running Update Time | 1        |
+----------------------------------
+--2024-12-11 15:04:42.221949 CET--
+| Itration            | 2        |
+| Real Det Return     | 557      |
+| Real Sto Return     | -14.2    |
+| Reward Loss         | -7.02    |
+| Running Env Steps   | 10000    |
+| Running Forward KL  | 75.1     |
+| Running Reverse KL  | 27       |
+| Running Update Time | 2        |
+----------------------------------

@@ -436,11 +436,13 @@ class SAC:
                 acts[t] = a.copy()
             obs = torch.FloatTensor(obs).to(self.device)[:, self.reward_state_indices]
             acts = torch.FloatTensor(acts).to(self.device)
+            # Concatenate states and actions before passing to reward function
             if self.use_actions_for_reward:
-                # Compute reward using both states and actions
-                avg_ep_return += self.reward_function(obs, acts).sum()
+                combined_input = torch.cat([obs, acts], dim=1)
+                avg_ep_return += self.reward_function(combined_input).sum()
             else:
-                avg_ep_return += self.reward_function(obs).sum() # (T, d) -> (T)
+                avg_ep_return += self.reward_function(obs).sum()
+            
         return avg_ep_return/self.num_test_episodes
 
     def test_agent_ori_env(self, deterministic=True):
@@ -589,7 +591,8 @@ class SAC:
                         if self.use_actions_for_reward:
                             # Compute reward using both states and actions
                             acts = batch['act']
-                            batch['rew'] = torch.FloatTensor(self.reward_function(obs, acts)).to(self.device)
+                            combined_input = torch.cat([obs, acts], dim=1)
+                            batch['rew'] = torch.FloatTensor(self.reward_function(combined_input)).to(self.device)
                         else:
                             # Compute reward using only states
                             batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
