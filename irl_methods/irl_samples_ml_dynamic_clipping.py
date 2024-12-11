@@ -118,7 +118,7 @@ def try_evaluate(itr: int, policy_type: str, sac_info, writer, global_step, seed
 
     return real_return_det, real_return_sto
 
-def log_metrics(itr: int, sac_agent, uncertainty_coef: float, loss: float, writer: SummaryWriter, v: dict):
+def log_metrics(itr: int, sac_agent, loss: float, writer: SummaryWriter, v: dict):
     """
     Log training metrics to tensorboard
     
@@ -213,13 +213,13 @@ if __name__ == "__main__":
     pid=os.getpid()
 
     # logs
-    exp_id = f"logs/{env_name}/exp-{num_expert_trajs}/{v['obj']}" # task/obj/date structure
+    exp_id = f"logs/{env_name}/exp-{num_expert_trajs}/{v['obj']}_dynamic_clipping" # task/obj/date structure
     # exp_id = 'debug'
     if not os.path.exists(exp_id):
         os.makedirs(exp_id)
 
     now = datetime.datetime.now(dateutil.tz.tzlocal())
-    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}_seed{seed}' + f'_qstd{q_std_clip}'
+    log_folder = exp_id + '/' + now.strftime('%Y_%m_%d_%H_%M_%S') + f'_q{num_q_pairs}_seed{seed}'
     logger.configure(dir=log_folder)            
     writer = SummaryWriter(log_folder)
     print(f"Logging to directory: {log_folder}")
@@ -339,7 +339,7 @@ if __name__ == "__main__":
             reward_optimizer.step()
 
         # Log metrics and get global step
-        global_step = log_metrics(itr, sac_agent, uncertainty_coef, loss, writer, v)
+        global_step = log_metrics(itr, sac_agent, loss, writer, v)
         
         # evaluating the learned reward
         real_return_det, real_return_sto = try_evaluate(itr, "Running", sac_info, writer, global_step, seed=seed)
