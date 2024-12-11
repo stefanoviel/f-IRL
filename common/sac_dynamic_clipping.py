@@ -94,8 +94,7 @@ class SAC:
             update_after=1000, update_every=50, num_test_episodes=10, max_ep_len=1000, 
             log_step_interval=None, reward_state_indices=None,
             save_freq=1, device=torch.device("cpu"), automatic_alpha_tuning=True, reinitialize=True,
-            num_q_pairs=3, uncertainty_coef=1.0, q_std_clip=1.0,
-            use_actions_for_reward=False, writer=None, **kwargs):
+            num_q_pairs=3, use_actions_for_reward=False, writer=None, **kwargs):
 
         """
         Soft Actor-Critic (SAC)

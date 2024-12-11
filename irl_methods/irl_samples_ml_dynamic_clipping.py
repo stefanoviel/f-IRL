@@ -170,11 +170,7 @@ if __name__ == "__main__":
                       help='Number of Q-network pairs (default: 1)')
     parser.add_argument('--seed', type=int, default=None,
                       help='Random seed (default: from config)')
-    parser.add_argument('--uncertainty_coef', type=float, default=1.0,
-                      help='Uncertainty coefficient for exploration (default: 1.0)')
-    parser.add_argument('--q_std_clip', type=float, default=1.0,
-                      help='Maximum value to clip Q-value standard deviations (default: 1.0)')
-    
+
 
     args = parser.parse_args()
 
@@ -190,13 +186,9 @@ if __name__ == "__main__":
     # Use parsed arguments
     num_q_pairs = args.num_q_pairs
     seed = args.seed if args.seed is not None else v['seed']
-    uncertainty_coef = args.uncertainty_coef
-    q_std_clip = args.q_std_clip
 
     print("num_q_pairs:", num_q_pairs)
     print("seed:", seed)
-    print("uncertainty_coef:", uncertainty_coef)
-    print("q_std_clip:", q_std_clip)
 
     # common parameters
     env_name = v['env']['env_name']
@@ -299,8 +291,6 @@ if __name__ == "__main__":
                 reward_state_indices=state_indices,
                 device=device,
                 num_q_pairs=int(num_q_pairs),
-                uncertainty_coef=uncertainty_coef,
-                q_std_clip=q_std_clip,
                 use_actions_for_reward=use_actions_for_reward,
                 writer=writer,
                 **v['sac']
@@ -371,5 +361,4 @@ if __name__ == "__main__":
 
     writer.close()
 
-
-# python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/hopper.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
+# python -m irl_methods.irl_samples_ml_dynamic_clipping --config configs/samples/agents/ant.yml --num_q_pairs 4 --seed 0 
