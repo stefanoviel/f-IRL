@@ -157,4 +157,4 @@ if __name__ == "__main__":
 # python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 1 10 100 500 1000 --base_path logs/Humanoid-v5/exp-16/rkl/ --max_steps 1e6
 
 
-#python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 0.5 1 5 10 50 100 500 1000 --base_path logs/Ant-v5/exp-16/cisl/
+# python plots/plot_reward_over_time.py --q 1 4 --clip 0.1 0.5 1 5 10 50 100 500 1000 --base_path logs/Humanoid-v5/exp-16/maxentirl_sa/

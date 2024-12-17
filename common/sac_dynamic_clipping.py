@@ -14,6 +14,7 @@ import time
 import sys
 import common.sac_agent as core
 import random
+from tqdm import tqdm
 
 def combined_shape(length, shape=None):
     if shape is None:
@@ -268,9 +269,6 @@ class SAC:
 
         self.test_fn = self.test_agent
 
-        self.uncertainty_coef = uncertainty_coef  # Store the coefficient
-        self.q_std_clip = q_std_clip  # Store the clipping value
-
         self.writer = writer  # Store the TensorBoard writer
 
         # Add comprehensive seeding at initialization
@@ -328,7 +326,7 @@ class SAC:
         return loss_q1 + loss_q2
 
     # Set up function for computing SAC pi loss
-    def compute_loss_pi(self, data):
+    def compute_loss_pi(self, data, clip_value):
         o = data['obs']
         pi, logp_pi = self.ac.pi(o[:, :self.true_state_dim])
         
@@ -341,8 +339,7 @@ class SAC:
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
         if len(q_mins) > 1:
-            q_std = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, self.q_std_clip)  # Use self.q_std_clip
-            exploration_bonus = self.uncertainty_coef * q_std
+            exploration_bonus = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, clip_value)  # Use self.q_std_clip
         else:
             exploration_bonus = 0
 
@@ -354,7 +351,7 @@ class SAC:
 
 
     # Set up model saving
-    def update(self, data):
+    def update(self, data, clip_value):
         # Update each Q-network pair with different batches
         losses_q = []
         for i in range(len(self.ac.q1_list)):
@@ -372,7 +369,7 @@ class SAC:
 
         # Update policy
         self.pi_optimizer.zero_grad()
-        loss_pi, log_pi = self.compute_loss_pi(data)
+        loss_pi, log_pi = self.compute_loss_pi(data, clip_value)
         loss_pi.backward()
         self.pi_optimizer.step()
 
@@ -530,7 +527,7 @@ class SAC:
         trajectory_returns = []
         current_clip_value = None
         
-        for t in range(self.steps_per_epoch * self.epochs):
+        for t in tqdm(range(self.steps_per_epoch * self.epochs)):
             # if t % 1000 == 0:  # Print every 1000 steps to avoid spam
             #     print(f"[STEP {t}] Current seed: {current_seed}, Buffer size: {self.replay_buffer.size}")
             #     print(f"[STEP {t}] Current observation: {o[:3]}...")
@@ -576,17 +573,21 @@ class SAC:
 
             # End of trajectory handling
             if d:
-                # Compute rewards for the entire trajectory using reward network
-                traj_states = torch.FloatTensor(trajectory_states).to(self.device)
+                # Convert lists to numpy arrays first
+                traj_states_np = np.array(trajectory_states)
+                traj_states = torch.FloatTensor(traj_states_np).to(self.device)
                 if self.reward_state_indices is not None:
                     traj_states = traj_states[:, self.reward_state_indices]
                 
                 if self.use_actions_for_reward:
-                    traj_actions = torch.FloatTensor(trajectory_actions).to(self.device)
+                    traj_actions_np = np.array(trajectory_actions)
+                    traj_actions = torch.FloatTensor(traj_actions_np).to(self.device)
                     combined_input = torch.cat([traj_states, traj_actions], dim=1)
-                    learned_rewards = self.reward_function(combined_input).detach().cpu().numpy()
+                    rewards = self.reward_function(combined_input)
+                    learned_rewards = rewards.detach().cpu().numpy() if torch.is_tensor(rewards) else rewards
                 else:
-                    learned_rewards = self.reward_function(traj_states).detach().cpu().numpy()
+                    rewards = self.reward_function(traj_states)
+                    learned_rewards = rewards.detach().cpu().numpy() if torch.is_tensor(rewards) else rewards
                 
                 # Compute discounted sum of rewards
                 discounted_sum = 0

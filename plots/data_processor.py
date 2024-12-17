@@ -49,6 +49,8 @@ class ExperimentDataProcessor:
             clip = self._extract_clip(folder)
             seed = self._extract_seed(folder)
 
+            print(f"Processing folder: {folder}, q={q}, clip={clip}, seed={seed}")
+
             if q is not None:
                 try:
                     df = pd.read_csv(f'{folder}/progress.csv')
@@ -75,6 +77,7 @@ class ExperimentDataProcessor:
         
         return combined_df
 
+
     @classmethod
     def process_experiments(cls, root_path, output_dir):
         """
@@ -99,7 +102,6 @@ class ExperimentDataProcessor:
         
         for exp_folder in exp_folders:
 
-
             try:
                 # Create processor for this experiment
                 processor = cls(exp_folder)
@@ -117,7 +119,7 @@ class ExperimentDataProcessor:
                 
                 # Save processed data
                 df.to_csv(output_file, index=False)
-                print(f"Processed and saved data to {output_file}")
+                # print(f"Processed and saved data to {output_file}")
                 
             except Exception as e:
                 print(f"Error processing {exp_folder}: {e}")

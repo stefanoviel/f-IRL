@@ -55,7 +55,10 @@ def create_returns_plot(
             continue
             
         for clip in clip_values:
-            data_subset = df[(df['q'] == q) & (df['clip'] == clip)]
+            if "dynamic_clipping" in method:
+                data_subset = df[(df['q'] == q)]
+            else:
+                data_subset = df[(df['q'] == q) & (df['clip'] == clip)]
             
             if len(data_subset) > 0:
                 grouped = data_subset.groupby('episode')['Real Det Return'].agg(['mean', 'std']).reset_index()
@@ -97,7 +100,8 @@ def plot_single_file(
     q_values: List[float],
     clip_values: List[float],
     show_confidence: bool = True,
-    max_episodes_dict: dict = None
+    max_episodes_dict: dict = None,
+    filter_dynamic_clipping: bool = False
 ) -> None:
     """Create plot from a single CSV file."""
     df = load_and_process_data(file_path)
@@ -119,7 +123,8 @@ def plot_multiple_files(
     q_values: List[float],
     clip_values: List[float],
     show_confidence: bool = True,
-    max_episodes_dict: dict = None
+    max_episodes_dict: dict = None,
+    filter_dynamic_clipping: bool = False
 ) -> None:
     """Create plot from all CSV files in the specified folder."""
     # Convert string path to Path object
@@ -134,12 +139,13 @@ def plot_multiple_files(
         
     # Process each file individually
     for file_path in file_paths:
+        print("Processing", file_path)
         df = load_and_process_data(str(file_path))
         
         # Extract env_name and method from file path
         full_env_name = next(part for part in file_path.parts if "v" in part)
         env_name = full_env_name.split('_')[0]  # Take only the part before first underscore
-        method = file_path.name.split('_')[2]  # Assuming method is always the third component
+        method = "_".join(file_path.name.split('_')[2:]).replace("_data.csv", "")  # Assuming method is always the third component
         
         # Get max episodes for this environment
         max_episodes = max_episodes_dict.get(env_name, None) if max_episodes_dict else None
@@ -151,34 +157,34 @@ def plot_multiple_files(
 if __name__ == "__main__":
     # Example parameters
     q_values = [1.0, 4.0]
-    clip_values = [0.5]
+    clip_values = [0.1, 0.5, 1, 5, 10, 50, 100, 500, 1000]
     
     # Dictionary specifying max episodes for each environment
     max_episodes_dict = {
         "Hopper-v5": 1e6,
         "Walker2d-v5": 1.5e6,
-        "Ant-v5": 1.5e6,
+        "Ant-v5": 1.2e6,
         "Humanoid-v5": 1e6,
         "HalfCheetah-v5": 1.5e6,
         # Add more environments as needed
     }
     
     # Single file example
-    plot_single_file(
-        "plots/cached_data/Walker2d-v5_exp-16_cisl_data.csv",
-        q_values,
-        clip_values,
-        show_confidence=True,
-        max_episodes_dict=max_episodes_dict
-    )
-    
-    # Multiple files example - now using folder path
-    # plot_multiple_files(
-    #     "plots/cached_data",  # Just specify the folder path
+    # plot_single_file(
+    #     "plots/cached_data/Walker2d-v5_exp-16_cisl_data.csv",
     #     q_values,
     #     clip_values,
-    #     show_confidence=False,
-    #     max_episodes_dict=max_episodes_dict
+    #     show_confidence=True,
+    #     max_episodes_dict=max_episodes_dict,
+    #     filter_dynamic_clipping=True
     # )
-
     
+    # Multiple files example - now using folder path
+    plot_multiple_files(
+        "plots/cached_data",  # Just specify the folder path
+        q_values,
+        clip_values,
+        show_confidence=False,
+        max_episodes_dict=max_episodes_dict,
+        filter_dynamic_clipping=True
+    )
