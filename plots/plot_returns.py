@@ -54,15 +54,14 @@ def create_returns_plot(
         if q == 1.0:  # Skip q=1 as it's already plotted
             continue
             
-        for clip in clip_values:
-            if "dynamic_clipping" in method:
-                data_subset = df[(df['q'] == q)]
-            else:
-                data_subset = df[(df['q'] == q) & (df['clip'] == clip)]
+        if "dynamic_clipping" in method:
+            # For dynamic clipping, only filter by q value
+            data_subset = df[df['q'] == q]
+            label = f'q={q}'
             
             if len(data_subset) > 0:
                 grouped = data_subset.groupby('episode')['Real Det Return'].agg(['mean', 'std']).reset_index()
-                plt.plot(grouped['episode'], grouped['mean'], label=f'q={q}, clip={clip}')
+                plt.plot(grouped['episode'], grouped['mean'], label=label)
                 
                 if show_confidence:
                     n_seeds = len(data_subset['seed'].unique())
@@ -73,6 +72,25 @@ def create_returns_plot(
                         grouped['mean'] + std_error,
                         alpha=0.2
                     )
+        else:
+            # For static clipping, filter by both q and clip values
+            for clip in clip_values:
+                data_subset = df[(df['q'] == q) & (df['clip'] == clip)]
+                label = f'q={q}, clip={clip}'
+                
+                if len(data_subset) > 0:
+                    grouped = data_subset.groupby('episode')['Real Det Return'].agg(['mean', 'std']).reset_index()
+                    plt.plot(grouped['episode'], grouped['mean'], label=label)
+                    
+                    if show_confidence:
+                        n_seeds = len(data_subset['seed'].unique())
+                        std_error = grouped['std'] / np.sqrt(n_seeds)
+                        plt.fill_between(
+                            grouped['episode'],
+                            grouped['mean'] - std_error,
+                            grouped['mean'] + std_error,
+                            alpha=0.2
+                        )
     
     plt.xlabel('Episode')
     plt.ylabel('Real Det Return')
