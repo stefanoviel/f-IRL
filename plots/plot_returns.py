@@ -112,6 +112,10 @@ def plot_single_file(
     env_name = full_env_name.split('_')[0]  # Take only the part before first underscore
     filename = path_parts[-1]
     method = filename.split('_')[2]  # Assuming 'cisl' is always the third component
+
+    method = "_".join(filename.split('_')[2:-1])
+
+    print("full_env_name", full_env_name, "env_name", env_name, "method", method)
     
     # Get max episodes for this environment
     max_episodes = max_episodes_dict.get(env_name, None) if max_episodes_dict else None
@@ -157,34 +161,35 @@ def plot_multiple_files(
 if __name__ == "__main__":
     # Example parameters
     q_values = [1.0, 4.0]
-    clip_values = [0.1, 0.5, 1, 5, 10, 50, 100, 500, 1000]
+    # clip_values = [0.1, 0.5, 1.0, 5.0, 10.0, 50.0, 100.0, 500.0, 1000.0]
+    clip_values = [50.0]
     
     # Dictionary specifying max episodes for each environment
     max_episodes_dict = {
         "Hopper-v5": 1e6,
         "Walker2d-v5": 1.5e6,
         "Ant-v5": 1.2e6,
-        "Humanoid-v5": 1e6,
+        "Humanoid-v5": 16,
         "HalfCheetah-v5": 1.5e6,
         # Add more environments as needed
     }
     
     # Single file example
-    # plot_single_file(
-    #     "plots/cached_data/Walker2d-v5_exp-16_cisl_data.csv",
-    #     q_values,
-    #     clip_values,
-    #     show_confidence=True,
-    #     max_episodes_dict=max_episodes_dict,
-    #     filter_dynamic_clipping=True
-    # )
-    
-    # Multiple files example - now using folder path
-    plot_multiple_files(
-        "plots/cached_data",  # Just specify the folder path
+    plot_single_file(
+        "plots/cached_data/Humanoid-v5_exp-16_maxentirl_sa_data.csv",
         q_values,
         clip_values,
         show_confidence=False,
         max_episodes_dict=max_episodes_dict,
         filter_dynamic_clipping=True
     )
+    
+    # Multiple files example - now using folder path
+    # plot_multiple_files(
+    #     "plots/cached_data",  # Just specify the folder path
+    #     q_values,
+    #     clip_values,
+    #     show_confidence=False,
+    #     max_episodes_dict=max_episodes_dict,
+    #     filter_dynamic_clipping=True
+    # )
