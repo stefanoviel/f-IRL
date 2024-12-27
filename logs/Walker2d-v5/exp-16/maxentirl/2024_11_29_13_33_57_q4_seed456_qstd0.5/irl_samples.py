@@ -16,7 +16,7 @@ from firl.models.reward import MLPReward
 from firl.models.discrim import SMMIRLDisc as Disc
 from firl.models.discrim import SMMIRLCritic as Critic
 # from common.sac import ReplayBuffer, SAC
-from common.mod_sac import ReplayBuffer, SAC
+from common.sac_irl_methods import ReplayBuffer, SAC
 
 import envs
 from utils import system, collect, logger, eval

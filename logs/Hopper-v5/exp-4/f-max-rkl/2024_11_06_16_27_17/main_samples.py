@@ -6,7 +6,7 @@ from ruamel.yaml import YAML
 import envs
 
 import torch
-from common.sac import SAC
+from common.sac_original import SAC
 from baselines.discrim import ResNetAIRLDisc, MLPDisc
 from baselines.adv_smm import AdvSMM
 

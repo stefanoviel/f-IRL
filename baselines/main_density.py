@@ -7,7 +7,7 @@ import envs
 from envs.tasks.grid_task import expert_density
 
 import torch
-from common.sac import SAC
+from common.sac_original import SAC
 from baselines.discrim import ResNetAIRLDisc
 from baselines.adv_smm import AdvSMM
 

@@ -339,7 +339,7 @@ class SAC:
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
         if len(q_mins) > 1:
-            exploration_bonus = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, clip_value)  # Use self.q_std_clip
+            exploration_bonus = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, clip_value)
         else:
             exploration_bonus = 0
 

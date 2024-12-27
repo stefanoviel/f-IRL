@@ -5,9 +5,15 @@ import os
 
 class ExperimentDataProcessor:
     def __init__(self, base_path):
+        """
+        Args:
+            base_path (str): The path to the folder that contains experiment subfolders.
+                             Example: "logs/Ant-v5/exp-16/rkl/"
+        """
         self.base_path = base_path
-        self.cache_dir = os.path.join('plots', 'cached_data')
-        os.makedirs(self.cache_dir, exist_ok=True)
+        # Use processed_data as the only place (also acts as cache).
+        self.processed_dir = 'processed_data'
+        os.makedirs(self.processed_dir, exist_ok=True)
 
     @staticmethod
     def _extract_q(folder_name):
@@ -24,24 +30,43 @@ class ExperimentDataProcessor:
         match = re.search(r'seed(\d+)', folder_name)
         return int(match.group(1)) if match else None
 
-    def _get_cache_path(self):
-        # Create a unique cache file name based on the base path
-        env_name = self.base_path.split('/')[1]
-        exp_name = self.base_path.split('/')[2]
-        method = self.base_path.split('/')[3]
-        return os.path.join(self.cache_dir, f'{env_name}_{exp_name}_{method}_data.csv')
+    def _get_processed_path(self):
+        """
+        Generate a file path under `processed_data/` with the format:
+            {env_name}_{exp_name}_{method}_data.csv
+
+        Example:
+            If base_path = "logs/Ant-v5/exp-16/rkl/",
+            this might generate "processed_data/Ant-v5_exp-16_rkl_data.csv"
+        """
+        parts = self.base_path.strip('/').split('/')
+        # e.g. parts = ['logs', 'Ant-v5', 'exp-16', 'rkl']
+        env_name = parts[1]
+        exp_name = parts[2]
+        method = parts[3]
+        return os.path.join(self.processed_dir, f'{env_name}_{exp_name}_{method}_data.csv')
 
     def load_data(self, use_cache=True):
-        cache_path = self._get_cache_path()
-        
-        if use_cache and os.path.exists(cache_path):
-            print(f"Loading cached data from {cache_path}")
-            return pd.read_csv(cache_path)
+        """
+        Load data from all matching folders into a single DataFrame.
+        If use_cache=True and the processed file exists, read from it.
+        Otherwise, process the subfolders, then save the result to the single
+        processed_data file.
+
+        Returns:
+            pd.DataFrame: Combined experiment data.
+        """
+        processed_path = self._get_processed_path()
+
+        if use_cache and os.path.exists(processed_path):
+            print(f"Loading cached data from {processed_path}")
+            return pd.read_csv(processed_path)
 
         data_rows = []
-        folders = glob.glob(f'{self.base_path}2024_*_seed*')
-        
-        # Extract environment name from base_path
+        # Glob example: "logs/Ant-v5/exp-16/rkl/2024_*_seed*"
+        folders = glob.glob(os.path.join(self.base_path, '2024_*_seed*'))
+
+        # Extract environment name from base_path (for consistent naming inside the DF)
         env_name = self.base_path.split('/')[1]
 
         for folder in folders:
@@ -54,12 +79,12 @@ class ExperimentDataProcessor:
             if q is not None:
                 try:
                     df = pd.read_csv(f'{folder}/progress.csv')
-                    # Add experiment metadata to each row
+                    # Add experiment metadata
                     df['q'] = q
                     df['clip'] = clip
                     df['folder'] = folder
                     df['episode'] = df['Itration'] * 5000  # Convert iterations to episodes
-                    df['environment'] = env_name  # Add environment name
+                    df['environment'] = env_name
                     df['seed'] = seed
                     data_rows.append(df)
                 except Exception as e:
@@ -68,64 +93,44 @@ class ExperimentDataProcessor:
         if not data_rows:
             raise ValueError(f"No data found in {self.base_path}")
 
-        # Combine all data into a single DataFrame
         combined_df = pd.concat(data_rows, ignore_index=True)
-        
-        # Save to cache
-        combined_df.to_csv(cache_path, index=False)
-        print(f"Cached data saved to {cache_path}")
-        
+
+        # Save to processed_data (also acts as cache)
+        combined_df.to_csv(processed_path, index=False)
+        print(f"Processed data saved to {processed_path}")
+
         return combined_df
 
-
     @classmethod
-    def process_experiments(cls, root_path, output_dir):
+    def process_experiments(cls, root_path):
         """
-        Process all experiments in the root path and save their data to output_dir.
+        Discover and process all experiment folders beneath `root_path`.
+        Each experiment is saved into `processed_data` folder (the only folder).
         
         Args:
-            root_path (str): Path containing multiple experiment folders
-                           (e.g., "logs/Ant-v5/")
-            output_dir (str): Directory where processed data will be saved
+            root_path (str): Path containing multiple environment folders,
+                             each containing multiple experiments, e.g. "logs/"
         """
-        os.makedirs(output_dir, exist_ok=True)
-        
-        # Find all method folders (e.g., rkl, cisl)
+        # Find all relevant method folders (e.g., rkl, cisl) under each exp-*
         exp_folders = []
         for env_folder in glob.glob(os.path.join(root_path, "*/")):
             for exp_folder in glob.glob(os.path.join(env_folder, "exp-*/")):
                 for method_folder in glob.glob(os.path.join(exp_folder, "*/")):
                     if os.path.isdir(method_folder):
                         exp_folders.append(method_folder)
-        
-        print(f"Found {len(exp_folders)} experiment folders to process")
-        
-        for exp_folder in exp_folders:
 
+        print(f"Found {len(exp_folders)} experiment folders to process")
+
+        for exp_folder in exp_folders:
             try:
-                # Create processor for this experiment
                 processor = cls(exp_folder)
-                
-                # Load and process the data
-                df = processor.load_data(use_cache=False)  # Force reprocessing
-                
-                # Create output filename based on experiment path
-                parts = exp_folder.strip('/').split('/')
-                env_name = parts[-4]  # e.g., "Ant-v5"
-                exp_name = parts[-3]  # e.g., "exp-16"
-                method = parts[-2]    # e.g., "rkl"
-                
-                output_file = os.path.join(output_dir, f'{env_name}_{exp_name}_{method}_data.csv')
-                
-                # Save processed data
-                df.to_csv(output_file, index=False)
-                # print(f"Processed and saved data to {output_file}")
-                
+                # Load (and thus process) data. Force reprocessing with use_cache=False
+                processor.load_data(use_cache=False)
+                # Since we only store in processed_data, there's no second saving step.
             except Exception as e:
                 print(f"Error processing {exp_folder}: {e}")
 
 
 if __name__ == "__main__":
-    root_path = "logs"
-    output_dir = "processed_data"
-    ExperimentDataProcessor.process_experiments(root_path, output_dir)
+    root_path = "logs"  # e.g. "logs/Ant-v5/" or just "logs/" if multiple envs
+    ExperimentDataProcessor.process_experiments(root_path)

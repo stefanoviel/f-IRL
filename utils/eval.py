@@ -1,4 +1,4 @@
-from common.sac import ReplayBuffer, SAC
+from common.sac_original import ReplayBuffer, SAC
 from utils import system, collect, logger
 from utils.plots import train_plot
 import torch

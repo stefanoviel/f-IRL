@@ -13,7 +13,7 @@ from firl.divs.ipm import ipm_loss
 from firl.models.reward import MLPReward
 from firl.models.discrim import SMMIRLDisc as Disc
 from firl.models.discrim import SMMIRLCritic as Critic
-from common.sac import ReplayBuffer, SAC
+from common.sac_original import ReplayBuffer, SAC
 
 import envs
 from utils import system, collect, logger, eval

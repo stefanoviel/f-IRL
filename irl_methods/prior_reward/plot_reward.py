@@ -1,5 +1,5 @@
 import gym
-from common.sac import ReplayBuffer, SAC
+from common.sac_original import ReplayBuffer, SAC
 import torch
 from utils import system
 import argparse
