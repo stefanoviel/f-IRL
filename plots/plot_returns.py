@@ -195,7 +195,7 @@ if __name__ == "__main__":
     
     # Single file example
     plot_single_file(
-        "plots/cached_data/Ant-v5_exp-16_maxentirl_dynamic_clipping_data.csv",
+        "processed_data/Ant-v5_exp-16_maxentirl_dynamic_clipping_data.csv",
         q_values,
         clip_values,
         show_confidence=False,
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     
     # Multiple files example - now using folder path
     # plot_multiple_files(
-    #     "plots/cached_data",  # Just specify the folder path
+    #     "processed_data",  # Just specify the folder path
     #     q_values,
     #     clip_values,
     #     show_confidence=False,
