@@ -296,7 +296,7 @@ if __name__ == "__main__":
             )
         
         sac_agent.reward_function = reward_func.get_scalar_reward # only need to change reward in sac
-        sac_info = sac_agent.learn_mujoco(print_out=True)
+        sac_info = sac_agent.learn_mujoco(itr, print_out=True)
 
         start = time.time()
         samples = collect.collect_trajectories_policy_single(gym_env, sac_agent, 

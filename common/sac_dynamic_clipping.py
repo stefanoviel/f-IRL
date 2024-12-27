@@ -494,7 +494,7 @@ class SAC:
 
 
     # Learns from single trajectories rather than batch
-    def learn_mujoco(self, print_out=False, save_path=None):
+    def learn_mujoco(self, outer_iteration_number, print_out=False, save_path=None):
         # Reset all seeds at the start of training
         self._setup_seeds(self.seed)
         
@@ -606,8 +606,8 @@ class SAC:
                     
                     # Log the clip value to TensorBoard
                     if self.writer is not None:
-                        self.writer.add_scalar('Training/reward_clip_value', current_clip_value, t)
-                        self.writer.add_scalar('Training/trajectory_return', trajectory_returns[-1], t)
+                        self.writer.add_scalar('Training/reward_clip_value', current_clip_value, outer_iteration_number + t)
+                        self.writer.add_scalar('Training/trajectory_return', trajectory_returns[-1], outer_iteration_number + t)
                 
                 # Reset trajectory tracking variables
                 trajectory_states = []
