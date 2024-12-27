@@ -334,7 +334,7 @@ class SAC:
         q1_vals = [q1(o, pi) for q1 in self.ac.q1_list]
         q2_vals = [q2(o, pi) for q2 in self.ac.q2_list]
         
-        # Compute mean and std of minimum Q-values
+        # Compute mean and std of minimum Q-values  
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
@@ -595,12 +595,15 @@ class SAC:
                     discounted_sum = r + self.gamma * discounted_sum
                 
                 # Store the discounted return for this trajectory
-                trajectory_returns.append(discounted_sum)   # TODO: something wrong here because I get negative clipping values
+                trajectory_returns.append(discounted_sum)
                 
                 # Calculate new clip value as average of recent trajectory returns
                 # Only use last 10 trajectories to be more responsive to recent performance
                 if len(trajectory_returns) > 0:
-                    current_clip_value = np.mean(trajectory_returns[-10:])
+
+                    # computing abs because rewards can be negative and we're clipping std (always positive)
+                    current_clip_value = np.abs(np.mean(trajectory_returns[-10:]))
+                    
                     # Log the clip value to TensorBoard
                     if self.writer is not None:
                         self.writer.add_scalar('Training/reward_clip_value', current_clip_value, t)
