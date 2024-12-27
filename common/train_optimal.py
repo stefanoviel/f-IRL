@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 import envs
-from common.sac import ReplayBuffer, SAC
+from common.sac_original import ReplayBuffer, SAC
 from irl_methods.models.reward import MLPReward
 from utils.plots.train_plot import plot_sac_curve
 

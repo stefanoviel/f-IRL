@@ -11,7 +11,7 @@ import torch.optim as optim
 from torch import nn
 from torch import autograd
 import torch.nn.functional as F
-from common.sac import ReplayBuffer
+from common.sac_original import ReplayBuffer
 from utils import collect, eval
 from utils.plots import train_plot
 from sklearn import neighbors

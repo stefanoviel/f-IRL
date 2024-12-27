@@ -8,7 +8,7 @@ import torch
 import gym
 from ruamel.yaml import YAML
 
-from common.sac import ReplayBuffer, SAC
+from common.sac_original import ReplayBuffer, SAC
 
 import envs
 from utils import system, logger, eval

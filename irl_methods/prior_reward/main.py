@@ -1,6 +1,6 @@
 import gym
 from envs.vectorized_grid import ContinuousGridEnv
-from common.sac import ReplayBuffer, SAC
+from common.sac_original import ReplayBuffer, SAC
 import torch
 from utils import system
 import argparse
