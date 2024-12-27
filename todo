@@ -1,3 +1,8 @@
 log dynamic clipping. 
 questions:
 is there a way to not choose the clipping value manually? cuase right now it could jsut be a method with high variance. 
+
+implement baseline
+clipping: zero - abs(trajectory return)
+keep track of clipping value and plot it without abs. 
+

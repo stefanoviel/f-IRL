@@ -181,7 +181,7 @@ if __name__ == "__main__":
     # Example parameters
     q_values = [1.0, 4.0]
     # clip_values = [0.1, 0.5, 1.0, 5.0, 10.0, 50.0, 100.0, 500.0, 1000.0]
-    clip_values = [0.5]
+    clip_values = [50.0]
     
     # Dictionary specifying max episodes for each environment
     max_episodes_dict = {
@@ -195,7 +195,7 @@ if __name__ == "__main__":
     
     # Single file example
     plot_single_file(
-        "plots/cached_data/Walker2d-v5_exp-16_maxentirl_sa_data.csv",
+        "plots/cached_data/HalfCheetah-v5_exp-16_maxentirl_sa_data.csv",
         q_values,
         clip_values,
         show_confidence=False,
