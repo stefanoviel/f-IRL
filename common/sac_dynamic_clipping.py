@@ -595,7 +595,7 @@ class SAC:
                     discounted_sum = r + self.gamma * discounted_sum
                 
                 # Store the discounted return for this trajectory
-                trajectory_returns.append(discounted_sum)
+                trajectory_returns.append(discounted_sum)   # TODO: something wrong here because I get negative clipping values
                 
                 # Calculate new clip value as average of recent trajectory returns
                 # Only use last 10 trajectories to be more responsive to recent performance

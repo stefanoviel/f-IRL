@@ -195,7 +195,7 @@ if __name__ == "__main__":
     
     # Single file example
     plot_single_file(
-        "processed_data/Ant-v5_exp-16_maxentirl_dynamic_clipping_data.csv",
+        "plots/cached_data/Walker2d-v5_exp-16_maxentirl_sa_data.csv",
         q_values,
         clip_values,
         show_confidence=False,
