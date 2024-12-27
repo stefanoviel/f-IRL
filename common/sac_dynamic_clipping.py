@@ -603,8 +603,8 @@ class SAC:
                     current_clip_value = np.mean(trajectory_returns[-10:])
                     # Log the clip value to TensorBoard
                     if self.writer is not None:
-                        self.writer.add_scalar('training/reward_clip_value', current_clip_value, t)
-                        self.writer.add_scalar('training/trajectory_return', trajectory_returns[-1], t)
+                        self.writer.add_scalar('Training/reward_clip_value', current_clip_value, t)
+                        self.writer.add_scalar('Training/trajectory_return', trajectory_returns[-1], t)
                 
                 # Reset trajectory tracking variables
                 trajectory_states = []

@@ -171,7 +171,6 @@ if __name__ == "__main__":
     parser.add_argument('--seed', type=int, default=None,
                       help='Random seed (default: from config)')
 
-
     args = parser.parse_args()
 
 

@@ -52,7 +52,7 @@ python baselines/main_density.py configs/density/reacher_trace_mix.yml # Mixture
 ### Sec 5.2 IRL benchmark (MuJoCo)
 First, make sure that you have downloaded expert data into `expert_data/`. *Otherwise*, you can generate expert data by training expert policy:
 ```bash
-python common/train_expert.py configs/samples/experts/{env}.yml # env is in {hopper, walker2d, halfcheetah, ant}
+python -m common.train_expert configs/samples/experts/{env}.yml # env is in {hopper, walker2d, halfcheetah, ant}
 ```
 
 Then train our method or baseline with provided expert data method (Policy Performance).
