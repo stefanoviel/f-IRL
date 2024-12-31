@@ -269,6 +269,9 @@ if __name__ == "__main__":
     elif v['obj'] != 'maxentirl':
         disc = Disc(len(state_indices), **v['disc'], device=device)
 
+
+    global_step = 0
+
     max_real_return_det, max_real_return_sto = -np.inf, -np.inf
     for itr in range(v['irl']['n_itrs']):
 
@@ -296,7 +299,7 @@ if __name__ == "__main__":
             )
         
         sac_agent.reward_function = reward_func.get_scalar_reward # only need to change reward in sac
-        sac_info = sac_agent.learn_mujoco(itr, print_out=True)
+        sac_info = sac_agent.learn_mujoco(global_step, print_out=True)
 
         start = time.time()
         samples = collect.collect_trajectories_policy_single(gym_env, sac_agent, 

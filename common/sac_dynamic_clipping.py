@@ -494,7 +494,7 @@ class SAC:
 
 
     # Learns from single trajectories rather than batch
-    def learn_mujoco(self, outer_iteration_number, print_out=False, save_path=None):
+    def learn_mujoco(self, global_step_logging, print_out=False, save_path=None):
         # Reset all seeds at the start of training
         self._setup_seeds(self.seed)
         
@@ -597,18 +597,6 @@ class SAC:
                 # Store the discounted return for this trajectory
                 trajectory_returns.append(discounted_sum)
                 
-                # Calculate new clip value as average of recent trajectory returns
-                # Only use last 10 trajectories to be more responsive to recent performance
-                if len(trajectory_returns) > 0:
-
-                    # computing abs because rewards can be negative and we're clipping std (always positive)
-                    current_clip_value = np.abs(np.mean(trajectory_returns[-10:]))
-                    
-                    # Log the clip value to TensorBoard
-                    if self.writer is not None:
-                        self.writer.add_scalar('Training/reward_clip_value', current_clip_value, outer_iteration_number + t)
-                        self.writer.add_scalar('Training/trajectory_return', trajectory_returns[-1], outer_iteration_number + t)
-                
                 # Reset trajectory tracking variables
                 trajectory_states = []
                 trajectory_actions = []
@@ -663,6 +651,25 @@ class SAC:
                 log_pis.append(log_pi)
                 test_time_steps.append(t+1)
                 local_time = time.time()
+
+
+        # only log last clipping value
+        if len(trajectory_returns) > 0 and self.writer is not None:
+
+            # computing abs because rewards can be negative and we're clipping std (always positive)
+            current_clip_value = np.abs(np.median(trajectory_returns[-10:]))
+            
+            # Log the clip value to TensorBoard
+            self.writer.add_scalar('Training/reward_clip_value', current_clip_value, global_step_logging)
+            self.writer.add_scalar('Training/trajectory_return', trajectory_returns[-1], global_step_logging)
+
+            # Mean/Min/Max returns over last N trajectories
+            recent_returns = trajectory_returns[-10:]
+            self.writer.add_scalar('Training/trajectory_return_mean', np.mean(recent_returns), global_step_logging)
+            self.writer.add_scalar('Training/trajectory_return_min', np.min(recent_returns), global_step_logging)
+            self.writer.add_scalar('Training/trajectory_return_max', np.max(recent_returns), global_step_logging)
+
+        
 
         print(f"SAC Training End: time {time.time() - start_time:.0f}s")
         return [test_rets, alphas, log_pis, test_time_steps]
