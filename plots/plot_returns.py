@@ -194,21 +194,21 @@ if __name__ == "__main__":
     }
     
     # Single file example
-    plot_single_file(
-        "plots/cached_data/Walker2d-v5_exp-16_maxentirl_sa_data.csv",
-        q_values,
-        clip_values,
-        show_confidence=False,
-        max_episodes_dict=max_episodes_dict,
-        filter_dynamic_clipping=True
-    )
-    
-    # Multiple files example - now using folder path
-    # plot_multiple_files(
-    #     "processed_data",  # Just specify the folder path
+    # plot_single_file(
+    #     "plots/cached_data/Walker2d-v5_exp-16_maxentirl_sa_data.csv",
     #     q_values,
     #     clip_values,
     #     show_confidence=False,
     #     max_episodes_dict=max_episodes_dict,
     #     filter_dynamic_clipping=True
     # )
+    
+    # Multiple files example - now using folder path
+    plot_multiple_files(
+        "processed_data",  # Just specify the folder path
+        q_values,
+        clip_values,
+        show_confidence=False,
+        max_episodes_dict=max_episodes_dict,
+        filter_dynamic_clipping=True
+    )

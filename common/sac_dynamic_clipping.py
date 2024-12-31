@@ -219,6 +219,7 @@ class SAC:
         self.ac = actor_critic(self.env.observation_space, self.env.action_space, k, 
                              add_time=add_time, device=device, num_q_pairs=num_q_pairs, **ac_kwargs)
         self.ac.set_seed(seed)
+        self.num_q_pairs = num_q_pairs
         
         # Create target networks and set their seeds
         self.ac_targ = deepcopy(self.ac)
@@ -338,12 +339,11 @@ class SAC:
         q_mins = [torch.min(q1, q2) for q1, q2 in zip(q1_vals, q2_vals)]
         q_mean = torch.mean(torch.stack(q_mins, dim=0), dim=0)
         
-        if len(q_mins) > 1:
+        if self.num_q_pairs > 1:
             exploration_bonus = torch.clamp(torch.std(torch.stack(q_mins, dim=0), dim=0), 0, clip_value)
         else:
             exploration_bonus = 0
 
-        
         # Use mean + exploration bonus in policy loss
         # By minimizing the log probability of all the actions, we are maximizing the entropy of the policy.
         loss_pi = (self.alpha * logp_pi - (q_mean + exploration_bonus)).mean()
@@ -572,7 +572,7 @@ class SAC:
             o = o2
 
             # End of trajectory handling
-            if d:
+            if d or ep_len == self.max_ep_len:
                 # Convert lists to numpy arrays first
                 traj_states_np = np.array(trajectory_states)
                 traj_states = torch.FloatTensor(traj_states_np).to(self.device)
@@ -645,7 +645,6 @@ class SAC:
                         else:
                             batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
                         
-                        # Pass the current clip value to update
                         _, _, log_pi = self.update(data=batch, clip_value=current_clip_value)
 
 

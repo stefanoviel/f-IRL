@@ -371,4 +371,4 @@ if __name__ == "__main__":
     writer.close()
 
 
-# python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/hopper.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 
+# python -m irl_methods.irl_samples_ml_irl --config configs/samples/agents/ant.yml --num_q_pairs 1 --seed 0 --uncertainty_coef 1.0 --q_std_clip 1.0 

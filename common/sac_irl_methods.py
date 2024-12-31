@@ -316,7 +316,7 @@ class SAC:
             # Target actions come from *current* policy
             a2, logp_a2 = self.ac.pi(o2[:, :self.true_state_dim])
 
-            # Target Q-values from corresponding target network pair
+            # Target Q-values from c/home/viel/f-IRL/logs/Ant-v5/exp-16/maxentirl/2024_12_28_17_39_11_q1_seed0_qstd1.0orresponding target network pair
             q1_pi_targ = self.ac_targ.q1_list[q_idx](o2, a2)
             q2_pi_targ = self.ac_targ.q2_list[q_idx](o2, a2)
             q_pi_targ = torch.min(q1_pi_targ, q2_pi_targ)
