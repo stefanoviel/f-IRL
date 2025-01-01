@@ -3709,3 +3709,43 @@ Logging to logs/Ant-v5/exp-16/maxentirl_dynamic_clipping/2024_12_31_13_00_22_q4_
 | Running Reverse KL  | 21.4      |
 | Running Update Time | 370       |
 -----------------------------------
+--2025-01-01 15:42:17.648137 CET---
+| Itration            | 371       |
+| Real Det Return     | -408      |
+| Real Sto Return     | -438      |
+| Reward Loss         | -1.74e+04 |
+| Running Env Steps   | 1855000   |
+| Running Forward KL  | 75.6      |
+| Running Reverse KL  | 25.8      |
+| Running Update Time | 371       |
+-----------------------------------
+--2025-01-01 15:46:06.814302 CET---
+| Itration            | 372       |
+| Real Det Return     | -344      |
+| Real Sto Return     | -642      |
+| Reward Loss         | -1.73e+04 |
+| Running Env Steps   | 1860000   |
+| Running Forward KL  | 74.7      |
+| Running Reverse KL  | 22.8      |
+| Running Update Time | 372       |
+-----------------------------------
+--2025-01-01 15:49:54.301875 CET---
+| Itration            | 373       |
+| Real Det Return     | -562      |
+| Real Sto Return     | -454      |
+| Reward Loss         | -1.74e+04 |
+| Running Env Steps   | 1865000   |
+| Running Forward KL  | 75.1      |
+| Running Reverse KL  | 23.1      |
+| Running Update Time | 373       |
+-----------------------------------
+--2025-01-01 15:53:35.588778 CET---
+| Itration            | 374       |
+| Real Det Return     | -397      |
+| Real Sto Return     | -272      |
+| Reward Loss         | -1.73e+04 |
+| Running Env Steps   | 1870000   |
+| Running Forward KL  | 77        |
+| Running Reverse KL  | 24.2      |
+| Running Update Time | 374       |
+-----------------------------------

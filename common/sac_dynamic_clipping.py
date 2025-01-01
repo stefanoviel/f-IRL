@@ -313,27 +313,31 @@ class SAC:
 
     # Set up function for computing SAC Q-losses
     def compute_loss_q(self, data, q_idx):
-        """Compute Q-loss for a specific pair of Q-networks"""
+        """
+        Compute Q-loss for a specific pair of Q-networks, and also
+        store some logging information about target Q-values.
+        """
         o, a, r, o2, d = data['obs'], data['act'], data['rew'], data['obs2'], data['done']
 
         q1 = self.ac.q1_list[q_idx](o, a)
         q2 = self.ac.q2_list[q_idx](o, a)
 
-        # Bellman backup for Q functions
+        # Bellman backup
         with torch.no_grad():
-            # Target actions come from *current* policy
             a2, logp_a2 = self.ac.pi(o2[:, :self.true_state_dim])
-
-            # Target Q-values from corresponding target network pair
             q1_pi_targ = self.ac_targ.q1_list[q_idx](o2, a2)
             q2_pi_targ = self.ac_targ.q2_list[q_idx](o2, a2)
             q_pi_targ = torch.min(q1_pi_targ, q2_pi_targ)
             backup = r + self.gamma * (1 - d) * (q_pi_targ - self.alpha * logp_a2)
 
-        # MSE loss against Bellman backup
+            # For logging: let's store the mean and std of the target values
+            self._current_target_q_mean = backup.mean().item()
+            self._current_target_q_std = backup.std().item()
+
         loss_q1 = ((q1 - backup)**2).mean()
         loss_q2 = ((q2 - backup)**2).mean()
         return loss_q1 + loss_q2
+
 
     # Set up function for computing SAC pi loss
     def compute_loss_pi(self, data, clip_value):
@@ -360,7 +364,7 @@ class SAC:
 
 
     # Set up model saving
-    def update(self, data, clip_value):
+    def update(self, data, clip_value, global_step_logging):
         # Update each Q-network pair with different batches
         losses_q = []
         for i in range(len(self.ac.q1_list)):
@@ -404,7 +408,34 @@ class SAC:
                 p_targ.data.mul_(self.polyak)
                 p_targ.data.add_((1 - self.polyak) * p.data)
 
-        return np.array([np.mean(losses_q), loss_pi.item(), log_pi.detach().cpu().mean().item()])
+        # ----------------------------------------------------------------------
+        # Additional LOGGING here
+        # ----------------------------------------------------------------------
+        # Log Q-loss
+        mean_q_loss = np.mean(losses_q)
+
+        # Log mean and std of the target Q (captured from compute_loss_q)
+        target_q_mean = getattr(self, '_current_target_q_mean', 0.)
+        target_q_std = getattr(self, '_current_target_q_std', 0.)
+
+        # Log policy entropy = - E[log pi(a|s)]
+        policy_entropy = -log_pi.mean().item()
+
+        # Log Q-value stats across ensemble
+        ensemble_q_mean, ensemble_q_std = self.get_q_stats()
+
+        # If using TensorBoard
+        if self.writer is not None:
+            self.writer.add_scalar('SAC/Loss_Q', mean_q_loss, global_step_logging)
+            self.writer.add_scalar('SAC/QTarget_mean', target_q_mean, global_step_logging)
+            self.writer.add_scalar('SAC/QTarget_std', target_q_std, global_step_logging)
+            self.writer.add_scalar('SAC/Policy_entropy', policy_entropy, global_step_logging)
+            self.writer.add_scalar('SAC/QEnsemble_mean', ensemble_q_mean, global_step_logging)
+            self.writer.add_scalar('SAC/QEnsemble_std', ensemble_q_std, global_step_logging)
+
+
+        return np.array([mean_q_loss, loss_pi.item(), log_pi.detach().cpu().mean().item()])
+
 
     def get_action(self, o, deterministic=False, get_logprob=False):
         if len(o.shape) < 2:
