@@ -95,7 +95,7 @@ class SAC:
             update_after=1000, update_every=50, num_test_episodes=10, max_ep_len=1000, 
             log_step_interval=None, reward_state_indices=None,
             save_freq=1, device=torch.device("cpu"), automatic_alpha_tuning=True, reinitialize=True,
-            num_q_pairs=3, use_actions_for_reward=False, writer=None, **kwargs):
+            num_q_pairs=3, use_actions_for_reward=False, writer=None, ema_decay=0.995, **kwargs):
 
         """
         Soft Actor-Critic (SAC)
@@ -195,7 +195,8 @@ class SAC:
             q_std_clip (float): Maximum value to clip Q-value standard deviations. Default: 1.0
         """
 
-
+        self.ema_decay = ema_decay  # Decay factor for EMA (close to 1 for more smoothing)
+        self.clip_value_ema = None  # Initialize EMA value as None, first iteration doesn't have clipping
         
         self.env, self.test_env = env_fn(), env_fn()
         self.obs_dim = self.env.observation_space.shape
@@ -300,6 +301,14 @@ class SAC:
         self.ac_targ.set_seed(seed+1)
 
         self.action_rng = np.random.RandomState(seed)
+
+
+    def update_clip_value_ema(self, new_value):
+        """Update the exponential moving average of the clipping value"""
+        if self.clip_value_ema is None:
+            self.clip_value_ema = new_value
+        else:
+            self.clip_value_ema = self.ema_decay * self.clip_value_ema + (1 - self.ema_decay) * new_value
 
 
     # Set up function for computing SAC Q-losses
@@ -525,12 +534,8 @@ class SAC:
         trajectory_states = []  # Store states for computing rewards later
         trajectory_actions = []  # Store actions if needed
         trajectory_returns = []
-        current_clip_value = None
         
         for t in tqdm(range(self.steps_per_epoch * self.epochs)):
-            # if t % 1000 == 0:  # Print every 1000 steps to avoid spam
-            #     print(f"[STEP {t}] Current seed: {current_seed}, Buffer size: {self.replay_buffer.size}")
-            #     print(f"[STEP {t}] Current observation: {o[:3]}...")
             
             # Until start_steps have elapsed, randomly sample actions
             # from a uniform distribution for better exploration. Afterwards, 
@@ -565,7 +570,6 @@ class SAC:
             # Store experience to replay buffer
             # self.replay_buffer.store_batch(o, a, r, o2, d)
             self.replay_buffer.store(o, a, r, o2, d)
-
 
             # Super critical, easy to overlook step: make sure to update 
             # most recent observation!
@@ -613,7 +617,7 @@ class SAC:
                     for j in range(self.update_every):
                         batch = self.replay_buffer.sample_batch(self.batch_size)
                         # Pass the current clip value to update
-                        _, _, log_pi = self.update(data=batch, clip_value=current_clip_value)
+                        _, _, log_pi = self.update(data=batch, clip_value=self.clip_value_ema)
                 
                     test_epret = self.test_fn()
                     if print_out:
@@ -633,7 +637,7 @@ class SAC:
                         else:
                             batch['rew'] = torch.FloatTensor(self.reward_function(obs)).to(self.device)
                         
-                        _, _, log_pi = self.update(data=batch, clip_value=current_clip_value)
+                        _, _, log_pi = self.update(data=batch, clip_value=self.clip_value_ema)
 
 
             # End of epoch handling
@@ -657,19 +661,12 @@ class SAC:
         if len(trajectory_returns) > 0 and self.writer is not None:
 
             # computing abs because rewards can be negative and we're clipping std (always positive)
-            current_clip_value = np.abs(np.median(trajectory_returns[-10:]))
+            new_clip_value = np.abs(np.median(trajectory_returns))
+            self.update_clip_value_ema(new_clip_value)
             
             # Log the clip value to TensorBoard
-            self.writer.add_scalar('Training/reward_clip_value', current_clip_value, global_step_logging)
-            self.writer.add_scalar('Training/trajectory_return', trajectory_returns[-1], global_step_logging)
-
-            # Mean/Min/Max returns over last N trajectories
-            recent_returns = trajectory_returns[-10:]
-            self.writer.add_scalar('Training/trajectory_return_mean', np.mean(recent_returns), global_step_logging)
-            self.writer.add_scalar('Training/trajectory_return_min', np.min(recent_returns), global_step_logging)
-            self.writer.add_scalar('Training/trajectory_return_max', np.max(recent_returns), global_step_logging)
-
-        
+            self.writer.add_scalar('Training/reward_clip_value', self.clip_value_ema, global_step_logging)
+            self.writer.add_scalar('Training/trajectory_return', new_clip_value, global_step_logging)
 
         print(f"SAC Training End: time {time.time() - start_time:.0f}s")
         return [test_rets, alphas, log_pis, test_time_steps]

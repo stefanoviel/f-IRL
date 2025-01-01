@@ -18,7 +18,6 @@ from irl_methods.models.discrim import SMMIRLCritic as Critic
 # from common.sac import ReplayBuffer, SAC
 from common.sac_dynamic_clipping import ReplayBuffer, SAC
 
-import envs
 from utils import system, collect, logger, eval
 from utils.plots.train_plot_high_dim import plot_disc
 from utils.plots.train_plot import plot_disc as visual_disc
